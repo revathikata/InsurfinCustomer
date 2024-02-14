@@ -1,0 +1,310 @@
+<div class="main">
+  <div class="row">
+    <div class="col-lg-6 p-0">
+      <app-side-nav-section />
+    </div>
+
+    <div class="col-lg-6 rightColoumn" *ngIf="proposalAccepted">
+      <div class="distrbtr-welcome">
+        <div class="review-details">
+          <div class="row">
+            <div class="col-2">
+              <mat-icon class="back-arrw" (click)="navigateToHome()">keyboard_backspace</mat-icon>
+            </div>
+            <div class="col-8">
+              <p class="pol-dtls" (click)="navigateToLogin()">Home</p>
+            </div>
+            <div class="col-2 bottomsheet-icon">
+              <!-- <mat-icon class="vert" mat-raised-button (click)="openBottomSheet()">more_vert</mat-icon> -->
+              <img src="../../../assets/DotsThreeOutlineVertical.svg" alt="" (click)="openBottomSheet()">
+            </div>
+            <div *ngIf="divToShow === 'div1'" class='container insurer-payment'>
+              <p class="letterHead container">Insurer Payment
+                Authorization Letter for {{customerName | titlecase}}</p>
+
+                <p class="container">To,<br>
+
+                  Achanchal Insurtech Solutions Private Limited,<br> 
+                  
+                  HD-072, Weworks Salarpuria Symbiosis, Arekere,<br>  
+                  
+                  Bannerghatta Road, Bengaluru – 560076<br> 
+                  
+                 <b> (“InsurFin” or “you”)</b></p><br>
+
+                 <p class="subject">SUBJECT: AUTHORIZATION LETTER FOR CREATION OF VIRTUAL ACCOUNT </p>
+
+                 <p class="container">Dear Sir/Ma’am, <br>
+
+                  I hereby submit that I am the holder of an insurance policy/proposal number _____________ <b>(“Insurance Plan”)</b> issued by [•] <b>(“Insurer”)</b>.  
+                  
+                  I hereby authorize and permit you to enable the creation of virtual account through the Technology Service Provider<b> (“TSP”)</b> engaged by you, initiate payment transactions, share any necessary information with the [Lender Name] <b>(“Lender”)</b> and the TSP and undertake any other actions as may be necessary, on my behalf, in relation to the premium financing. 
+                  
+                  Furthermore, I hereby wish to inform you that I have authorized the Lender to pay the total insurance premium (inclusive of the loan amount and the statutory taxes, if any) to the Insurer on my behalf, upon InsurFin verifying the bank account details of the Insurer. The payment can be made to the Insurer’s bank account from the amounts disbursed by the Lender through the virtual account created for this purpose.<br><br>  
+                  
+                   
+                  
+                  I hereby promise that I will continue to pay the monthly dues towards the loan to the Lender.</p>
+
+                <!-- <p class="container">I hereby submit that I am the holder of an insurance policy/proposal number <b>{{proposalNumber}}</b>
+                  (‘Proposal’) issued by [•] (“Insurer”).</p>
+  
+                <p class="container">I hereby authorize InsurFin to pay the total insurance premium (inclusive of own contribution
+                  and the
+                  loan amount and the statutory taxes, if any) to the Insurer on my behalf. The payment can be
+                  made to</p>
+                <p  class="container">the Insurer’s bank account from the escrow account created for this purpose.</p>
+                 <p  class="container"> I hereby promise that I will continue to pay the monthly dues towards the loan to the Lender.</p> -->
+  
+                <p  class="container">ACCEPTANCE & AUTHENTICATION: I SUBMIT THE ABOVE TERMS THROUGH
+                  ONLINE/ELECTRONIC MEANS. I ALSO CONFIRM THAT ACCEPTANCE OF THE ABOVE
+                  TERMS AND CONDITIONS WAS COMPLETED ONLINE FOR MY CONVENIENCE AND
+                  SHALL BE DEEMED TO Ins ON MY REQUEST. I FURTHER CONFIRM THAT I HAVE
+                  APPLIED, ACCEPTED, AUTHENTICATED, SIGNED AND DELIVERED THE ABOVE
+                  TERMS BY CLICKING/TICKING THE “I CONFIRM” OR SIMILAR ICON TAB.</p>
+              <!-- <p class="container">
+                I hereby submit that I am the holder of an insurance policy/proposal number <b>{{proposalNumber}}</b>
+                (‘Policy’) issued by [•] (“Insurer”).</p> -->
+
+              <!-- <p class="container mt-3">I have procured the Policy pursuant to a loan passed and issued by [•] (“Lender”)
+                facilitated by
+                Achanchal Insurtech Private Limited.</p> -->
+
+              <!-- <p class="container mt-3">I hereby authorize the Lender to initiate cancellation of my Policy if I do not
+                make the EMI payment due
+                to Lender within 30 (thirty) days of the EMI due date for each payment cycle based on the loan repayment
+                schedule given in the Loan Details Sheet.</p> -->
+
+              <!-- <p class="container acknowledge">I acknowledge and agree that in the event of cancellation of my Policy, the Lender
+                would be receiving
+                the Policy cancellation refund from the Insurer (“Policy Refund”). The Lender is hereby authorised to
+                deduct from the Policy Refund any and all EMI payments due to the Lender from me till the date of
+                cancellation of the Policy, provided, if the Policy Refund exceeds the total payments due to the
+                Lender, the differential amount will be refunded to me. As a result of my non-payment of the EMI amount,
+                the Lender shall also be entitled to recover the outstanding loan balance and applicable charges (if
+                any) from the Policy Refund paid by the Insurer.
+                I hereby authorize Lender to collect the Policy Refund of the Policy from the Insurer in the Lender’s
+                bank account.</p> -->
+
+              <!-- <p class="container mt-3">ACCEPTANCE & AUTHENTICATION: I SUBMIT THE ABOVE TERMS THROUGH ONLINE/ELECTRONIC
+                MEANS. I ALSO CONFIRM
+                THAT ACCEPTANCE OF THE ABOVE TERMS AND CONDITIONS WAS COMPLETED ONLINE FOR MY CONVENIENCE AND SHALL BE
+                DEEMED TO BE ON MY REQUEST. I FURTHER CONFIRM THAT I HAVE APPLIED, ACCEPTED, AUTHENTICATED, SIGNED AND
+                DELIVERED THE ABOVE TERMS BY CLICKING/TICKING THE “I CONFIRM” OR SIMILAR ICON TAB.</p> -->
+
+              <div class="container mt-3 geo-location">
+                <p>Geo-location :
+                  <!-- <span>{{currentAddressValue?.address[0]?' ,' : '' }}{{currentAddressValue?.address.slice(1).join(',') ?' ,' : '' }}{{currentAddressValue?.city ?' ,' : '' }}
+                  {{currentAddressValue?.state ?' ,' : '' }} {{currentAddressValue?.country ?' ,' : '' }}</span> -->
+                  <span>{{currentAddressValue?.address[0]}}{{currentAddressValue?.address[0] ?' ,' : ''
+                    }}{{currentAddressValue?.address.slice(1).join(',')}}{{currentAddressValue?.address.slice(1).join(',')?'
+                    ,' : '' }}{{currentAddressValue?.city}}{{currentAddressValue?.city ?' ,' : '' }}
+                    {{currentAddressValue?.state }}{{currentAddressValue?.state ?' ,' : '' }}
+                    {{currentAddressValue?.country}}</span></p>
+                  <!-- <p>IP Address : <span>{{ipAddress}}</span></p> -->
+                <p>Policyholder’s Name: <span>{{browserName| titlecase}}</span></p>
+                <p>Timestamp :<span>{{timeStamp}}</span></p>
+                <p>OTP Verified on Mobile No  : <span>{{phoneNumber}}</span></p>
+              </div>
+
+
+              <div class="footer">
+                <div class="row footer-flex">
+                  <div class="col-2">
+                    <mat-checkbox class="example-margin checkInp" color="primary" [(ngModel)]="checkBox"
+                      (change)="yourLocation($event)"></mat-checkbox>
+                  </div>
+                  <div class="col-10">
+                    <p class="agree">I agree to the Lender Authorization Letter and confirm all the details in it</p>
+                  </div>
+                </div>
+                <div>
+                  <!-- <button class="btn btn-primary  acceptBtn" [disabled]="!checkBox"
+                    (click)="onAccept1()">Accept</button> -->
+                    <button class="btn btn-primary acceptBtn" [disabled]="!checkBox || !locationAccessGranted" (click)="onAccept1()">Accept</button>
+
+                </div>
+              </div>
+
+            </div>
+            <div *ngIf="divToShow === 'div2'" class="container insurer-payment">
+              <p class="letterHead">Insurer Policy Action
+                Initiation Letter</p>
+               <p>Policy/ Proposal Cancellation Request Form</p>
+                To,<br>
+                <p>{{prosalDetails.insurerDetailsDto.insurerName}}</p>
+                <p>Policy/Proposal Number: {{proposalNumber}}</p>
+                <p>Policyholder’s Name : {{prosalDetails.proposalDetailsDto.customerName}}</p>
+                <p>Policyholder’s Address : {{prosalDetails.customerAddress[2].addressLine1}}
+                  {{prosalDetails.customerAddress[2].addressLine2}}{{prosalDetails.customerAddress[2].city}}
+                  {{prosalDetails.customerAddress[2].State}}</p>
+                <p>Contact Number :{{phoneNumber}}</p>
+                <p>Email ID : {{email}}</p>
+                <p>I hereby submit that I am the holder of an insurance policy/proposal number{{proposalNumber}}<b>(“Insurance Plan”).</b>.</p> 
+                <p>I hereby submit that I have not lodged a claim under the Insurance Plan.<br>
+                  I request you to process the cancellation of my Insurance Plan, after adjusting the applicable charges (if any).<br>  
+                  I understand that cancellation of the Insurance Plan results in termination of the insurance contract and all rights/ titles and interest under the Insurance Plan shall stand terminated. The payment or refund of premium, arising out of the above, to my / our account shall be in full and final discharge of all your obligations towards me / us under the abovementioned Insurance Plan. No further liability shall attach to nor shall any claim be preferred by me / us under the Insurance Plan with effect from the date of this letter. You shall not be liable for any consequence arising out of non-acceptance or reduction in insurance coverage or cancellation of Insurance Plan with effect from the date of this letter. </p>
+                  <p>BANK DETAILS FOR DIRECT CREDIT OF CANCELLATION REFUND </p>
+                  <p>Bank Name			: _______________________</p> 
+                  <p>Bank Branch			: _______________________ </p>
+                  <p>Bank Account No		: _______________________ </p>
+                  <p> IFSC Code			: _______________________	</p>												 
+                  <p>Date : _______________________ </p>
+                  <p>  Place: _______________________ </p>
+
+                  <p>ACCEPTANCE & AUTHENTICATION: I SUBMIT<br> THE ABOVE TERMS THROUGH ONLINE<br>/ELECTRONIC MEANS. I ALSO
+                    CONFIRM THAT <br>ACCEPTANCE OF THE ABOVE TERMS AND <br>CONDITIONS WAS COMPLETED ONLINE FOR <br>MY
+                    CONVENIENCE AND SHALL BE DEEMED TO<br> BE ON MY REQUEST. I FURTHER CONFIRM THAT<br> I HAVE APPLIED,
+                    ACCEPTED, AUTHENTICATED,<br> SIGNED AND DELIVERED THE ABOVE TERMS <br>BY CLICKING/TICKING THE “I
+                    CONFIRM” OR<br> SIMILAR ICON TAB.</p>
+                <!-- <p>The virtual bank account details for direct credit of cancellation refund shall be appended to
+                   this letter after the disbursement of the loan and creation of the virtual account. </p><br>
+
+                ACCEPTANCE & AUTHENTICATION: I SUBMIT<br> THE ABOVE TERMS THROUGH ONLINE<br>/ELECTRONIC MEANS. I ALSO
+                CONFIRM THAT <br>ACCEPTANCE OF THE ABOVE TERMS AND <br>CONDITIONS WAS COMPLETED ONLINE FOR <br>MY
+                CONVENIENCE AND SHALL BE DEEMED TO<br> BE ON MY REQUEST. I FURTHER CONFIRM THAT<br> I HAVE APPLIED,
+                ACCEPTED, AUTHENTICATED,<br> SIGNED AND DELIVERED THE ABOVE TERMS <br>BY CLICKING/TICKING THE “I
+                CONFIRM” OR<br> SIMILAR ICON TAB.<br> -->
+
+              <div class="container geo-location">
+                <p><b>Geo-location </b>:
+                <span>{{currentAddressValue?.address[0]}}{{currentAddressValue?.address[0] ?' ,' : ''
+                  }}{{currentAddressValue?.address.slice(1).join(',')}}{{currentAddressValue?.address.slice(1).join(',')?'
+                  ,' : '' }}{{currentAddressValue?.city}}{{currentAddressValue?.city ?' ,' : '' }}
+                  {{currentAddressValue?.state }}{{currentAddressValue?.state ?' ,' : '' }}
+                  {{currentAddressValue?.country}}</span></p>
+                <!-- <p>IP Address :</p> -->
+                <p><b>Policy holder's name :</b> <span>{{browserName | titlecase}}</span></p>
+                <p><b>Timestamp :</b> <span>{{timeStamp}}</span></p>
+                <p><b>OTP verified on Mobile No :</b> <span>{{phoneNumber}}</span></p>
+              </div>
+
+
+              <div class="footer">
+                <div class="row footer-flex">
+                  <div class="col-2">
+                    <mat-checkbox class="example-margin checkInp" color="primary" [(ngModel)]="checkBox"
+                      (change)="yourLocation($event)"></mat-checkbox>
+                  </div>
+                  <div class="col-10">
+                    <p class="agree">I agree to the Lender Authorization <br>Letter and confirm all the details in it
+                    </p>
+                  </div>
+                </div>
+                <div>
+                  <!-- <button class="btn btn-primary  acceptBtn" [disabled]="!checkBox" (click)="onAccept()">Accept</button> -->
+                  <button class="btn btn-primary acceptBtn" [disabled]="!checkBox || !locationAccessGranted" (click)="onAccept2()">Accept</button>
+
+                </div>
+              </div>
+
+            </div>
+            <div *ngIf="divToShow === 'div3'" class="container insurer-payment">
+              <p class="letterHead container">Lender Authorization
+                Letter for {{customerName | titlecase}}</p><br>
+
+
+              <p class="container">
+                To,<br>
+                [Lender Name] <br>
+                [Lender Address] <br>
+
+                <p class="subject mt-4">SUBJECT: AUTHORIZATION LETTER </p>
+                <p class="container mt-4">Dear Sir/Ma’am,<br>
+
+                  I hereby submit that I am the holder of an insurance policy/proposal number _____________ <b>(“Insurance Plan”)</b> issued by [•] <b>(“Insurer”)</b>.  I have procured the Insurance Plan pursuant to a loan passed and issued by [•] <b>(“Lender”)</b> facilitated by Achanchal Insurtech Solutions Private Limited <b>(“InsurFin”)</b>.  
+                  
+                  I hereby wish to inform the Lender that I have authorized and permitted InsurFin to enable the creation of virtual account through the Technology Service Provider <b>(“TSP”)</b> engaged by InsurFin, initiate payment transactions, share any necessary information with the Lender and the TSP and undertake any other actions as may be necessary, on my behalf, in relation to the premium financing. 
+                  
+                  I hereby authorize the Lender to pay the total insurance premium (inclusive of the loan amount and the statutory taxes, if any) to the Insurer on my behalf, upon InsurFin verifying the bank account details of the Insurer. The payment can be made to the Insurer’s bank account from the amounts disbursed by the Lender through the virtual account created for this purpose. 
+                  
+                  I hereby promise that I will continue to pay the monthly dues towards the loan to the Lender.  
+                  
+                  Furthermore, I hereby authorize the Lender to initiate cancellation of my Insurance Plan if I do not make the EMI payment due to Lender within 15 (fifteen) days of the EMI due date for each payment cycle based on the loan repayment schedule given in the Loan Details Sheet.  
+                  
+                  I acknowledge and agree that in the event of cancellation or rejection of my Insurance Plan, the Lender would be receiving the Insurance Plan cancellation refund from the Insurer <b>(“Insurance Plan Refund”)</b>. The Lender is hereby authorized to deduct from the Insurance Plan Refund any and all EMI payments due to the Lender from me till the date of cancellation of the Insurance Plan, provided, if the Insurance Plan Refund exceeds the total payments due to the Lender, the differential amount will be refunded to me in my source account. As a result of my non-payment of the EMI amount, the Lender shall also be entitled to recover the outstanding loan balance and applicable charges (if any) from the Insurance Plan Refund paid by the Insurer.  
+                  
+                  Additionally, in the event that any other funds are credited to my account or received from any other known source, I hereby authorize the Lender to utilize these funds towards the outstanding loan amount to the extent of the loan outstanding, and the differential amount if any will be refunded to me in my source account. </p>
+                  <p class="container">I hereby authorize Lender to collect the Insurance Plan Refund of the Insurance Plan from the Insurer in the Lender’s bank account.  </p>
+
+              <p class="container mt-3">
+                ACCEPTANCE & AUTHENTICATION: I SUBMIT THE ABOVE TERMS THROUGH ONLINE/ELECTRONIC MEANS. I ALSO CONFIRM
+                THAT ACCEPTANCE OF THE ABOVE TERMS AND CONDITIONS WAS COMPLETED ONLINE FOR MY CONVENIENCE AND SHALL BE
+                DEEMED TO BE ON MY REQUEST. I FURTHER CONFIRM THAT I HAVE APPLIED, ACCEPTED, AUTHENTICATED, SIGNED AND
+                DELIVERED THE ABOVE TERMS BY CLICKING/TICKING THE “I CONFIRM” OR SIMILAR ICON TAB.
+              </p>
+
+              <div class="container geo-location">
+                <p>Geo-location :
+                  <span>{{currentAddressValue?.address[0]}}{{currentAddressValue?.address[0] ?' ,' : ''
+                    }}{{currentAddressValue?.address.slice(1).join(',')}}{{currentAddressValue?.address.slice(1).join(',')?'
+                    ,' : '' }}{{currentAddressValue?.city}}{{currentAddressValue?.city ?' ,' : '' }}
+                    {{currentAddressValue?.state }}{{currentAddressValue?.state ?' ,' : '' }}
+                    {{currentAddressValue?.country}}</span></p>
+                  <!-- <p>IP Address :</p> -->
+                <p>Borrower’s name: <span>{{browserName | titlecase}}</span></p>
+                <p>Timestamp :<span>{{timeStamp}}</span></p>
+                <p>OTP verified for : <span>{{phoneNumber}}</span></p>
+              </div>
+
+
+              <div class="footer">
+                <div class="row footer-flex">
+                  <div class="col-2">
+                    <mat-checkbox class="example-margin checkInp" color="primary" [(ngModel)]="checkBox"
+                      (change)="yourLocation($event)"></mat-checkbox>
+                  </div>
+                  <div class="col-10">
+                    <p class="agree">I agree to the Lender Authorization <br>Letter and confirm all the details in it
+                    </p>
+                  </div>
+                </div>
+                <div>
+                  <!-- <button class="btn btn-primary  acceptBtn" [disabled]="!checkBox"
+                    (click)="onAccept3()">Accept</button> -->
+                    <button class="btn btn-primary acceptBtn" [disabled]="!checkBox || !locationAccessGranted" (click)="onAccept3()">Accept</button>
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-6 rightColoumn" *ngIf="!proposalAccepted">
+      <div class="customer-authorization">
+        <div class="container">
+          <div class="mt-3">
+            <img class="lender-img" src="../../assets/lender-page-complete -img.svg" alt="">
+          </div>
+          <div class="row mt-3">
+            <p class="stepsCmpleted">{{allchecked}}/3 completed</p>
+            <p class="description">You have accepted the Lender Authorization <br> Letter. Here are the details
+              corresponding to it:</p>
+          </div>
+        </div>
+        <div class="container addressData">
+          <div class="row container geo-location ">
+            <p class="dataStyle mt-5">Geo-location :
+              <span>{{currentAddressValue?.address[0]}}{{currentAddressValue?.address[0] ?' ,' : ''
+                }}{{currentAddressValue?.address.slice(1).join(',')}}{{currentAddressValue?.address.slice(1).join(',')?'
+                ,' : '' }}{{currentAddressValue?.city}}{{currentAddressValue?.city ?' ,' : '' }}
+                {{currentAddressValue?.state }}{{currentAddressValue?.state ?' ,' : '' }}
+                {{currentAddressValue?.country}}</span>
+            </p>
+            <!-- <p class="dataStyle">IP Address :</p> -->
+            <p class="dataStyle">Borrower’s name: <span>{{browserName | titlecase}}</span></p>
+            <p class="dataStyle">Timestamp :<span>{{timeStamp}}</span></p>
+            <p class="dataStyle">OTP verified for : <span>{{phoneNumber}}</span></p>
+          </div>
+        </div>
+        <div class="buttonClass">
+          <button class="btn btn-primary acceptBtn" (click)="openProposal()">Continue</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

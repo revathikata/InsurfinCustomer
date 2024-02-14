@@ -1,0 +1,72 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import url("../node_modules/bootstrap/dist/css/bootstrap.min.css");
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 25px;
+    background: #4D7FAE;
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 25px;
+    /* margin-top: 16px;
+    margin-bottom: 16px; */
+}
+
+.mat-mdc-dialog-container .mdc-dialog__surface {
+    border-radius: 20px !important;
+    height: 239px;
+}
+
+.custom-fixed-bottom-sheet {
+    margin-left:49%;
+  }
+  @media screen and (max-width: 850px) {
+    .custom-fixed-bottom-sheet {
+      margin-left: 0;
+    }
+
+  }
+
+  .mat-mdc-dialog-container .mdc-dialog__surface {
+    margin-left: 215%;
+    margin-top: 31px;
+    border-radius: var(--mdc-dialog-container-shape, var(--mdc-shape-medium, 4px));
+  }
+  @media screen and (max-width: 592px) {
+    .mat-mdc-dialog-container .mdc-dialog__surface {
+        margin-left: 0%;
+        margin-top: 31px;
+        border-radius: var(--mdc-dialog-container-shape, var(--mdc-shape-medium, 4px));
+    }
+  }
+
+  /* @media print {
+    html, body {
+       display: none;  
+    }
+} */

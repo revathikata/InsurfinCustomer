@@ -1,0 +1,57 @@
+<div *ngIf="documentType==='MoreActions'" class="sorting">
+    <div class="more-actions-flex container">
+        <p class="more-actions">More Actions</p>
+        <mat-icon class="close" (click)="close()">close</mat-icon>
+    </div>
+    <div class="contact-advisor-flex container">
+        <img src="../../../assets/phone-img (2).svg">
+        <p class="contact-advisor">Contact Advisor </p><span class='PhoneNum' >(+91 {{distributorphone}})</span>
+    </div>
+    <div class="container">
+        <hr>
+    </div>
+    <div class="envelop-flex container">
+        <img src="../../../assets/envelop-img.svg">
+        <p class="contact-advisor" (click)="openMail()">Email InsurFin Customer Care</p>
+    </div>
+</div>
+
+<!-- sorting -->
+<div *ngIf="documentType==='sort'" class="sorting">
+    <div class="container sort-flex">
+        <p class="sort-by">Sort By</p>
+        <mat-icon class="clear" (click)="close()">clear</mat-icon>
+    </div>
+    <div class="mat-radio container">
+        <mat-radio-button  class="checkInp" color="primary" (click)="selectOption($event,'alphabetical')"></mat-radio-button>
+        <p class="alphabet">Alphabetical (A-Z)</p>
+    </div>
+    <div class="container">
+        <hr class="horizontal-line">
+    </div>
+    <div class=" due-date container">
+        <mat-radio-button class="checkInp" color="primary" (click)="selectOption($event,'ClosesttoFarthest')"></mat-radio-button>
+        <p class="alphabet">Due Date (Closest to Farthest)</p>
+    </div>
+    <div class="container">
+        <hr class="horizontal-line">
+    </div>
+    <div class="outstanding container">
+        <mat-radio-button class="checkInp" color="primary" (click)="selectOption($event,'EMIs')"></mat-radio-button>
+        <p class="alphabet">Outstanding EMIs (High to Low)</p>
+    </div>
+    <div class="container">
+        <hr class="horizontal-line">
+    </div>
+    <div class="loanamount container">
+        <mat-radio-button class="checkInp" color="primary" (click)="selectOption($event,'LowtoHigh')"></mat-radio-button>
+        <p class="alphabet">Loan Amount (Low to High)</p>
+    </div>
+    <div class="container">
+        <hr class="horizontal-line">
+    </div>
+    <div class="high-low container">
+        <mat-radio-button class="checkInp" color="primary" (click)="selectOption($event,'HightoLow')"></mat-radio-button>
+        <p class="alphabet">Loan Amount (High to Low)</p>
+    </div>
+</div>

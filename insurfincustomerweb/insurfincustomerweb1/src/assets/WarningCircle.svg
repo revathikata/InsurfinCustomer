@@ -1,0 +1,7 @@
+<svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="WarningCircle">
+<path id="Vector" d="M12.582 3.5C7.61147 3.5 3.58203 7.52944 3.58203 12.5C3.58203 17.4706 7.61147 21.5 12.582 21.5C17.5526 21.5 21.582 17.4706 21.582 12.5C21.582 7.52944 17.5526 3.5 12.582 3.5Z" stroke="#041427" stroke-width="1.5" stroke-miterlimit="10"/>
+<path id="Vector_2" d="M12.582 17L12.582 11.75" stroke="#041427" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_3" d="M12.582 7.25C11.9607 7.25 11.457 7.75368 11.457 8.375C11.457 8.99632 11.9607 9.5 12.582 9.5C13.2034 9.5 13.707 8.99632 13.707 8.375C13.707 7.75368 13.2034 7.25 12.582 7.25Z" fill="#041427"/>
+</g>
+</svg>

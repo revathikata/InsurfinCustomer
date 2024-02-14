@@ -1,0 +1,247 @@
+.rightColoumn {
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 100vh;
+    background: linear-gradient(270deg, #EEF5FC 0%, #C3D9ED 100%);
+}
+
+.proposal-img {
+    margin-left: 17%;
+}
+
+.distrbtr-welcome {
+    margin: auto;
+    border: 1px solid grey;
+    border-radius: 10px;
+    height: 780px;
+    width: 393px;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    background-color: #EDF4FB;
+}
+
+.main {
+    overflow: hidden;
+}
+
+.leftArrw {
+    margin-top: 20px;
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+.customer-dtls {
+    font-size: 16px;
+    font-weight: 700;
+    margin-left: 5PX;
+    color: #041427;
+    margin-top: 22px;
+}
+
+.associate-flex {
+    display: flex;
+    width: 345px;
+    height: 36px;
+    background: #FFFFFF;
+    border: 1px solid #DDDDDD;
+    border-radius: 8px;
+    align-items: center;
+    margin-top: 35px;
+}
+
+.associate {
+    margin-top: 11px;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    color: #48B16E;
+    margin-left: 10px;
+}
+
+.bell-img {
+    width: 14px;
+    height: 14px;
+}
+
+.proposal {
+    margin-left: 20px;
+    margin-top: 60px;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 40px;
+    color: #005AAA;
+}
+
+.next-step {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 21px;
+    color: #7D848D;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.complete-payment {
+    color: #7D848D;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.payment-btn {
+    background: #005AAA;
+    box-shadow: inset 0px 0px 10px 6px rgba(0, 90, 170, 0.02);
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 21px;
+    width: 345px;
+    height: 48px;
+    text-align: center;
+    color: #FFFFFF;
+    margin-top: 55px;
+}
+
+.lender-btn {
+    background: #005AAA;
+    box-shadow: inset 0px 0px 10px 6px rgba(0, 90, 170, 0.02);
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 21px;
+    width: 345px;
+    height: 48px;
+    text-align: center;
+    color: #FFFFFF;
+    margin-top: 125px;
+}
+
+.Proposal-flex {
+    display: flex;
+}
+
+.check-background {
+    width: 60px;
+    height: 60px;
+    background: rgba(72, 177, 110, 0.22);
+    border-radius: 50%;
+    margin-left: 140px;
+}
+
+.check-circle {
+    width: 32px;
+    height: 32px;
+    margin-top: 14px;
+    margin-left: 14px;
+}
+
+.Success {
+    font-size: 20px;
+    font-weight: 700;
+    color: #48B16E;
+    margin-top: 10px;
+    margin-left: 135px;
+}
+
+.money-success {
+    font-size: 20px;
+    font-weight: 700;
+    color: #48B16E;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.loan-disbursed {
+    margin-left: 20px;
+    margin-top: 40px;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 40px;
+    color: #005AAA;
+}
+
+.account-invalid {
+    color: red;
+    margin-left: 12px;
+}
+
+.re-enter-aadhar {
+    color: #005AAA;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 40px;
+    /* 125% */
+}
+
+.aadhar-num {
+    color: #7D848D;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.regForm {
+    border-radius: 12px;
+    height: 42px;
+    outline: none;
+    box-shadow: none !important;
+}
+
+.regForm:focus {
+    border: 1.5px solid #005AAA;
+}
+
+.loan-submitted {
+    margin: auto;
+    border: 1px solid grey;
+    border-radius: 10px;
+    height: 680px;
+    width: 393px;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    background-color: #EDF4FB;
+}
+
+.prpsl-dtls {
+    font-size: 16px;
+    font-weight: 700;
+    color: #041427;
+    margin-left: 30px;
+    cursor: pointer;
+}
+
+.loan-request {
+    color: #005AAA;
+    font-size: 32px;
+    font-weight: 700;
+    width: width;
+    width: 300px;
+    line-height: 31px;
+    /* margin-left: 20px; */
+}
+
+.loan-status {
+    color: #7D848D;
+    font-family: DM Sans;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.home-btn {
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+    width: 345px;
+    height: 48px;
+    margin-left: 20px;
+    background-color: #005AAA;
+    border-radius: 14px;
+}
+
+.loan-flex {
+    margin-left: 20px;
+}
+.loan-submitted-btn{
+    margin-top: 27%;
+}

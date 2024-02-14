@@ -1,0 +1,91 @@
+<div class="main">
+    <div class="welcome">
+        <div class="row">
+            <div class="col-lg-6 p-0">
+                <app-side-nav-section />
+            </div>
+
+            <div class="col-lg-6 rightcoloumn" *ngIf="phoneNumberValid">
+                <div class="distrbtr-welcome">
+                    <div class="container">
+
+                        <img class="welcome-bg" src="../../assets/welcome-bg.svg">
+
+                        <div>
+                            <p class="welcome-main">Welcome!<span>👋</span></p>
+                            <p class="your">Enter your phone number to proceed</p>
+                        </div>
+
+                        <form [formGroup]="loginForm">
+                            <div class="section">
+                                <label class="phn">Phone number</label>
+                                <div class="input-wrapper">
+                                    <input type="tel" class="form-control inpPhn" formControlName="phonenumber"
+                                        placeholder="Enter phone number" #input>
+                                    <span>{{ input.value && isNumber(input.value) ? '+91 ' : '' }}</span>
+                                </div>
+                                <small
+                                    *ngIf="(loginForm.controls['phonenumber'].touched && loginForm.get('phonenumber')?.hasError('required'))"
+                                    class="errorMessage">Phone Number is required</small>
+                                <small 
+                                    *ngIf="(loginForm.controls['phonenumber'].touched && loginForm.get('phonenumber')?.hasError('pattern'))"
+                                    class="errorMessage">Enter a valid 10 digit number</small>
+                                <p class="errorMessage" *ngIf="errorMessage">
+                                        {{errorMessage}}
+                                    </p>
+                            </div>
+                            <!-- <div class="terms-conditions container">
+                                    <p>By continuing you agree to the<b class="privacy-policy">terms & conditions</b> and <b>privacy policy</b></p>
+                                </div> -->
+                            <div class="buttom">
+                                <p class="LoginText text-center" (click)="loginWithEmail()" *ngIf="loginWithEmailText">Login with email</p>
+                                <button class="btn btn-primary continue-btn" [disabled]="!loginForm.valid || BtnDisable"
+                                    (click)="continueOtp()">Continue</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-lg-6 rightcoloumn" *ngIf="!phoneNumberValid">
+
+                <div class="verify-phone">
+                    <div class="container">
+
+                        <mat-icon class="leftArrw" (click)="backArrow()">keyboard_backspace</mat-icon>
+
+                        <h1 class="verify">Verify phone number</h1>
+                        <div class="edit">
+                            <p class="otp-mb">We sent the OTP to <b>+91 {{getphonenumber}}</b></p>
+                            <img class="pencil" src="../../assets/PencilSimple.svg" (click)="initialSection()">
+                        </div>
+
+                        <p class="the-code">The code will expire in 15 minutes
+                            <!-- <b>{{minutes}}:{{seconds|number:'2.0'}}</b> -->
+                        </p>
+                        <p class="code">Didn't get the code? <span (click)="sendAgain()"
+                            [ngClass]="{'disabled': isDisabled, 'sendColor': !isDisabled}">Send again <span *ngIf="this.isDisabled">in
+                            <b>{{minutes}}:{{seconds|number:'2.0'}}</b></span></span></p>
+                    <div class="otpclss mt-5">
+
+
+                        <div class="otpclss mt-5">
+                            <ngx-otp-input [config]="otpInputConfig" (otpChange)="handleOtp($event)"
+                                (fill)="handleFill($event)">
+                            </ngx-otp-input>
+
+                        </div>
+
+                        <div class="mt-2">
+                            <small class="errorMessage" *ngIf="errorOtp"> {{errorOtp}}</small>
+                        </div>
+                        <button class="btn btn-primary otp-btn" (click)="logIn()"
+                            [disabled]="!otpfill || BtnDisable">Continue</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>      
+    </div>
+</div>

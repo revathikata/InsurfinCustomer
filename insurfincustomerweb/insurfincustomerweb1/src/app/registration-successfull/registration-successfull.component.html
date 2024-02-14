@@ -1,0 +1,29 @@
+<div class="main">
+    <div class="row">
+        <div class="col-lg-6 p-0">
+            <app-side-nav-section />
+        </div>   
+
+        <div class="col-lg-6 rightColoumn" >
+            <div class="distrbtr-welcome">
+
+                <!-- <mat-icon class="leftArrw" (click)="navigateBackArrow()">keyboard_backspace</mat-icon> -->
+
+                <div class="container">
+                    <img class="register-success" src="../../assets/registration-sucess.svg" alt="">
+                </div>
+
+                <div class="container">
+                    <p class="welcome">Registration successful!</p>
+                    <p class="more-details">You have successfully registered for Insurfin.</p>
+
+                </div>
+                <div class="container">
+                    <p class="error">{{errormsg}}</p>
+                    <button class="btn btn-primary continue-btn"  (click)="continueBtn()">Continue</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

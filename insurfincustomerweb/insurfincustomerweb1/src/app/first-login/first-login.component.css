@@ -1,0 +1,239 @@
+input.ng-touched.ng-invalid {
+    border: 1.5px solid red;
+    margin-bottom: 8px;
+}
+
+input.ng-untouched {
+    border: 1.5px solid #C6C6C6;
+}
+
+input.ng-valid {
+    border: 1.5px solid #C6C6C6
+}
+
+.distrbtr-welcome {
+    margin: auto;
+    border: 1px solid grey;
+    border-radius: 10px;
+    width: 393px;
+    height: 692px;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    padding: 10px;
+    background-color: #ffffff;
+}
+
+.verify-phone {
+    margin: auto;
+    border: 1px solid grey;
+    border-radius: 10px;
+    width: 393px;
+    height: 692px;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    padding: 10px;
+    background: linear-gradient(180deg, #EEF6FD -13.97%, #EDF4FB 113.2%)
+}
+
+.your {
+    color: #7D848D;
+    font-size: 16px;
+    font-weight: 400;
+    margin-top: 15px;
+}
+
+.main {
+    overflow: hidden;
+}
+
+.welcome-main {
+    color: #005AAA;
+    margin-top: 6%;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.inpPhn {
+    color: #041427;
+    outline: none;
+    box-shadow: none !important;
+    width: 345px;
+    height: 45px;
+    border-radius: 12px;
+}
+
+.inpPhn:focus {
+    border: 1.5px solid #005AAA;
+}
+.inpPhn::placeholder{
+    color: #C6C6C6;
+}
+
+.phn {
+    margin-top: 25px;
+    margin-bottom: 5px;
+    color: #7D848D;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.continue-btn {
+    height: 46px;
+    border-radius: 12px;
+    width: 345px;
+    background-color: #005AAA;
+    font-size: 16px;
+    font-weight: 700;
+    color: #FFFFFF;
+    letter-spacing: 1px;
+}
+.LoginText{
+    color: #2791E0;
+    font-weight: 600;
+    cursor: pointer;
+}
+.terms-conditions{
+font-weight: 400;
+font-size: 10px;
+line-height: 13px;
+color: #8B8F9C;
+
+}
+.privacy-policy{
+    font-size: 10px;
+    font-weight: 700;
+    color: #8B8F9C;
+    margin-left: 5px;
+}
+
+.otp-btn {
+    height: 42px;
+    border-radius: 12px;
+    width: 345px;
+    margin-top: 80%;
+    margin-bottom: 30px;
+    background-color: #005AAA;
+    font-size: 16px;
+    font-weight: 700;
+    color: #FFF;
+}
+
+.otp-mb {
+    font-size: 16px;
+    width: 305px;
+    margin-left: 6px;
+    color: #7D848D;
+    font-weight: 400;
+    margin-bottom: 2px;
+}
+
+.the-code {
+    font-size: 16px;
+    width: 305px;
+    margin-left: 6px;
+    color: #7D848D;
+    font-weight: 400;
+}
+
+.verify {
+    color: #005AAA;
+    margin-top: 50px;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.welcome-bg {
+    width: 472px;
+    height: 170px;
+    margin-left: 12%;
+    margin-top: 13%;
+    z-index: -999;
+    opacity: 19%;
+}
+
+.rightcoloumn {
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 100vh;
+    background: linear-gradient(270deg, #EEF5FC 0%, #C3D9ED 100%);
+}
+
+.sendColor {
+    color: #2791E0;
+    font-weight: 700;
+    font-size: 16px;
+    padding-left: 9px;
+    cursor: pointer;
+
+}
+
+button.btn[disabled] {
+    background: #C8DCEE;
+    border: 1px solid #C8DCEE;
+}
+.buttom{
+    margin-top: 27%;
+}
+.code {
+    margin-top: 20px;
+    color: #7D848D;
+    font-size: 16px;
+    font-weight: 400;
+    margin-left: 8px;
+}
+
+::ng-deep.ngx-otp-input {
+    background: #ffffff;
+    border: 1px solid #005AAA !important;
+    border-radius: 12px !important;
+    width: 52px !important;
+    height: 52px !important;
+    margin-right: -4px;
+}
+
+.pencil {
+    margin-top: -3px;
+    margin-left: -27px;
+    cursor: pointer;
+}
+
+.edit {
+    display: flex;
+}
+
+.leftArrw {
+    cursor: pointer;
+}
+
+.disabled {
+    color: #C8DCEE;
+    cursor: not-allowed;
+}
+
+.errorMessage {
+    color: red;
+    font-size: 14px;
+    font-weight: 400;
+    margin-left: 5px;
+}
+
+small{
+    margin-left: 5px;
+}
+.input-wrapper {
+    position: relative;
+  }
+
+  .input-wrapper input[type="tel"] {
+   padding-left: 38px;
+    /* adjust the padding to make room for the icon */
+  }
+
+  .input-wrapper span {
+    position: absolute;
+    top: 50%;
+    left: 0.5rem;
+    transform: translateY(-50%);
+    color: #7D848D;
+    font-size: 16px;
+  }

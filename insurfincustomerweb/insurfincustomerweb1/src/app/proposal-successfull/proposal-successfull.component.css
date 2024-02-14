@@ -1,0 +1,87 @@
+.propsl-success {
+    margin-top: 7%;
+    color: #005AAA;
+    font-weight: 700;
+    font-size: 32px;
+    margin-left: 20px;
+    line-height: 1;
+}
+
+
+.whts-email {
+    font-size: 16px;
+    font-weight: 400;
+    margin-left: 20px;
+    width: 345px;
+    margin-top: 27px;
+    width: 312px;
+    color: #7D848D
+
+}
+
+.leftArrw {
+    padding: 20px;
+    cursor: pointer;
+}
+
+.propose-dtls {
+    font-size: 16px;
+    font-weight: 700;
+    margin-left: 17PX;
+    color: #041427;
+}
+
+.startReg {
+    background: #005AAA;
+    box-shadow: inset 0px 0px 10px 6px rgb(0 90 170 / 2%);
+    border-radius: 14px;
+    width: 345px;
+    margin-top: 29px;
+    margin-left: 15px;
+    height: 46px;
+}
+
+.rightColoumn {
+    overflow-x: hidden;
+    overflow-x: auto;
+    height: 100vh;
+    background: linear-gradient(270deg, #EEF5FC 0%, #C3D9ED 100%);
+}
+/* .small {
+    border: 1px solid rgb(227, 223, 223);
+    background-color: #E8E8E8;
+    width: 224px;
+    height: 224px;
+    margin: auto;
+    margin-top: 13%;
+    border-radius: 12px;
+} */
+.proposal-image{
+    height: 250px;
+    width: 250px;
+    margin-left: 20%;
+}
+.distrbtr-welcome {
+    margin: auto;
+    border: 1px solid grey;
+    border-radius: 10px;
+    height: 772px;
+    width: 393px;
+    height: 692px;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    background-color: #EDF4FB;
+}
+
+.main {
+    overflow: hidden;
+}
+.collect {
+    font-size: 16px;
+    font-weight: 400;
+    margin-top: 59px;
+    margin-left: 20px;
+    color: #7D848D;
+}
+   
+

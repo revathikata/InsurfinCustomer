@@ -1,0 +1,264 @@
+.main {
+    overflow: hidden;
+}
+
+
+.rightColoumn {
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 100vh;
+    background: linear-gradient(270deg, #EEF5FC 0%, #C3D9ED 100%);
+}
+
+
+.distrbtr-welcome {
+    width: 350px;
+    margin: auto;
+    margin-top: 43px;
+
+}
+
+.mat-mdc-tab .mdc-tab__content {
+    width: 30px;
+    padding: 5px;
+    font-weight: 700;
+
+}
+
+::ng-deep.distrbtr-welcome .mat-mdc-tab.mdc-tab {
+    height: 48px;
+    flex-grow: 0;
+    width: 83px;
+    font-size: 10px;
+}
+
+::ng-deep.distrbtr-welcome .mat-mdc-tab.mdc-tab {
+    height: 32px;
+}
+
+::ng-deep.distrbtr-welcome .mat-mdc-tab-body-wrapper {
+    background-color: white;
+    border-radius: 17px;
+    margin-top: 20px;
+    padding: 10px;
+    width: 393px;
+    margin-bottom: 35px;
+    height: 550px;
+
+
+}
+
+.mat-mdc-tab:not(.mat-mdc-tab-disabled).mdc-tab--active .mdc-tab__text-label,
+.mat-mdc-tab-link:not(.mat-mdc-tab-disabled).mdc-tab--active .mdc-tab__text-label {
+    color: #005AAA;
+}
+
+::ng-deep .mat-expansion-indicator::after {
+    color: #005AAA;
+}
+
+/* button.btn[disabled] {
+    background: #C8DCEE;
+    border: 1px solid #C8DCEE;
+} */
+.leftArrw {
+    padding: 20px;
+}
+
+.cust-dtls {
+    font-size: 16px;
+    font-weight: 700;
+    margin-left: 17PX;
+    color: #041427;
+
+}
+
+.new-prosl {
+    letter-spacing: 1px;
+    font-weight: 700;
+    margin-left: 7%;
+    margin-top: 10%;
+    font-size: 24px;
+    color: #041427;
+}
+
+.john {
+    font-size: 14px;
+    color: #7D848D;
+    margin-left: 15px;
+    margin-top: 14px;
+    font-weight: 700; 
+
+}
+
+.pers-dtls {
+    margin-left: 15px;
+    margin-top: -6px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #041427;
+
+
+}
+
+::ng-deep .distrbtr-welcome .mat-mdc-tab.mdc-tab {
+    height: 32px;
+    margin-left: 42px;
+}
+
+.section {
+    margin-left: 10px;
+    margin-top: 20px;
+
+}
+
+.inp-product {
+    width: 345px;
+    height: 42px;
+    color: #C6C6C6;
+    font-size: 16px;
+    border-radius: 12px;
+    font-weight: 400;
+}
+
+.choose {
+    color: #7D848D;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.product-name {
+    width: 345px;
+    height: 42px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.product-name::placeholder {
+    color: #C6C6C6;
+}
+
+.form-control {
+    outline: none;
+    box-shadow: none !important;
+}
+
+.form-select {
+    outline: none;
+    box-shadow: none !important;
+}
+
+.years {
+    color: #7D848D;
+    font-size: 12px;
+    font-weight: 400;
+    margin-left: 3px;
+    margin-top: 3px;
+}
+
+.policy-Info {
+    font-size: 18px;
+    font-weight: 700;
+    color: #041427;
+    margin-left: 14px;
+    margin-top: 20px;
+}
+
+.policy-tensure {
+    font-size: 12px;
+    font-weight: 400;
+    margin-left: 5px;
+    color: #7D848D;
+    margin-bottom: 4px;
+}
+
+.tensure {
+    width: 345px;
+    height: 42px;
+    border-radius: 12px;
+    color: #C6C6C6;
+    font-size: 16px;
+    font-weight: 400;
+}
+mat-slider[_ngcontent-yoc-c124] {
+    width: 329px;
+    color: #041427;
+    margin-left: 13px;
+}
+
+.section {
+    margin-left: 10px;
+}
+
+.tensure::placeholder {
+    color: #C6C6C6;
+}
+
+mat-slider {
+    width: 329px;
+    color: #041427;
+    /* height: 12px; */
+}
+
+.premium-amt {
+    font-size: 12px;
+    font-weight: 400;
+    color: #7D848D;
+    margin-left: 10px;
+}
+
+.rupee {
+    width: 345px;
+    height: 42px;
+    margin-left: 5px;
+    margin-top: -19px;
+    border-radius: 12px
+}
+
+/* .ind-rupee {
+    left: 7%;
+    top: 44%;
+    position: absolute;
+    color: #C6C6C6;
+} */
+
+.add-propsl {
+    background-color: #005AAA;
+    margin-top: 39%;
+    height: 48px;
+    border-radius: 12px;
+    width: 345px;
+    margin-left: 16px;
+
+}
+
+.small {
+    border: 1px solid rgb(227, 223, 223);
+    background-color: #E8E8E8;
+    width: 224px;
+    height: 224px;
+    margin: auto;
+    margin-top: 13%;
+    border-radius: 12px;
+}
+
+.propsl-success {
+    font-size: 32px;
+    font-weight: 500;
+    color: #005AAA;
+    margin-top: 7%;
+    margin-left: 24px;
+    line-height: 1;
+}
+button.btn[disabled]{
+    background-color: #C8DCEE;
+    border: 1px solid #C8DCEE ;
+}  
+.cont-btn{
+    width: 345px;
+    height: 45px;
+    border-radius: 12px;
+    background-color: #005AAA;
+    margin-left: 12px;
+}

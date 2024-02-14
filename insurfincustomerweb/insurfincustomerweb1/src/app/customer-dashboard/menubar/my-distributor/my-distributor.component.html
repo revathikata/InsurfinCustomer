@@ -1,0 +1,155 @@
+<div class="main">
+    <div class="welcome">
+        <div class="row">
+            <div class="col-lg-6 p-0">
+                <app-side-nav-section />
+            </div>
+            <div class="col-lg-6 rightColoumn">
+                <div class="customer-welcome mb-5" *ngIf="myDistributor">
+                    <!-- we have : menu, home , notifications, Summary -->
+                    <div class="toolbar">
+                        <div class="menu-home">
+                            <mat-icon class="menu" (click)="openMenuBar()">menu</mat-icon>
+                            <p class="my-home">My Distributors</p>
+                            <span class="dot"></span>
+                            <mat-icon class="notifications">notifications_none</mat-icon>
+                        </div>
+                    </div>
+                    <div class="main container">
+                        <p class="distributor-tags">Distributors</p>
+                        <div class="distributor" (click)="viewDetails()" *ngFor="let distributor of distributorList; let i=index ">
+                                <img src="../../../assets/profile pic -img.png" class="distributor-profile">                              
+                                <p class="distributor-praposal"><b>{{distributor.distributorName}}</b></p>
+                                <p class="prapose">{{distributor.proposalCount}} Proposal  |  {{distributor.policyCount}} Policy</p>
+                            <div class="arrow-flex">
+                                <img src="../../../assets/arrow side.svg">
+                            </div>
+                        </div>
+                        <hr>
+                        <!-- <div class="distributor" (click)="viewDetails()">
+                                <img src="../../../assets/profile pic -img.png" class="distributor-profile" >
+                            <p class="distributor-praposal"> <b>Kevin Sharma</b></p>
+                            <p class="prapose">1 Policy</p>
+                            <div class="arrow-flex">
+                                <img src="../../../assets/arrow side.svg">
+                            </div>
+                        </div> -->
+                        <!-- <hr> -->
+                </div>
+                
+            </div>
+
+            <div class="welcome-customer mb-5" *ngIf="viewCustomer">
+                <div class="container my-distbtrs">
+                    <mat-icon class="backspace" (click)="navigateBackArrow()">keyboard_backspace</mat-icon>
+                    <p class="distribute">My Distributors</p>
+                </div>
+
+                <div class="container verified-flex">
+                    <div>
+                        <img  src="../../../../assets/profile pic -img.png" class="distributor-profile">
+                    </div>
+                    <div class="verified-section">
+                        <p class="john-name">{{distributorviewDetails?.customerDistributor?.distributorName}}</p>
+                        <p class="proposal">{{distributorviewDetails?.customerProposal.length}} Proposal  |  {{distributorviewDetails?.customerPolicy.length}} Policy</p>
+                        <p class="verified">Verified</p>
+                    </div>
+                    <div>
+                        <img class="phone-img" src="../../../../assets/phone-img (2).svg">
+                    </div>
+                </div>
+                <div class="edit-details container">
+                    <div class="container">
+                        <p class="details">GENERAL DETAILS</p>
+                    </div>
+                    <div class="general-details container">
+                        <p class="distributor-since">Distributor since</p>
+                        <p class="one-year">{{distributorviewDetails?.customerDistributor?.distributorSince}}</p>
+                    </div>
+                    <div class="general-details container">
+                        <p class="distributor-since">Phone Number</p>
+                        <p class="one-year">+91 {{distributorviewDetails?.customerDistributor?.phoneNumber}}</p>
+                    </div>
+                    <div class="general-details container">
+                        <p class="distributor-since">Email ID</p>
+                        <p class="one-year">{{distributorviewDetails?.customerDistributor?.email}}</p>
+                    </div>
+                    <div class="general-details container">
+                        <p class="distributor-since">Address</p>
+                        <p class="address">
+                            {{ distributorviewDetails?.customerDistributor?.address?.addressLine1 }}{{ distributorviewDetails?.customerDistributor?.address?.addressLine1 ? ', ' : '' }}
+                            {{ distributorviewDetails?.customerDistributor?.address?.addressLine2 }}{{ distributorviewDetails?.customerDistributor?.address?.addressLine2 ? ', ' : '' }}
+                            {{ distributorviewDetails?.customerDistributor?.address?.city }}{{ distributorviewDetails?.customerDistributor?.address?.city ? ', ' : '' }}
+                            {{ distributorviewDetails?.customerDistributor?.address?.state ? '-':'' }} {{ distributorviewDetails?.customerDistributor?.address?.pinCode }}
+                        </p>                        
+                    </div>
+                    <div>
+                        <hr>
+                    </div>
+                    <div class="container">
+                        <p class="details">PROPOSALS CREATED</p>
+                    </div>
+                    <div class="card container mt-3" *ngIf="distributorviewDetails?.customerProposal.length > 0">
+                        <div class="high-flex">
+                            <mat-icon class="error">error_outline</mat-icon>
+                            <p class="high-priority">High Priority | Review within 3 days</p>
+                        </div>
+                        <div class="section-flex">
+                            <mat-icon style="margin-top: 20px; color: #005AAA;" (click)="leftArrow()" [ngStyle]="{'display':SeletctedProposalIndex >=1 ? 'block':'none' }">keyboard_arrow_left</mat-icon>
+                            <div class="section">
+                                <p class="silver-policy">{{distributorviewDetails?.customerProposal?.[SeletctedProposalIndex]?.productName}}</p>
+                                <p class="prpsl-acceptance">{{distributorviewDetails?.customerProposal?.[SeletctedProposalIndex]?.displayStatus}}</p>
+                            </div>
+                            <div>
+                                <img class="right-arrw" src="../../assets/CaretRight.svg" (click)="ArrowClick()">
+                            </div>
+                        </div>
+                        <div class="section">
+                            <p class="policy-amt">Policy Amount</p>
+                            <p class="ten-lacs">{{distributorviewDetails?.customerProposal?.[SeletctedProposalIndex]?.policyAmount}}</p>
+                        </div>
+                        <div class="section">
+                            <p class="policy-num">Proposal Number</p>
+                            <p class="ten-lacs">{{distributorviewDetails?.customerProposal?.[SeletctedProposalIndex]?.proposalNumber}}</p>
+                        </div>
+                        <div class="mb-5 container">
+                            <button class="btn btn-primary review-btn" (click)="reviewProposal()">Review Proposal</button>
+                        </div>
+                    </div>
+                    <div>
+                        <hr>
+                    </div>
+                    <div class="container">
+                        <p class="details">POLICIES MANAGED</p>
+                    </div>
+                    <div class="container card-box mb-5">
+                        <div class="silver-flex">
+                            <mat-icon style="margin-top: 20px; color: #005AAA;" (click)="leftArrow()" [ngStyle]="{'display':SeletctedProposalIndex >=1 ? 'block':'none' }">keyboard_arrow_left</mat-icon>
+                            <div class="container">
+                                <p class="policy-silver">{{distributorviewDetails?.customerProposal?.[SeletctedProposalIndex]?.productName}}</p>
+                            </div>
+                            <div>
+                                <img class="right-arrw" src="../../assets/CaretRight.svg" (click)="ArrowClick()">
+                            </div>
+                        </div>
+                        <div class="section">
+                            <p class="policy-amt">Insurer</p>
+                            <p class="hdfc-ins">{{distributorviewDetails?.customerPolicy?.[SeletctedProposalIndex]?.insurerName}}</p>
+                        </div>
+                        <div class="section">
+                            <p class="policy-amt">Premium Amount (₹)</p>
+                            <p class="hdfc-ins">{{distributorviewDetails?.customerPolicy?.[SeletctedProposalIndex]?.premiumAmount}}</p>
+                        </div>
+                        <div class="section">
+                            <p class="policy-amt">Policy Tenure</p>
+                            <p class="hdfc-ins">{{distributorviewDetails?.customerPolicy?.[SeletctedProposalIndex]?.policyTenure}}</p>
+                        </div>
+                    </div>
+
+                    
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,124 @@
+.main {
+    overflow-y: hidden;
+}
+
+.distrbtr-welcome {
+    margin: auto;
+    border: 1px solid grey;
+    border-radius: 10px;
+    width: 393px;
+    height: 692px;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    padding: 10px;
+    background-color: #ffffff;
+    overflow-y: scroll;
+}
+
+.rightcoloumn {
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 100vh;
+    background: linear-gradient(270deg, #EEF5FC 0%, #C3D9ED 100%);
+}
+
+.leftArrw {
+    cursor: pointer;
+}
+
+.mainHead {
+    color: #005AAA;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.64px;
+}
+
+.email-content {
+    color: #7D848D;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+:host::ng-deep.ngx-otp-input {
+    background: #ffffff;
+    border: 1px solid #005AAA !important;
+    border-radius: 12px !important;
+    width: 52px !important;
+    height: 52px !important;
+    margin-right: -4px;
+}
+
+.sendColor {
+    color: #2791E0;
+    font-weight: 700;
+    font-size: 16px;
+    padding-left: 9px;
+    cursor: pointer;
+}
+
+.disabled {
+    color: #C8DCEE;
+    cursor: not-allowed;
+}
+
+.continue-btn,
+.acceptButton {
+    color: #FFF;
+    text-align: center;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    border-radius: 12px;
+    background: #005AAA;
+    box-shadow: 0px 0px 10px 6px rgba(0, 90, 170, 0.02) inset;
+    width: 345px;
+    height: 52px;
+    flex-shrink: 0;
+    margin-top: 10px;
+}
+
+.LetterHead {
+    color: #005AAA;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.64px;
+}
+
+.rightColoumn {
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 100vh;
+    background: linear-gradient(270deg, #EEF5FC 0%, #C3D9ED 100%);
+}
+
+.footer-flex {
+    margin-top: 10%;
+}
+
+.footer {
+    border-radius: 20px 20px 0px 0px;
+    background: #FFF;
+    box-shadow: 0px 0px 10px 0px rgba(77, 127, 174, 0.20);
+}
+.Home{
+    padding-left: 10px;
+    position: relative;
+    bottom: 6px;
+}
+.agree {
+    color: #8B8F9C;
+    font-size: 16px;
+    font-weight: 700;
+}
+button.continue-btn[disabled] {
+    background: #C8DCEE;
+    border: 1px solid #C8DCEE;
+    cursor: not-allowed;
+}

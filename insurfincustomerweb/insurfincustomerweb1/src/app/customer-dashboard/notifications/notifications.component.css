@@ -1,0 +1,144 @@
+.main {
+    overflow: hidden;
+  }
+  .rightColoumn {
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 100vh;
+    background: linear-gradient(270deg, #EEF5FC 0%, #C3D9ED 100%);
+  }
+  /* .col-lg-6 {
+    overflow: hidden;
+  } */
+  .margin-dtls{
+    border: 1px solid #FFFFFF;
+    width: 391px;
+    margin-left: -12px;
+    padding: 21px;
+    margin-top: 30px;
+    border-radius: 10px;
+    background: #FFFFFF;
+box-shadow: 0px 0px 10px rgba(77, 127, 174, 0.2);
+border-radius: 24px 24px 0px 0px;
+  }
+  
+  .distrbtr-welcome {
+    width: 393px;
+    margin: auto;
+    margin-top: 43px;
+  }
+  
+  .customer-welcome {
+    margin: auto;
+    border: 1px solid grey;
+    border-radius: 10px;
+    width: 393px;
+    margin-top: 5%;
+    height: 600px;
+    margin-bottom: 5%;
+    background-color: #ffffff;
+  
+  }
+  .display{
+    display: flex;
+    margin-left: 16px;
+  }
+  .back-arrow{
+    margin-top: 10px;
+    cursor: pointer;
+}
+.notification{
+    display: flex;
+    margin-top: 20px;
+  }
+  .notif{
+    margin-left: 20px;
+    color: #041427;
+    font-weight: 700;
+  }
+  .marks{
+    margin-top: 2px;
+    margin-left: 110px;
+    color: #2791E0;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .main {
+    overflow: hidden;
+  }
+  .distributor-flex{
+    margin-left: 16px;
+    margin-top: 35px;
+    cursor: pointer;
+    /* display: flex; */
+  }
+  .distributor-flexone{
+    margin-left: 16px;
+  }
+  .praposalnumber{
+    padding-left: 53px;
+    margin-top: -41px;
+    width: 260px;
+    font-weight: 400;
+font-size: 14px;
+color: #041427;
+
+}
+.praposalnumberone{
+     margin-left: 55px;
+     width: 216px;
+     margin-top: -39px; 
+     font-weight: 400;
+font-size: 14px;
+color: #7D848D;
+
+ }
+ .home{
+    font-weight: 700;
+    font-size:16px ;
+    color: #041427;
+    margin-left: 14px;
+    margin-top: 10px;
+  }
+  .right-arrow{
+    cursor: pointer;
+  }
+   
+  .icon{
+    margin-top: 14px;
+  }
+  .dot{
+    position: relative;
+    background: red;
+    border-radius: 50%;
+    height: 12px;
+    margin-left: 0px;
+    top: 11px;
+    width: 12px;
+    cursor: pointer;
+    box-shadow: 0 0 0 rgba(252,252,252, 0.4);
+    animation: pulse 3s infinite;
+  }
+  .arrow-flex{
+    display: flex;
+    justify-content: space-evenly;
+  }
+  .arrow-flex img{
+    margin-left: 211px;
+margin-top: -105px;
+  }
+  .twohours-ago{
+    font-weight: 400;
+font-size: 12px;
+line-height: 16px;
+color: #7D848D;
+margin-left: 38px;
+  }
+  .distributor-profile{
+    width: 52px;
+    height: 51px;
+    border-radius: 50%;
+    margin-left: -8px;
+    margin-top: 1px;
+  
+  }

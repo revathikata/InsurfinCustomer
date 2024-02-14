@@ -1,0 +1,804 @@
+<div class="main">
+  <div class="welcome">
+    <div class="row">
+      <div class="col-lg-6 p-0">
+        <app-side-nav-section />
+      </div>
+
+      <div class="col-lg-6 rightColoumn">
+        <div class="flex">
+          <mat-icon class="backspace" (click)="navigatebackArrow()">keyboard_backspace</mat-icon>
+          <p class="home">Summary</p>
+        </div>
+        <div class="distrbtr-welcome">
+          <p class="add-new">Customer Details</p>
+          <mat-tab-group [(selectedIndex)]="selectedIndex" (selectedTabChange)="tabChanged($event)">
+
+            <mat-tab label="Customer info" >
+              <div class="container">
+                <p class="customer">Customer Information</p>
+
+                <form [formGroup]="customerInfoForm">
+
+                  <div class="section">
+                    <label>Full name(name should be same as Aadhaar)<span>*</span></label>
+                    <input type="text" class="form-control" (keyup)="toCamelCase($event)" [(ngModel)]="target" placeholder="Enter full name" formControlName="fullname">
+                    <small
+                      *ngIf="(customerInfoForm.controls['fullname'].touched && customerInfoForm.get('fullname')?.hasError('required')) || (customerInfoForm.controls['pancardnum'].touched && customerInfoForm.controls['fullname']?.invalid)"
+                      style="color: red;">Please enter a valid name</small>
+                    <small
+                      *ngIf="(customerInfoForm.controls['fullname'].touched && customerInfoForm.get('fullname')?.hasError('pattern'))"
+                      style="color: red;">Please enter a valid name</small>
+                    <small class="mismatchedData" *ngIf="panNameError">{{panNameError}}</small>
+                    <small class="mismatchedData" *ngIf="AadharNameError">{{AadharNameError}}</small>
+                  </div>
+                  <div class="section">
+                    <label>Date of birth<span>*</span></label>
+                    <input type="text" class="form-control" placeholder="dd/mm/yyyy" formControlName="dob" (input)="checkdobValue($event)"
+                      (click)="openDialog()">
+                    <small
+                      *ngIf="(customerInfoForm.controls['dob'].touched && customerInfoForm.get('dob')?.hasError('required')) || (customerInfoForm.controls['pancardnum'].touched && customerInfoForm.controls['dob']?.invalid)"
+                      style="color: red;">DOB is required</small>
+                  </div>
+
+                  <div class="section">
+                    <label>Gender<span>*</span></label>
+                    <ng-select class="statedropdown custom-ngselect" [items]="Gender" placeholder=" Select Gender"
+                      formControlName="gender" [disabled]="selectDisabled"
+                      [ngClass]="{ 'disable-gender': !disableGender, 'gender-background': disableGender }"
+                      [clearable]="false" [searchable]="false">
+
+                    </ng-select>
+                    <small
+                      *ngIf="(customerInfoForm.controls['gender'].touched && customerInfoForm.get('gender')?.hasError('required')) || (customerInfoForm.controls['pancardnum'].touched && customerInfoForm.controls['gender']?.invalid)"
+                      style="color: red;">Gender is required</small>
+                  </div>
+
+                  <div class="section">
+                    <label>Phone number<span>*</span></label>
+                    <input type="tel" class="form-control" maxlength="10" formControlName="phnnum"
+                      placeholder="Enter phone number">
+                    <small
+                      *ngIf="(customerInfoForm.controls['phnnum'].touched && customerInfoForm.get('phnnum')?.hasError('required'))"
+                      style="color: red;"> Phone Number is required</small>
+                    <small
+                      *ngIf="(customerInfoForm.controls['phnnum'].touched && customerInfoForm.get('phnnum')?.hasError('pattern'))"
+                      style="color: red;">Enter valid Phone Number</small>
+                  </div>
+
+                  <p class="mt-3 persn-head">PAN and Aadhaar Information</p>
+                  <div class="section">
+                    <label>PAN<span>*</span></label>
+                    <input type="text" class="form-control regForm" maxlength="10" formControlName="pancardnum"
+                      (input)="panValidation($event)" appPanMask placeholder="Enter PAN">
+                    <small
+                      *ngIf="(customerInfoForm.controls['pancardnum'].touched && customerInfoForm.get('pancardnum')?.hasError('required'))"
+                      class="account-invalid"> PAN is Required</small>
+                    <small
+                      *ngIf="(customerInfoForm.controls['pancardnum'].touched && customerInfoForm.get('pancardnum')?.hasError('pattern'))"
+                      class="account-invalid">Enter a Valid PAN</small>
+                    <div>
+                      <p class="successpan" *ngIf="panVerification">{{panVerification}}<img
+                          src="../../assets/CheckCircle.svg"></p>
+                      <small class="account-invalid" *ngIf="panVerificationError && !panVerification 
+                      && !(customerInfoForm.get('pancardnum')?.hasError('required'))
+                      && !(customerInfoForm.get('pancardnum')?.hasError('pattern'))">{{panVerificationError}}</small>
+                    </div>
+                  </div>
+                  <div class="section">
+                    <label>Aadhaar Number<span>*</span></label>
+                    <input type="text" class="form-control regForm" maxlength="12" formControlName="aadhaarnum"
+                      appPanMask placeholder="Enter aadhaar Number">
+                    <small
+                      *ngIf="(customerInfoForm.controls['aadhaarnum'].touched && customerInfoForm.get('aadhaarnum')?.hasError('required'))"
+                      class="account-invalid"> Aadhaar Number is Required</small>
+                    <small
+                      *ngIf="(customerInfoForm.controls['aadhaarnum'].touched && customerInfoForm.get('aadhaarnum')?.hasError('pattern'))"
+                      class="account-invalid">Enter a Valid Aadhaar Number</small>
+                    <p class="verifymail" (click)="onVerify()" *ngIf="customerInfoForm.valid && !aadharVerified">Verify
+                      Aadhaar </p>
+                    <p class="successpan" *ngIf="aadharVerified">Aadhar Verified <img
+                        src="../../assets/CheckCircle.svg"></p>
+                    <small *ngIf="AadharError && !aadharVerified && !customerInfoForm.get('aadhaarnum')?.hasError('required')
+                    && !customerInfoForm.get('aadhaarnum')?.hasError('pattern')" class="account-invalid">{{AadharError}}
+                    </small>
+                    <p *ngIf="AadharmisMatch" class="account-invalid">{{AadharmisMatch}}</p>
+                  </div>
+                  <div class="mt-5 mb-3">
+                    <p class="aadhar-num-verify" *ngIf="!aadharVerified">Aadhaar number verification is mandatory to
+                      proceed ahead</p>
+                    <button class="btn btn-primary cust-Btn" [disabled]="!aadharVerified"
+                      (click)="customerInfo()">Continue</button>
+                  </div>
+                </form>
+              </div>
+
+            </mat-tab>
+
+
+            <mat-tab label="Address" [disabled]="customerInfoForm.invalid">
+              <div class="container">
+                <div class="current-address" *ngIf="showCurrentAddress">
+                  <p class="customer">Current Address</p>
+                  <form [formGroup]="currentAddress">
+                    <div class="section">
+                      <label>Address line 1<span>*</span></label>
+                      <input type="text" class="form-control" formControlName="currentaddressline1"
+                        placeholder="Enter adress line 1">
+                      <small
+                        *ngIf="(currentAddress.controls['currentaddressline1'].touched && currentAddress.get('currentaddressline1')?.hasError('required'))"
+                        style="color: red;"> Address line 1 is Required</small>
+                      <small
+                        *ngIf="(currentAddress.controls['currentaddressline1'].touched && currentAddress.get('currentaddressline1')?.hasError('pattern'))"
+                        style="color: red;">Enter Valid Address Line 1</small>
+                    </div>
+                    <div class="section">
+                      <label>Address line 2<span>*</span></label>
+                      <input type="text" class="form-control" formControlName="currentaddressline2"
+                        placeholder="Enter adress line 2">
+                      <small
+                        *ngIf="(currentAddress.controls['currentaddressline2'].touched && currentAddress.get('currentaddressline2')?.hasError('required'))"
+                        style="color: red;"> Address line 2 is Required</small>
+                      <small
+                        *ngIf="(currentAddress.controls['currentaddressline2'].touched && currentAddress.get('currentaddressline2')?.hasError('pattern'))"
+                        style="color: red;">Enter Valid Address Line 2</small>
+                    </div>
+                    <div class="section">
+                      <label>City<span>*</span></label>
+                      <input type="text" class="form-control" formControlName="currentcity" placeholder="Enter city">
+                      <small
+                        *ngIf="(currentAddress.controls['currentcity'].touched && currentAddress.get('currentcity')?.hasError('required'))"
+                        style="color: red;"> City is Required</small>
+                      <small
+                        *ngIf="(currentAddress.controls['currentcity'].touched && currentAddress.get('currentcity')?.hasError('pattern'))"
+                        style="color: red;">Enter a Valid City</small>
+                    </div>
+                    <div class="section">
+                      <label>State<span>*</span></label>
+                      <ng-select class="statedropdown" [items]="stateName" bindLabel="stateName" bindValue="stateName"
+                        placeholder="Select State" formControlName="currentstate" [searchable]="true"
+                        [clearable]="true">
+                        <!-- <ng-option  *ngFor="let states of stateName">{{states}}</ng-option> -->
+                      </ng-select>
+                      <small
+                        *ngIf="(currentAddress.controls['currentstate'].touched && currentAddress.get('currentstate')?.hasError('required'))"
+                        style="color: red;"> State is Required</small>
+                    </div>
+                    <div class="section">
+                      <label>Country</label>
+                      <input type="text" class="form-control" formControlName="currentcountry">
+                      <small
+                        *ngIf="(currentAddress.controls['currentcountry'].touched && currentAddress.get('currentcountry')?.hasError('required'))"
+                        style="color: red;"> Country is Required</small>
+                    </div>
+                    <div class="section">
+                      <label>Pincode<span>*</span></label>
+                      <input type="text" class="form-control" formControlName="currentpincode"
+                        placeholder="Enter pincode" maxlength="6">
+                      <small
+                        *ngIf="(currentAddress.controls['currentpincode'].touched && currentAddress.get('currentpincode')?.hasError('required'))"
+                        style="color: red;"> Pincode is Required</small>
+                      <small
+                        *ngIf="(currentAddress.controls['currentpincode'].touched && currentAddress.get('currentpincode')?.hasError('pattern'))"
+                        style="color: red;">Enter a Valid Pincode</small>
+                    </div>
+                  </form>
+                </div>
+
+                <div class="container">
+                  <p class="customer">Permanent Address</p>
+                  <form [formGroup]="permanentAddress">
+
+                    <div class="section">
+                      <label>Address line 1 <span>*</span></label>
+                      <input type="text" class="form-control" formControlName="paddressline1"
+                        placeholder="Enter adress line 1">
+                      <small
+                        *ngIf="(permanentAddress.controls['paddressline1'].touched && permanentAddress.get('paddressline1')?.hasError('required'))"
+                        style="color: red;">Address line 1 is Required</small>
+                      <small
+                        *ngIf="(permanentAddress.controls['paddressline1'].touched && permanentAddress.get('paddressline1')?.hasError('pattern'))"
+                        style="color: red;">Enter Valid Address Line 1</small>
+                    </div>
+
+                    <div class="section">
+                      <label>Address line 2<span>*</span></label>
+                      <input type="text" class="form-control" formControlName="paddressline2"
+                        placeholder="Enter adress line 2" [ngClass]="{
+                          'red-border': permanentAddress.get('paddressline2')?.hasError('sameAddress')
+                        }">
+                      <small
+                        *ngIf="(permanentAddress.controls['paddressline2'].touched && permanentAddress.get('paddressline2')?.hasError('required'))"
+                        style="color: red;"> Address line 2 is Required</small>
+                      <small
+                        *ngIf="(permanentAddress.controls['paddressline2'].touched && permanentAddress.get('paddressline2')?.hasError('pattern'))"
+                        style="color: red;">Enter Valid Address Line 2</small>
+                      <span *ngIf="permanentAddress.get('paddressline2')?.hasError('sameAddress')" class="red-class">
+                        Addresses cannot be the same.
+                      </span>
+                    </div>
+
+                    <div class="section">
+                      <label>City<span>*</span></label>
+                      <input type="text" class="form-control" formControlName="pcity" placeholder="Enter city">
+                      <small
+                        *ngIf="(permanentAddress.controls['pcity'].touched && permanentAddress.get('pcity')?.hasError('required'))"
+                        style="color: red;"> City is Required</small>
+                      <small
+                        *ngIf="(permanentAddress.controls['pcity'].touched && permanentAddress.get('pcity')?.hasError('pattern'))"
+                        style="color: red;">Enter a Valid City</small>
+                    </div>
+
+                    <div class="section">
+                      <label>State<span>*</span></label>
+                      <ng-select class="statedropdown" [items]="stateName" bindLabel="stateName" bindValue="stateName"
+                        placeholder="Select State" formControlName="pstate"
+                        [ngClass]="{ 'disable-gender': !disableGender, 'gender-background': disableGender }"
+                        [searchable]="true" [clearable]="true">
+                      </ng-select>
+                      <small
+                        *ngIf="(permanentAddress.controls['pstate'].touched && permanentAddress.get('pstate')?.hasError('required'))"
+                        style="color: red;"> State is Required</small>
+                    </div>
+
+                    <div class="section">
+                      <label>Country</label>
+                      <input type="text" class="form-control" formControlName="pcountry">
+                      <small
+                        *ngIf="(permanentAddress.controls['pcountry'].touched && permanentAddress.get('pcountry')?.hasError('required'))"
+                        style="color: red;"> Country is Required</small>
+                    </div>
+
+                    <div class="section">
+                      <label>Pincode<span>*</span></label>
+                      <input type="text" class="form-control" formControlName="ppincode" placeholder="Enter pincode">
+                      <small
+                        *ngIf="(permanentAddress.controls['ppincode'].touched && permanentAddress.get('ppincode')?.hasError('required'))"
+                        style="color: red;">Pincode is Required</small>
+                      <small
+                        *ngIf="(permanentAddress.controls['ppincode'].touched && permanentAddress.get('ppincode')?.hasError('pattern'))"
+                        style="color: red;">Enter a Valid Pincode</small>
+                    </div>
+                    <!-- <div class="mt-3 mb-3">
+                      <button class="btn btn-primary cust-Btn" (click)="permanentAddressContinue()"
+                        [disabled]="!permanentAddress.valid">Continue</button>
+                    </div> -->
+                  </form>
+                </div>
+
+
+                <div class="checkdiv d-flex">
+                  <input type="checkbox" class="form-check" (change)="checkValue($event)" [(ngModel)]="isCheckboxChecked" [disabled]="isAddressLineEmpty()">
+                  <p class="sameCurrent">Communication address is the same as the permanent address</p>
+                </div>
+             <p *ngIf="addressEmptyField" style="color: red;">{{addressEmptyField}}</p>
+                <p class="customer">Communication Address</p>
+                <form [formGroup]="communicationAddress">
+                  <div class="section">
+                    <label>Address line 1<span>*</span></label>
+                    <input type="text" class="form-control" formControlName="addressline1"
+                      placeholder="Enter adress line 1">
+                    <small
+                      *ngIf="(communicationAddress.controls['addressline1'].touched && communicationAddress.get('addressline1')?.hasError('required'))"
+                      style="color: red;"> Address line 1 is Required</small>
+
+                    <small
+                      *ngIf="(communicationAddress.controls['addressline1'].touched && communicationAddress.get('addressline1')?.hasError('pattern'))"
+                      style="color: red;">Enter Valid Address Line 1</small>
+
+                  </div>
+
+                  <div class="section">
+                    <label>Address line 2<span>*</span></label>
+                    <input type="text" class="form-control" formControlName="addressline2"
+                      placeholder="Enter adress line 2" [ngClass]="{
+                        'red-border': communicationAddress.get('addressline2')?.hasError('sameAddress')
+                      }">
+                    <small
+                      *ngIf="(communicationAddress.controls['addressline2'].touched && communicationAddress.get('addressline2')?.hasError('required'))"
+                      style="color: red;"> Address line 2 is Required</small>
+                    <small
+                      *ngIf="(communicationAddress.controls['addressline2'].touched && communicationAddress.get('addressline2')?.hasError('pattern'))"
+                      style="color: red;">Enter Valid Address Line 2</small>
+                    <span *ngIf="communicationAddress.get('addressline2')?.hasError('sameAddress')" class="red-class">
+                      Addresses cannot be the same.
+                    </span>
+                  </div>
+
+                  <div class="section">
+                    <label>City<span>*</span></label>
+                    <input type="text" class="form-control" formControlName="city" placeholder="Enter city">
+                    <small
+                      *ngIf="(communicationAddress.controls['city'].touched && communicationAddress.get('city')?.hasError('required'))"
+                      style="color: red;"> City is Required</small>
+                    <small
+                      *ngIf="(communicationAddress.controls['city'].touched && communicationAddress.get('city')?.hasError('pattern'))"
+                      style="color: red;">Enter a Valid City</small>
+                  </div>
+
+                  <div class="section">
+                    <label>State<span>*</span></label>
+                    <ng-select class="statedropdown" [items]="stateName" bindLabel="stateName" bindValue="stateName"
+                      placeholder="Select State" formControlName="state" [searchable]="true" [clearable]="true">
+                    </ng-select>
+                    <small
+                      *ngIf="(communicationAddress.controls['state'].touched && communicationAddress.get('state')?.hasError('required'))"
+                      style="color: red;"> State is Required</small>
+                  </div>
+
+                  <div class="section">
+                    <label>Country</label>
+                    <input type="text" class="form-control" formControlName="country">
+                    <small
+                      *ngIf="(communicationAddress.controls['country'].touched && communicationAddress.get('country')?.hasError('required'))"
+                      style="color: red;"> Country is Required</small>
+                  </div>
+
+                  <div class="section">
+                    <label>Pincode<span>*</span></label>
+                    <input type="text" class="form-control" formControlName="pincode" placeholder="Enter pincode"
+                      maxlength="6">
+                    <small
+                      *ngIf="(communicationAddress.controls['pincode'].touched && communicationAddress.get('pincode')?.hasError('required'))"
+                      style="color: red;"> Pincode is Required</small>
+                    <small
+                      *ngIf="(communicationAddress.controls['pincode'].touched && communicationAddress.get('pincode')?.hasError('pattern'))"
+                      style="color: red;">Enter a Valid Pincode</small>
+                  </div>
+                  <div class="mt-5 mb-3">
+                    <button class="btn btn-primary cust-Btn" (click)="communicationAddressContinue()"
+                      [disabled]="!communicationAddress.valid">Continue</button>
+                  </div>
+                </form>
+              </div>
+
+            </mat-tab>
+
+            <mat-tab label="Employment" [disabled]="restrictCutomerEdit || !communicationAddress.valid">
+              <div class="container">
+                <p class="customer">Employment Details</p>
+
+                <div *ngIf="isSalary">
+                  <mat-radio-button [checked]="isSalaried" (click)="checkSalary()"></mat-radio-button><span
+                    class="salary">Salaried
+                    Employee</span>
+                </div>
+                <div *ngIf="isSelf" [ngClass]="isSelf ? 'isValid' :'' ">
+                  <mat-radio-button class="radio" [checked]="!isSalaried" (click)="checkSelf()"></mat-radio-button><span
+                    class="salary">Self
+                    Employed</span>
+                </div>
+
+                <form [formGroup]="salaryEmploymentForm" *ngIf="salary">
+
+                  <div class="section">
+                    <label>Company name (as in salary slip)<span>*</span></label>
+                    <input type="text" class="form-control" placeholder="Enter company email"
+                      formControlName="companyname">
+                    <small
+                      *ngIf="(salaryEmploymentForm.controls['companyname'].touched && salaryEmploymentForm.get('companyname')?.hasError('required'))"
+                      style="color: red;">Company name is Required</small>
+                  </div>
+                  <div class="section">
+                    <label>Primary email<span>*</span></label>
+                    <input type="text" class="form-control" placeholder="Enter company email" formControlName="pemail">
+                    <small
+                      *ngIf="(salaryEmploymentForm.controls['pemail'].touched && salaryEmploymentForm.get('pemail')?.hasError('required'))"
+                      style="color: red;">Email ID Required</small>
+                    <small
+                      *ngIf="(salaryEmploymentForm.controls['pemail'].touched && salaryEmploymentForm.get('pemail')?.hasError('pattern'))"
+                      style="color: red;">Invalid email ID</small>
+                  </div>
+                  <div class="section">
+                    <label>Secondary email<span>*</span></label>
+                    <input type="text" class="form-control" placeholder="Enter personal email" formControlName="semail"
+                      [ngClass]="{
+                      'red-border': salaryEmploymentForm.get('semail')?.hasError('isEmail')
+                    }">
+                    <small
+                      *ngIf="(salaryEmploymentForm.controls['semail'].touched && salaryEmploymentForm.get('semail')?.hasError('required'))"
+                      style="color: red;">Email ID Required</small>
+                    <small
+                      *ngIf="(salaryEmploymentForm.controls['semail'].touched && salaryEmploymentForm.get('semail')?.hasError('pattern'))"
+                      style="color: red;">Invalid email ID</small>
+                      <span *ngIf="salaryEmploymentForm.get('semail')?.hasError('isEmail')" class="yellow-class">
+                        Primary and Secondary emails cannot be the same
+                      </span>
+                  </div>
+                  <div class="section">
+                    <label>Monthly income<span>*</span></label>
+                    <div class="input-wrapper">
+                      <input type="text" class="form-control rupee" formControlName="mincome" appCurrencyFormat #input>
+                      <i class="fa-solid fa-indian-rupee-sign ind-rupee"
+                        [ngStyle]="{'color': input.value ? '#041427' : ''}"></i>
+                    </div>
+                    <small *ngIf="salaryEmploymentForm.controls['mincome'].touched && 
+                    (salaryEmploymentForm.get('mincome')?.hasError('required') || 
+                    salaryEmploymentForm.get('mincome')?.hasError('minIncome'))" style="color: red;">
+                    {{ salaryEmploymentForm.get('mincome')?.hasError('required') ? 'Monthly Income is Required' :
+                    'Monthly income cannot be lower than ₹20,000'}}
+                   
+                    </small>
+                  </div>
+                  <div class="mt-5 mb-3">
+                    <button class="btn btn-primary cust-Btn" (click)="salariedEmployment()"
+                      [disabled]="!salaryEmploymentForm.valid">Continue</button>
+                  </div>
+
+                </form>
+
+                <form [formGroup]="selfEmploymentForm" *ngIf="!salary">
+
+                  <div class="section">
+                    <label>Type of employment</label>
+                    <ng-select class="statedropdown" [items]="employee" placeholder="select type of employment"
+                      formControlName="temployement">
+                    </ng-select>
+                    <small
+                      *ngIf="(selfEmploymentForm.controls['temployement'].touched && selfEmploymentForm.get('temployement')?.hasError('required'))"
+                      style="color: red;">Type of employment is Required</small>
+                  </div>
+
+                  <div class="section">
+                    <label>Primary email<span>*</span></label>
+                    <input type="text" class="form-control" placeholder="Enter company email"
+                      formControlName="primaryemail">
+                    <small
+                      *ngIf="(selfEmploymentForm.controls['primaryemail'].touched && selfEmploymentForm.get('primaryemail')?.hasError('required'))"
+                      style="color: red;">Email ID Required</small>
+                    <small
+                      *ngIf="(selfEmploymentForm.controls['primaryemail'].touched && selfEmploymentForm.get('primaryemail')?.hasError('pattern'))"
+                      style="color: red;">Invalid email ID</small>
+                  </div>
+                  <div class="section">
+                    <label>Secondary email<span>*</span></label>
+                    <input type="text" class="form-control" placeholder="Enter personal email"
+                      formControlName="secondaryemail">
+                    <small
+                      *ngIf="(selfEmploymentForm.controls['secondaryemail'].touched && selfEmploymentForm.get('secondaryemail')?.hasError('required'))"
+                      style="color: red;">Email ID Required</small>
+                    <small
+                      *ngIf="(selfEmploymentForm.controls['secondaryemail'].touched && selfEmploymentForm.get('secondaryemail')?.hasError('pattern'))"
+                      style="color: red;">Invalid email ID</small>
+                  </div>
+                  <span *ngIf="selfEmploymentForm.get('secondaryemail')?.hasError('isSelfEmail')" class="yellow-class">
+                    Primary and Secondary emails cannot be the same
+                  </span>
+                  <div class="section">
+                    <label>Annual Income (per annum)<span>*</span></label>
+                    <div class="input-wrapper">
+                      <input type="text" class="form-control rupee" formControlName="aincome" appCurrencyFormat #input>
+                      <i class="fa-solid fa-indian-rupee-sign ind-rupee"
+                        [ngStyle]="{'color': input.value ? '#041427' : ''}"></i>
+                    </div>
+                    <small *ngIf="selfEmploymentForm.controls['aincome'].touched && 
+                    (selfEmploymentForm.get('aincome')?.hasError('required') || 
+                    selfEmploymentForm.get('aincome')?.hasError('minIncome'))" style="color: red;">
+                    {{ selfEmploymentForm.get('aincome')?.hasError('required') ? 'Annual Income is Required' :
+                    'Annual income cannot be lower than ₹3,00,000'}}
+                    </small>
+                  </div>
+                  <div class="mt-5 mb-3">
+                    <button class="btn btn-primary cust-Btn" (click)="selfEmployment()"
+                      [disabled]="!selfEmploymentForm.valid">Continue</button>
+                  </div>
+
+                </form>
+
+              </div>
+            </mat-tab>
+
+
+            <mat-tab label="KYC verification" [disabled]="!salaryEmploymentForm.valid && !selfEmploymentForm.valid || !communicationAddress.valid">
+
+              <div class="kyc">
+                <p class="verify">KYC Verification</p>
+                <!-- <p class="skip" (click)="skipKyc()">Skip for now</p> -->
+              </div>
+              <p class="your-kyc">Complete your KYC for smoother experience and quicker benefits. Only pdf, jpg and png
+                allowed [Max: 5 MB]</p>
+
+              <div class="hr">
+                <hr />
+              </div>
+              <div class="container">
+                <p class="aadhar-pan">Aadhaar and PAN information</p>
+              </div>
+              <form [formGroup]="customerInfoForm">
+                <div>
+                  <div class="pan-aadhar-section">
+                    <label>PAN<span>*</span></label>
+                    <input type="text" class="form-control regForm" maxlength="10" formControlName="pancardnum"
+                      appPanMask placeholder="Enter PAN">
+                    <small
+                      *ngIf="(customerInfoForm.controls['pancardnum'].touched && customerInfoForm.get('pancardnum')?.hasError('required'))"
+                      class="account-invalid"> PAN is Required</small>
+                    <small
+                      *ngIf="(customerInfoForm.controls['pancardnum'].touched && customerInfoForm.get('pancardnum')?.hasError('pattern'))"
+                      class="account-invalid">Enter a Valid PAN</small>
+                    <div>
+                      <p class="successpan" *ngIf="panVerification">{{panVerification}}<img
+                          src="../../assets/CheckCircle.svg"></p>
+                      <p class="text-danger" *ngIf="panVerificationError && !panVerification">{{panVerificationError}}
+                      </p>
+                    </div>
+                  </div>
+                  <div class="pan-aadhar-section">
+                    <label>Aadhaar Number<span>*</span></label>
+                    <input type="text" class="form-control regForm" maxlength="14" formControlName="aadhaarnum"
+                      appPanMask placeholder="Enter aadhaar Number">
+                    <small
+                      *ngIf="(customerInfoForm.controls['aadhaarnum'].touched && customerInfoForm.get('aadhaarnum')?.hasError('required'))"
+                      class="account-invalid"> Aadhaar Number is Required</small>
+                    <small
+                      *ngIf="(customerInfoForm.controls['aadhaarnum'].touched && customerInfoForm.get('aadhaarnum')?.hasError('pattern'))"
+                      class="account-invalid">Enter a Valid Aadhaar Number</small>
+                    <p class="verifymail" (click)="onVerify()" *ngIf="customerInfoForm.valid && !aadharVerified">Verify
+                      Aadhaar </p>
+                    <p class="successpan" *ngIf="aadharVerified">Aadhar Verified <img
+                        src="../../assets/CheckCircle.svg"></p>
+                    <p *ngIf="AadharError && !aadharVerified" class="text-danger">{{AadharError}}</p>
+                  </div>
+                </div>
+              </form>
+
+
+              <form [formGroup]="salaryForm" *ngIf="salary">
+
+                <!-- <div class="adharinfo">
+                  <label class="kyc-label">Aadhaar info *</label>
+                </div> -->
+                <!-- <div class="section fileupload"
+                  [ngClass]="imgname ? 'uploaded' : !aadharFront ? 'fileupload' : 'notupload'"
+                  (click)="onAadhaarFront()">
+                  <label class="uploadlabel-Added">
+                    <input type="file" class="form-control uploadimg" #input id="uploadInp"
+                      placeholder="Upload Aadhaar front" (change)="AdharFrontFile($event)"
+                      formControlName="adharfrontimg" accept="application/pdf,image/png,image/jpeg">
+                    <div class="inputimgName d-flex">
+                      <p for="uploadInp" class="imguploadText" *ngIf="!imgname">Upload Aadhaar front</p>
+                      <p #input id="uploadInp" class="afteruploaded" *ngIf="imgname" [title]="imgname">{{ truncateFileName(imgname) }}</p>
+                      <img class="checkcircle" *ngIf="imgname" src="../../assets/CheckCircle.svg">
+                      <img class="imgcls" *ngIf="!imgname" src="../../assets/UploadImg.svg" alt="">
+                      <img class="trash" (click)="removeAadharFront($event)" src="../../assets/Trash.svg" *ngIf="imgname"
+                        alt="">
+                    </div>
+
+                  </label>
+                </div> -->
+                <!-- <div class="section fileupload"
+                  [ngClass]="imgback ? 'uploaded' : !aadharBack ? 'fileupload' : 'notupload'" (click)="onAadhaarBack()">
+                  <label class="uploadlabel-Added">
+                    <input type="file" class="form-control uploadimg" #input id="uploadback"
+                      placeholder="Upload Aadhaar back" (change)="AdharBackFile($event)" formControlName="adharbackimg"
+                      accept="application/pdf,image/png,image/jpeg">
+                    <div class="inputimgName d-flex">
+                      <p for="uploadback" class="imguploadText" *ngIf="!imgback">Upload Aadhaar back</p>
+                      <p #input id="uploadback" class="afteruploaded" *ngIf="imgback" [title]="imgback">{{ truncateFileName(imgback) }}</p>
+                      <img class="checkcircle" *ngIf="imgback" src="../../assets/CheckCircle.svg">
+                      <img class="imgcls" *ngIf="!imgback" src="../../assets/UploadImg.svg" alt="">
+                      <img class="trash" (click)="removeAadharBack($event)" src="../../assets/Trash.svg" *ngIf="imgback"
+                        alt="">
+                    </div>
+
+                  </label>
+                </div> -->
+                <!-- <div class="hrr">
+                  <hr />
+                </div> -->
+                <!-- <div class="adharinfo">
+                  <label class="kyc-label">PAN info *</label>
+                </div> -->
+                <!-- <div class="section fileupload" [ngClass]="imgbpan ? 'uploaded' : !panCard ? 'fileupload' : 'notupload'"
+                  (click)="onPanCard()">
+                  <label class="uploadlabel-Added">
+                    <input type="file" class="form-control uploadimg" #input id="uploadpan"
+                      placeholder="Upload PAN Front" (change)="PanFrontFile($event)" formControlName="pancardimg"
+                      accept="application/pdf,image/png,image/jpeg">
+                    <div class="inputimgName d-flex">
+                      <p for="uploadpan" class="imguploadText" *ngIf="!imgbpan">Upload Pan front</p>
+                      <p #input id="uploadpan" class="afteruploaded" *ngIf="imgbpan" [title]="imgbpan">{{ truncateFileName(imgbpan) }}</p>
+                      <img class="checkcircle" *ngIf="imgbpan" src="../../assets/CheckCircle.svg">
+                      <img class="imgcls" *ngIf="!imgbpan" src="../../assets/UploadImg.svg" alt="">
+                      <img class="trash" (click)="removePan($event)" src="../../assets/Trash.svg" *ngIf="imgbpan" alt="">
+                    </div>
+
+                  </label>
+                </div> -->
+                <div class="hrr">
+                  <hr>
+                </div>
+
+                <div class="adharinfo">
+                  <label class="kyc-label">Bank details *</label>
+                </div>
+                <!-- <div class="section fileupload"
+                  [ngClass]="imgbank1 ? 'uploaded' : !cancelCheque ? 'fileupload' : 'notupload'"
+                  (click)="onCancelCheque()">
+                  <label class="uploadlabel-Added">
+                    <input type="file" class="form-control uploadimg" #input id="uploadbank1"
+                      placeholder="Upload bank Details" (change)="BankdetailsCheque($event)"
+                      formControlName="cancelchequeimg" accept="application/pdf,image/png,image/jpeg">
+                    <div class="inputimgName d-flex">
+                      <p for="uploadbank1" class="imguploadText" *ngIf="!imgbank1">Upload cancelled cheque</p>
+                      <p #input id="uploadbank1" class="afteruploaded" *ngIf="imgbank1" [title]="imgbank1">{{ truncateFileName(imgbank1) }}</p>
+                      <img class="checkcircle" *ngIf="imgbank1" src="../../assets/CheckCircle.svg">
+                      <img class="imgcls" *ngIf="!imgbank1" src="../../assets/UploadImg.svg" alt="">
+                      <img class="trash" (click)="removeCancelCheque($event)" src="../../assets/Trash.svg" *ngIf="imgbank1"
+                        alt="">
+                    </div>
+
+                  </label>
+                </div> -->
+                <div class="section fileupload"
+                  [ngClass]="imgbank2 ? 'uploaded' : !bankStatement ? 'fileupload' : 'notupload'"
+                  (click)="onBankStatement()">
+                  <label class="uploadlabel-Added">
+                    <input type="file" class="form-control uploadimg" #input id="uploadbank2"
+                      placeholder="Upload PAN Front" (change)="BankdetailStatement($event)"
+                      formControlName="bankstatementimg" accept="application/pdf,image/png,image/jpeg">
+                    <div class="inputimgName d-flex">
+                      <p for="uploadbank2" class="imguploadText" *ngIf="!imgbank2">Upload bank statement </p>
+                      <p #input id="uploadbank2" class="afteruploaded" *ngIf="imgbank2" [title]="imgbank2">{{
+                        truncateFileName(imgbank2) }}</p>
+                      <img class="checkcircle" *ngIf="imgbank2" src="../../assets/CheckCircle.svg">
+                      <img class="imgcls" *ngIf="!imgbank2" src="../../assets/UploadImg.svg" alt="">
+                      <img class="trash" (click)="removeBankStatement($event)" src="../../assets/Trash.svg"
+                        *ngIf="imgbank2" alt="">
+                    </div>
+
+                  </label>
+                </div>
+                <div class="mb-3 mt-5">
+                  <p class="uploading-documents-process" *ngIf="!imgbank2">Uploading documents is mandatory to proceed
+                    ahead</p>
+                  <button class="btn btn-primary kyc-Btn" (click)="saveCustomerContinue()"
+                    [disabled]="!imgbank2">Continue</button>
+                  <!-- <button class="btn btn-primary kyc-Btn" (click)="salaryContinue()" *ngIf="showDataa"
+                    [disabled]="!salaryForm.valid && !(imgname && imgback && imgbpan && imgbank1 && imgbank2)">Save and done</button> -->
+                </div>
+              </form>
+
+
+              <form [formGroup]="selfForm" *ngIf="!salary">
+                <!-- <div class="adharinfo">
+                  <label class="kyc-label">Aadhaar info *</label>
+                </div>
+                <div class="section fileupload"
+                  [ngClass]="imgname ? 'uploaded' : !aadharFront ? 'fileupload' : 'notupload'"
+                  (click)="onAadhaarFront()">
+                  <label class="uploadlabel-Added">
+                    <input type="file" class="form-control uploadimg" #input id="uploadInp"
+                      placeholder="Upload Aadhaar front" (change)="AdharFrontFile($event)"
+                      formControlName="adharfrontimg" accept="application/pdf,image/png,image/jpeg">
+                    <div class="inputimgName d-flex">
+                      <p for="uploadInp" class="imguploadText" *ngIf="!imgname">Upload Aadhaar front</p>
+                      <p #input id="uploadInp" class="afteruploaded" *ngIf="imgname"[title]="imgname">{{ truncateFileName(imgname) }}</p>
+                      <img class="checkcircle" *ngIf="imgname" src="../../assets/CheckCircle.svg">
+                      <img class="imgcls" *ngIf="!imgname" src="../../assets/UploadImg.svg" alt="">
+                      <img class="trash" (click)="removeAadharFront($event)" src="../../assets/Trash.svg" *ngIf="imgname"
+                        alt="">
+                    </div>
+
+                  </label>
+                </div> -->
+                <!-- <div class="section fileupload"
+                  [ngClass]="imgback ? 'uploaded' : !aadharBack ? 'fileupload' : 'notupload'" (click)="onAadhaarBack()">
+                  <label class="uploadlabel-Added">
+                    <input type="file" class="form-control uploadimg" #input id="uploadback"
+                      placeholder="Upload Aadhaar back" (change)="AdharBackFile($event)" formControlName="adharbackimg"
+                      accept="application/pdf,image/png,image/jpeg">
+                    <div class="inputimgName d-flex">
+                      <p for="uploadback" class="imguploadText" *ngIf="!imgback">Upload Aadhaar Back</p>
+                      <p #input id="uploadback" class="afteruploaded" *ngIf="imgback" [title]="imgback">{{ truncateFileName(imgback) }}</p>
+                      <img class="checkcircle" *ngIf="imgback" src="../../assets/CheckCircle.svg">
+                      <img class="imgcls" *ngIf="!imgback" src="../../assets/UploadImg.svg" alt="">
+                      <img class="trash" (click)="removeAadharBack($event)" src="../../assets/Trash.svg" *ngIf="imgback"
+                        alt="">
+                    </div>
+
+                  </label>
+                </div>
+                <div class="hrr">
+                  <hr />
+                </div>
+                <div class="adharinfo">
+                  <label class="kyc-label">PAN info *</label>
+                </div>
+                <div class="section fileupload" [ngClass]="imgbpan ? 'uploaded' : !panCard ? 'fileupload' : 'notupload'"
+                  (click)="onPanCard()">
+                  <label class="uploadlabel-Added">
+                    <input type="file" class="form-control uploadimg" #input id="uploadpan"
+                      placeholder="Upload PAN Front" (change)="PanFrontFile($event)" formControlName="pancardimg"
+                      accept="application/pdf,image/png,image/jpeg">
+                    <div class="inputimgName d-flex">
+                      <p for="uploadpan" class="imguploadText" *ngIf="!imgbpan">Upload PAN Front</p>
+                      <p #input id="uploadpan" class="afteruploaded" *ngIf="imgbpan" [title]="imgbpan">{{ truncateFileName(imgbpan) }}</p>
+                      <img class="checkcircle" *ngIf="imgbpan" src="../../assets/CheckCircle.svg">
+                      <img class="imgcls" *ngIf="!imgbpan" src="../../assets/UploadImg.svg" alt="">
+                      <img class="trash" (click)="removePan($event)" src="../../assets/Trash.svg" *ngIf="imgbpan" alt="">
+                    </div>
+
+                  </label>
+                </div> -->
+                <div class="hrr">
+                  <hr />
+                </div>
+                <div class="adharinfo">
+                  <label class="kyc-label">Company documents *</label>
+                </div>
+                <div class="section fileupload"
+                  [ngClass]="imgdocument1 ? 'uploaded' : !gstCertificate ? 'fileupload' : 'notupload'"
+                  (click)="onGst()">
+                  <label class="uploadlabel-Added">
+                    <input type="file" class="form-control uploadimg" #input id="uploadocument1"
+                      placeholder="Upload bank Details" (change)="uploadGstCertificate($event)"
+                      formControlName="gstcertificateimg" accept="application/pdf,image/png,image/jpeg">
+                    <div class="inputimgName d-flex">
+                      <p for="uploadocument1" class="imguploadText" *ngIf="!imgdocument1">Upload company bank statement</p>
+                      <p #input id="uploadocument1" class="afteruploaded" *ngIf="imgdocument1" [title]="imgdocument1">{{
+                        truncateFileName(imgdocument1) }}</p>
+                      <img class="checkcircle" *ngIf="imgdocument1" src="../../assets/CheckCircle.svg">
+                      <img class="imgcls" *ngIf="!imgdocument1" src="../../assets/UploadImg.svg" alt="">
+                      <img class="trash" (click)="removeGst($event)" src="../../assets/Trash.svg" *ngIf="imgdocument1"
+                        alt="">
+                    </div>
+
+                  </label>
+                </div>
+                <div class="section fileupload"
+                  [ngClass]="imgdocument2 ? 'uploaded' : !incomeTax ? 'fileupload' : 'notupload'" (click)="onIncome()">
+                  <label class="uploadlabel-Added">
+                    <input type="file" class="form-control uploadimg" #input id="uploadocuments2"
+                      placeholder="Upload PAN Front" (change)="uploadIncomeTax($event)" formControlName="incometaximg"
+                      accept="application/pdf,image/png,image/jpeg">
+                    <div class="inputimgName d-flex">
+                      <p for="uploadocuments2" class="imguploadText" *ngIf="!imgdocument2">Upload income tax return
+                      </p>
+                      <p #input id="uploadocuments2" class="afteruploaded" *ngIf="imgdocument2" [title]="imgdocument2">
+                        {{ truncateFileName(imgdocument2) }}</p>
+                      <img class="checkcircle" *ngIf="imgdocument2" src="../../assets/CheckCircle.svg">
+                      <img class="imgcls" *ngIf="!imgdocument2" src="../../assets/UploadImg.svg" alt="">
+                      <img class="trash" (click)="removeIncome($event)" src="../../assets/Trash.svg"
+                        *ngIf="imgdocument2" alt="">
+                    </div>
+
+                  </label>
+                </div>
+                <div class="section fileupload"
+                  [ngClass]="imgdocument3 ? 'uploaded' : !incorporation ? 'fileupload' : 'notupload'"
+                  (click)="onIncorporation()">
+                  <label class="uploadlabel-Added">
+                    <input type="file" class="form-control uploadimg" #input id="uploadocuments2"
+                      placeholder="Upload PAN Front" (change)="uploadIncorporate($event)"
+                      formControlName="incorporationimg" accept="application/pdf,image/png,image/jpeg">
+                    <div class="inputimgName d-flex">
+                      <p for="uploadocuments3" class="imguploadText" *ngIf="!imgdocument3">Upload certificate of
+                        incorporation </p>
+                      <p #input id="uploadocuments3" class="afteruploaded" *ngIf="imgdocument3" [title]="imgdocument3">
+                        {{ truncateFileName(imgdocument3) }}</p>
+                      <img class="checkcircle" *ngIf="imgdocument3" src="../../assets/CheckCircle.svg">
+                      <img class="imgcls" *ngIf="!imgdocument3" src="../../assets/UploadImg.svg" alt="">
+                      <img class="trash" (click)="removeIncorporation($event)" src="../../assets/Trash.svg"
+                        *ngIf="imgdocument3" alt="">
+                    </div>
+
+                  </label>
+                </div>
+                <div class="mb-3 mt-5">
+                  <p *ngIf="errorMsg" class="red-class">{{errorMsg}}</p>
+                  <p class="upload-documents-proceed" *ngIf="!(imgdocument1 && imgdocument2 && imgdocument3)">Uploading documents is mandatory to proceed
+                    ahead</p>
+                  <button class="btn btn-primary kyc-Btn" (click)="saveCustomerContinue()"
+                    [disabled]="!( imgdocument1 && imgdocument2 && imgdocument3)">Continue</button>
+                  <!-- <button class="btn btn-primary kyc-Btn"*ngIf="showDataa" (click)="selfData()" [disabled]="!selfForm.valid && !(imgname && imgback && imgbpan && imgdocument1 && imgdocument2 && imgdocument3)"
+                    >Save and done</button> -->
+                </div>
+              </form>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

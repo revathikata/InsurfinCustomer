@@ -1,0 +1,162 @@
+<div class="main">
+  <div class="welcome">
+    <div class="row">
+      <div class="col-lg-6 p-0">
+        <app-side-nav-section />
+      </div>
+
+      <div class="col-lg-6 rightColoumn" *ngIf="proposalAccepted">
+        <div class="distrbtr-welcome container">
+          <div class="Proposal-flex">
+            <mat-icon class="leftArrw" (click)="navigateToProposaldetails()">keyboard_backspace</mat-icon>
+            <p class="customer-dtls">Proposal Details</p>
+          </div>
+
+          <div class="proposal-img">
+            <img src="../../assets/proposal-success.svg" width="250px" height="250px">
+          </div>
+          <div class="section" *ngIf="!AadharValid">
+            <div class="container">
+              <p class="proposal">Proposal accepted successfully!</p>
+              <p class="next-step">
+                As the next step, please complete your payment.
+              </p>
+            </div>
+            <div class="associate-flex container">
+              <img src="../../assets/BellRinging.svg" class="bell-img" />
+              <p class="associate">
+                Associate has been notified of your acceptance
+              </p>
+            </div>
+            <div class="container">
+              <button class="btn btn-primary payment-btn" (click)="AadharValidationPage()">
+                Initiate Loan Process
+              </button>
+            </div>
+          </div>
+          <div class="aadharCheck" *ngIf="AadharValid">
+            <div class="container">
+              <p class="re-enter-aadhar container">Re-enter Aadhaar details!</p>
+              <p class="complete-payment container">As the next step, please complete your payment.
+              </p>
+            </div>
+            <form [formGroup]="AadharForm">
+              <div class="inputSection container">
+                <label class="aadhar-num container">Aadhaar number*</label><br>
+                <input type="text" class="form-control regForm" maxlength="12" formControlName="aadhaarnum" appPanMask
+                  placeholder="Enter aadhaar Number">
+                <small
+                  *ngIf="(AadharForm.controls['aadhaarnum'].touched && AadharForm.get('aadhaarnum')?.hasError('required'))"
+                  class="account-invalid"> Aadhaar Number is Required</small>
+                <small
+                  *ngIf="(AadharForm.controls['aadhaarnum'].touched && AadharForm.get('aadhaarnum')?.hasError('pattern'))"
+                  class="account-invalid"> Enter valid Aadhar number</small>
+              </div>
+              <div class="inputSection container mt-3">
+                <label class="aadhar-num container">Aadhaar number*</label><br>
+                <input type="text" class="form-control regForm" maxlength="12" formControlName="reEnteraadhaarnum"
+                  appPanMask placeholder="Enter aadhaar Number" (input)="InputAadharValidation($event)">
+                <small
+                  *ngIf="(AadharForm.controls['reEnteraadhaarnum'].touched  && AadharForm.get('reEnteraadhaarnum')?.hasError('misMatch'))"
+                  class="account-invalid">Aadhar Must Match</small>
+                <small *ngIf="AadharMismatchError" class="inputSection">{{AadharMismatchError}}</small>
+                <small *ngIf="AadharForm.valid && !AadharMismatchError" style="color: green;">Aadhaar number verified <img src="../../assets/CheckCircle (1).png"></small>
+              </div>
+            </form>
+
+            <div class="bottom container ">
+              <button class="btn btn-primary payment-btn" [disabled]="!AadharForm.valid || AadharMismatchError"
+                (click)="AadharValidation()">Initiate Loan Process</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 rightColoumn" *ngIf="isLoanSubmitted ">
+        <div class="loan-submitted">
+          <div class="Proposal-flex">
+            <!-- <mat-icon class="leftArrw" (click)="navigateToProposaldetails()">keyboard_backspace</mat-icon> -->
+            <p class="prpsl-dtls container mt-5" (click)="navigateToReviewProposal()">Proposal Details</p>
+          </div>
+          <div class="proposal-img">
+            <img src="../../assets/proposal-success.svg" width="250px" height="250px">
+          </div>
+          <div class="container loan-flex">
+            <p class="loan-request">Loan request submitted!</p>
+            <p class="loan-status ">Your loan request is submitted, you will be notified about the the loan status or you can login back and check the details</p>
+          </div>
+          <div class="container loan-submitted-btn">
+            <button class="btn btn-primary home-btn" (click)="navigateToDashboard()">Back to Home</button>
+          </div>
+        </div>
+      </div>
+
+
+
+      <!-- <div class="col-lg-6 rightColoumn" *ngIf="lenderService ">
+        <div class="distrbtr-welcome container">
+          <div class="Proposal-flex">
+            <mat-icon class="leftArrw" (click)="navigateToProposal()">keyboard_backspace</mat-icon>
+          </div>
+
+          <div class="small container"></div>
+          <div class="container">
+            <p class="proposal">Lender Page</p>
+            <p class="next-step">
+              By clicking on continue your ESCROW account is going to be created
+              successfully!
+            </p>
+          </div>
+
+          <div *ngIf="success">
+            <div class="check-background mt-5">
+              <img src="../../assets/CheckCircle.svg" class="check-circle" />
+            </div>
+            <p class="Success">Success</p>
+          </div>
+          <div class="container mt-5" *ngIf="!success">
+            <button
+              class="btn btn-primary lender-btn"
+              (click)="escrowService()"
+            >
+              Continue
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 rightColoumn" *ngIf="transferAmount">
+        <div class="distrbtr-welcome container">
+          <div class="Proposal-flex">
+            <mat-icon class="leftArrw" (click)="navigateToLender()">keyboard_backspace</mat-icon>
+          </div>
+
+          <div class="small container"></div>
+          <div class="container">
+            <p class="loan-disbursed">FUND TRANSFER</p>
+            <p class="next-step">
+              By clicking on <b>Transfer Amount</b> your amount is going to be
+              transferred successfully!
+            </p>
+          </div>
+
+          <div *ngIf="trasnferSuccess">
+            <div class="check-background mt-5">
+              <img src="../../assets/CheckCircle.svg" class="check-circle" />
+            </div>
+            <p class="money-success">Money transferred successfully</p>
+          </div>
+          <div class="container mt-5">
+            <button
+              class="btn btn-primary lender-btn"
+              (click)="transferMoney()"
+              *ngIf="!trasnferSuccess"
+            >
+              Transfer Amount
+            </button>
+          </div>
+        </div>
+      </div> -->
+    </div>
+  </div>
+</div>

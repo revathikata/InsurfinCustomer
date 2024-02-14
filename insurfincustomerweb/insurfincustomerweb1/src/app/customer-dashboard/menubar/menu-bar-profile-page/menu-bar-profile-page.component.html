@@ -1,0 +1,304 @@
+<div class="main">
+    <div class="welcome">
+        <div class="row">
+            <div class="col-lg-6 p-0">
+                <app-side-nav-section />
+            </div>
+            <div class="col-lg-6 rightColoumn">
+                <div class="customer-welcome">
+                    <!-- we have : menu, home , notifications, Summary -->
+                    <div class="toolbar">
+                        <div class="menu-home container">
+                            <mat-icon class="menu" (click)="openMenuBar()">menu</mat-icon>
+                            <p class="my-home">Profile</p>
+                            <img class="dots" (click)="openBottomSheet(customerData,'dotsmenu')"  src="../../../../assets/three-dots-img.svg">
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <div class="details">
+                        </div>
+
+                        <div class="flex container">
+                            <!-- <div class="img">
+                                <img src={{customerProfilePic}} *ngIf="customerProfilePic" class="distributor-profile">
+                                <img *ngIf="!customerProfilePic" src="../../assets/profile pic -img.png" class="distributor-profile">
+                            </div>
+                            <div class="content">
+                                <b class="john">{{customerData.fullName}}</b>
+                                <p class="pan-mask" [panMask]="customerData.panNumber" appPanMask>{{customerData.panNumber}}</p>
+                            </div>
+                            <div class="camera">
+                                <img (click)="openBottomSheet('camera')" src="../../../../assets/Camera.svg">
+                            </div> -->
+                            <div class="row">
+                                <div class="col-2 img">
+                                    <img src={{customerProfilePic}} *ngIf="customerProfilePic" class="distributor-profile">
+                                    <img *ngIf="!customerProfilePic" src="../../assets/profile pic -img.png" class="distributor-profile">
+                                </div>
+                                <div class="col-8 content">
+                                    <b class="john">{{customerData.fullName  | titlecase}}</b>
+                                    <p class="pan-mask" [panMask]="customerData.panNumber" appPanMask>{{customerData.panNumber}}</p>
+                                </div>
+                                <div class="col-2 camera">
+                                    <img (click)="openBottomSheet(customerData,'camera')" src="../../../../assets/Camera.svg">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class=" container margin-dtls">
+                            <div class="row">
+                                <div class="col-8">
+                                    <p  class="kyc-doc">GENERAL DETAILS</p>
+                                </div>
+                                <div class="col-4">
+                                    <p class="editdetails" (click)="navigateToNewCustomer()"  *ngIf="!customerData.registrationCompleted === true">Edit Details</p>
+                                </div>
+                            </div>
+                            <div class="group1">
+                                <h5>Full Name</h5>
+                                <h6 class="bold">{{customerData.fullName  | titlecase}}</h6>
+                            </div>
+                            <div class="group1">
+                                <h5>Date of Birth</h5>
+                                <h6 class="bold">{{customerData.dateOfBirth}}</h6>
+                            </div>
+                            <div class="group1">
+                                <h5>Gender</h5>
+                                <h6 class="bold">{{customerData.gender}}</h6>
+                            </div>
+                            <div class="group1">
+                                <h5>Phone Number</h5>
+                                <h6 class="bold"><span>+91</span> {{customerData.phoneNumber}}</h6>
+                            </div>
+                            <div class="group1">
+                                <h5>Aadhaar Number</h5>
+                                <h6 class="bold" [panMask]="customerData.aadhaarNumber" appPanMask>{{customerData.aadhaarNumber}}</h6>
+                            </div>
+                            <div class="group1">
+                                <h5>PAN</h5>
+                                <h6 class="bold" [panMask]="customerData.panNumber" appPanMask>{{customerData.panNumber}}</h6>
+                                <!-- [panMask]="{ type: 'pan', number: customerData.panNumber }" appPanMask -->
+                            </div>
+                            <div>
+                                <hr>
+                            </div>
+
+
+                            <mat-accordion>
+                                <mat-expansion-panel class="insurer-details" [expanded]="true">
+                                    <mat-expansion-panel-header>
+                                        <mat-panel-title>
+                                        </mat-panel-title>
+                                        <mat-panel-description>
+                                            <div>
+                                                <div class="adress-flex">
+                                                    <div class="section">
+                                                        <p class="adress">ADDRESS</p>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </mat-panel-description>
+                                    </mat-expansion-panel-header>
+
+                                    <div class="more-flex">
+                                        <div class="display2">
+                                            <p class="cuminication-adress">Current Address</p>
+                                            <!-- <p class="date">
+                                                {{ customerData.customerAddressDetails?.[2]?.addressLine1 }}{{ customerData.customerAddressDetails?.[2]?.addressLine1 ? ' ,' : '' }}
+                                                {{ customerData.customerAddressDetails?.[2]?.addressLine2 }}{{ customerData.customerAddressDetails?.[2]?.addressLine2 ? ' ,' : '' }}
+                                                {{ customerData.customerAddressDetails?.[2]?.city }}{{ customerData.customerAddressDetails?.[2]?.city ? ' ,' : '' }}
+                                                {{ customerData.customerAddressDetails?.[2]?.state? "-":'' }} {{ customerData.customerAddressDetails?.[2]?.pinCode }}
+                                            </p>                                             -->
+                                            <p class="date">
+                                                {{ customerData.customerAddressDetails?.[0]?.addressLine1 }}{{ customerData.customerAddressDetails?.[0]?.addressLine1 ? ' ,' : '' }}
+                                                {{ customerData.customerAddressDetails?.[0]?.addressLine2 }}{{ customerData.customerAddressDetails?.[0]?.addressLine2 ? ' ,' : '' }}
+                                                {{ customerData.customerAddressDetails?.[0]?.city }}{{ customerData.customerAddressDetails?.[0]?.city ? ' ,' : '' }}
+                                                {{ customerData.customerAddressDetails?.[0]?.state ? "-":'' }} {{ customerData.customerAddressDetails?.[0]?.pinCode }}
+                                            </p>
+                                        </div>
+                                        <div class="display">
+                                            <p class="cuminication-adress">Communication Address</p>
+                                            <!-- <p class="date">
+                                                {{ customerData.customerAddressDetails?.[0]?.addressLine1 }}{{ customerData.customerAddressDetails?.[0]?.addressLine1 ? ' ,' : '' }}
+                                                {{ customerData.customerAddressDetails?.[0]?.addressLine2 }}{{ customerData.customerAddressDetails?.[0]?.addressLine2 ? ' ,' : '' }}
+                                                {{ customerData.customerAddressDetails?.[0]?.city }}{{ customerData.customerAddressDetails?.[0]?.city ? ' ,' : '' }}
+                                                {{ customerData.customerAddressDetails?.[0]?.state ? "-":'' }} {{ customerData.customerAddressDetails?.[0]?.pinCode }}
+                                            </p> -->
+                                            <p class="date">
+                                                {{ customerData.customerAddressDetails?.[2]?.addressLine1 }}{{ customerData.customerAddressDetails?.[2]?.addressLine1 ? ' ,' : '' }}
+                                                {{ customerData.customerAddressDetails?.[2]?.addressLine2 }}{{ customerData.customerAddressDetails?.[2]?.addressLine2 ? ' ,' : '' }}
+                                                {{ customerData.customerAddressDetails?.[2]?.city }}{{ customerData.customerAddressDetails?.[2]?.city ? ' ,' : '' }}
+                                                {{ customerData.customerAddressDetails?.[2]?.state? "-":'' }} {{ customerData.customerAddressDetails?.[2]?.pinCode }}
+                                            </p>     
+                                            
+                                        </div>
+                                        <div class="display2">
+                                            <p class="cuminication-adress">Permanent Address</p>
+                                            <p class="date">
+                                                {{ customerData.customerAddressDetails?.[1]?.addressLine1 }}{{ customerData.customerAddressDetails?.[1]?.addressLine1 ? ' ,' : '' }}
+                                                {{ customerData.customerAddressDetails?.[1]?.addressLine2 }}{{ customerData.customerAddressDetails?.[1]?.addressLine2 ? ' ,' : '' }}
+                                                {{ customerData.customerAddressDetails?.[1]?.city }}{{ customerData.customerAddressDetails?.[1]?.city ? ' ,' : '' }}
+                                                {{ customerData.customerAddressDetails?.[1]?.state ? "-":''  }} {{ customerData.customerAddressDetails?.[1]?.pinCode }}
+                                            </p>
+                                            
+                                        </div>
+                                    </div>
+                                </mat-expansion-panel>
+                            </mat-accordion>
+
+                            <div>
+                                <hr>
+                            </div>
+                                <mat-accordion>
+                                    <mat-expansion-panel class="insurer-details" [expanded]="true">
+                                        <mat-expansion-panel-header>
+                                            <mat-panel-title>
+                                            </mat-panel-title>
+                                            <mat-panel-description>
+                                                <div>
+                                                    <div class="adress-flex">
+                                                        <div class="section">
+                                                            <p class="adress">EMPLOYMENT</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </mat-panel-description>
+                                        </mat-expansion-panel-header>
+                                        <div class="more-flex">
+                                            <div class="display">
+                                                <p class="cuminication-adress">Employment Type</p>
+                                                <p class="date" *ngIf="customerData.employmentDetails?.employmentType === 'SALARIEDEMPLOYEE'">Salaried Employee</p>
+                                                <p class="date"  *ngIf="customerData.employmentDetails?.employmentType === 'SELFEMPLOYEE'">Self Employee</p>
+                                            </div>
+                                            <!-- <div class="display1">
+                                                <p class="cuminication-adress">{{customerData.employmentDetails?.employmentType === 'SALARIEDEMPLOYEE' ? 'companyName' : 'Type of employment'}}</p>
+                                                <p class="date">{{customerData.employmentDetails?.employmentType === 'SALARIEDEMPLOYEE' ? 
+                                                    customerData.employmentDetails?.salariedEmployeeDetails?.companyName :
+                                                    customerData.employmentDetails?.selfEmployeeDetails?.typeOfEmployement}}</p>
+                                            </div> -->
+                                            <div class="display1" *ngIf="customerData.employmentDetails?.employmentType === 'SALARIEDEMPLOYEE'">
+                                                <p class="cuminication-adress">Company Name</p>
+                                                <p class="date">{{ customerData.employmentDetails?.salariedEmployeeDetails?.companyName  | titlecase}}</p>
+                                            </div>
+                                            <div  class="display1" *ngIf="customerData.employmentDetails?.employmentType === 'SELFEMPLOYEE'">
+                                                <p class="cuminication-adress">Type of employment</p>
+                                                <p class="date">{{ customerData.employmentDetails?.selfEmployeeDetails?.typeOfEmployement  | titlecase}}</p>
+                                            </div>
+                                            <div class="display2">
+                                                <p class="cuminication-adress">Primary Email</p>
+                                                <p class="date">{{customerData.employmentDetails?.employmentType === 'SALARIEDEMPLOYEE' ? 
+                                                    customerData.employmentDetails?.salariedEmployeeDetails?.primaryEmail :
+                                                    customerData.employmentDetails?.selfEmployeeDetails?.primaryEmail}}</p> 
+                                            </div>
+                                            <div class="display1">
+                                                <p class="cuminication-adress">Secondary Email</p>
+                                                <p class="date">{{customerData.employmentDetails?.employmentType === 'SALARIEDEMPLOYEE' ? 
+                                                    customerData.employmentDetails?.salariedEmployeeDetails?.secondaryEmail :
+                                                    customerData.employmentDetails?.selfEmployeeDetails?.secondaryEmail}}</p>
+                                            </div>
+                                            <div class="display1">
+                                                <p class="cuminication-adress">{{customerData.employmentDetails?.employmentType === 'SALARIEDEMPLOYEE' ? 'Monthly Income' : 'Annual Income'}}</p>
+                                               <p class="date"> &#8377; {{customerData.employmentDetails?.employmentType === 'SALARIEDEMPLOYEE' ? 
+                                                    (customerData.employmentDetails?.salariedEmployeeDetails?.monthlyIncome | number) :
+                                                    (customerData.employmentDetails?.selfEmployeeDetails?.annualIncome | number)}}</p>
+                                            </div>
+                                        </div>
+                                    </mat-expansion-panel>
+                                </mat-accordion>
+
+                            <div>
+                                <hr>
+                            </div>
+                            <div>
+                                <p class="kyc-doc">KYC DOCUMENTS</p>
+                            </div>
+                            <!-- <div class="row">
+                                <div class="col-10">
+                                    <p class="aadhar-front">Aadhaar Front</p>
+                                    <p class="aadhar-jpeg">{{aadharFront}}</p>
+                                </div>
+                                <div class="col-2">
+                                    <img src="../../../../assets/Eye.svg" class="eye-show" (click)="kycdocuments('aadhaarFront',aadharfrontUrl )" >
+                                </div>
+                            </div> -->
+                            <!-- <div class="row">
+                                <div class="col-10">
+                                    <p class="aadhar-front">Aadhaar Back</p>
+                                    <p class="aadhar-jpeg">{{aadharBack}}</p>
+                                </div>
+                                <div class="col-2">
+                                    <img src="../../../../assets/Eye.svg" class="eye-show" (click)="kycdocuments('aadhaarBack' , aadharbackUrl)" >
+                                </div>
+                            </div> -->
+                            <!-- <div class="row">
+                                <div class="col-10">
+                                    <p class="aadhar-front">PAN Front</p>
+                                    <p class="aadhar-jpeg">{{panCard}}</p>
+                                </div>
+                                <div class="col-2">
+                                    <img src="../../../../assets/Eye.svg" class="eye-show" (click)="kycdocuments('panFront', panUrl)" >
+                                </div>
+                            </div> -->
+
+                            <div *ngIf="customerData.employmentDetails?.employmentType === 'SALARIEDEMPLOYEE'">
+                                <!-- <div class="row">
+                                    <div class="col-10">
+                                        <p class="aadhar-front">Cancelled Cheque</p>
+                                        <p class="aadhar-jpeg">{{cancelCheque}}</p>
+                                    </div>
+                                    <div class="col-2">
+                                        <img src="../../../../assets/Eye.svg" class="eye-show" (click)="kycdocuments('cancelledCheque', bankChequeurl)"  >
+                                    </div>
+                                </div> -->
+                                <div class="row">
+                                    <div class="col-10">
+                                        <p class="aadhar-front">Bank Statement</p>
+                                        <p class="aadhar-jpeg">{{bankStatement}}</p>
+                                    </div>
+                                    <div class="col-2">
+                                        <img src="../../../../assets/Eye.svg" class="eye-show" (click)="kycdocuments('bankStatement', imgdocurl)" >
+                                    </div>
+                                </div>
+                            </div>
+ 
+                            <div *ngIf="customerData.employmentDetails?.employmentType === 'SELFEMPLOYEE'">
+                                <div class="row">
+                                  <div class="col-10">
+                                    <p class="aadhar-front">GST Certificate</p>
+                                    <p class="aadhar-jpeg">{{gstCertificate}}</p>
+                                  </div>
+                                  <div class="col-2">
+                                    <img src="../../assets/Eye.svg" class="eye-show" (click)="kycdocuments('gstCertificate', gstdocurl)">
+                                  </div>
+                                </div>
+                                  <div class="row">
+                                    <div class="col-10">
+                                      <p class="aadhar-front">Income Tax Return</p>
+                                      <p class="aadhar-jpeg">{{ incomeTax}}</p>
+                                    </div>
+                                    <div class="col-2">
+                                      <img src="../../assets/Eye.svg" class="eye-show" (click)="kycdocuments('incomeTax', Itrdocurl)">
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-10">
+                                      <p class="aadhar-front">Certificate of Incorporation</p>
+                                      <p class="aadhar-jpeg">{{ certificateOfIncorporation }}</p>
+                                    </div>
+                                    <div class="col-2">
+                                      <img src="../../assets/Eye.svg" class="eye-show" (click)="kycdocuments('certificateOfIncorporation', certUrl)">
+                                    </div>
+                                  </div>
+                              </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,55 @@
+<div class="main">
+    <div class="welcome">
+        <div class="row">
+
+            <div class="col-lg-6 p-0">
+                <app-side-nav-section />
+            </div>
+
+            <div class="col-lg-6 rightColoumn">
+                <div class="customer-welcome">
+                    <div class="container">
+                        <div class="display">
+                            <mat-icon class="back-arrow" (click)="navigateToDashboard()">keyboard_backspace</mat-icon>
+                            <p class="home">Home</p>
+                        </div>
+                        <!-- <div class="notification">
+                            <h3 class="notif">Notifications</h3>
+                            <mat-icon matBadge="01" matBadgeColor="warn" class="icon"></mat-icon>
+                            <p class="marks" (click)="markAsRead()">Mark all as read</p>
+                        </div> -->
+                        <div class="main">
+                            <div class="distributor-flex">
+                                    <div class="dot" *ngIf="getNotification"></div>
+                                    <img src="../../../assets/profile pic -img.png" class="distributor-profile">                              
+                                    <p class="praposalnumber">Your distributor <b>-----</b> has requested you to accept the proposal Number -------</p>
+                                <!-- <i class="fa-sharp fa-solid fa-angle-right"></i> -->
+                                <div class="arrow-flex">
+                                    <p class="twohours-ago">0 hr ago</p>
+                                    <img src="../../../assets/arrow side.svg" class="right-arrow">
+                                    
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="distributor-flexone">
+                               
+                                    <img src="../../../assets/profile pic -img.png" class="distributor-profile">
+                                <p class="praposalnumberone">Your distributor <b>-------</b> has requested you to accept the proposal Number -------</p>
+                                <div class="arrow-flex">
+                                    <p class="twohours-ago">0 hr ago</p>
+                                    <img src="../../../assets/arrow side.svg">
+                                    
+                                </div>
+                            </div>
+           <hr>
+                        </div>
+                    </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+ 
+

@@ -1,0 +1,60 @@
+<div class="padding" *ngIf="email">
+    <div class="container">
+        <div class="succss">
+            <div class="d-flex ">
+                <img class="img" src="../../assets/CircleWavy.svg">
+                <h4>Verify Email</h4>
+                <mat-icon mat-button class="close-icon" [mat-dialog-close]="true">close</mat-icon>
+            </div>
+         
+                <p class="verify-link">Verification link sent to customer's email ID. Please check the email and confirm verification. </p>
+          
+            <div class="example">
+                <p class="get-link">Didn't get the link?</p>
+                <p class="send" (click)="sendagain()">Send again</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="padding" *ngIf="resentEmail">
+    <div class="container">
+        <div class="succss">
+            <div class="d-flex ">
+                <img class="img" src="../../assets/CircleWavy.svg">
+                <h4>Link resent</h4>
+                <mat-icon mat-button class="close" [mat-dialog-close]="true">close</mat-icon>
+            </div>
+           
+                <p class="verify-link">A secure Two-Factor Authentication link has been sent to the customer's email ID - <b>jane.doemail.com</b> </p>
+                <div class="example">
+                    <p class="get-link">Didn't get the link?</p>
+                    <p class="send" (click)="sendAgain()">Send again</p>
+                </div>
+           
+        </div>
+
+
+    </div>
+</div>
+
+
+<div class="padding" *ngIf="!email && !resentEmail">
+    <div class="container">
+        <div class="succss">
+            <div class="d-flex ">
+                <img class="img" src="../../assets/CheckCircle.svg">
+                <h4>Success!</h4>
+                <mat-icon mat-button class="close-icon" [mat-dialog-close]="true">close</mat-icon>
+            </div>
+            <div class="actv-user">
+                <p>Customer's email address has been verified successfully.</p>
+            </div>
+            <div>
+                <button class="btn btn-primary popbtn" (click)="continue()" routerLink="/personal-details" [mat-dialog-close]="true">Continue</button>
+            </div>
+        </div>
+    </div>
+</div>

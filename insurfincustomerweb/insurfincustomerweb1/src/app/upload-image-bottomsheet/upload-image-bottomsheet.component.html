@@ -1,0 +1,33 @@
+<div class="main" *ngIf="dailogue.type ==='camera'">
+    <div class="upload">
+      <p class="uploadimage" (click)="uploadImage()">Upload image</p>
+      <mat-icon class="wrong1" (click)="closeSheet()">close</mat-icon>
+    </div>
+    <div class="takephoto">
+      <p class="photo" (click)="captur()" accept="image/png,image/jpeg">Take photo</p>
+    </div>
+    <hr>
+    <div class="mb-5 container">
+      <label class="upload-gallery" style="cursor: pointer;">
+        Upload from gallery
+        <input type="file" style="display:none;" (change)="profileUpload($event)" accept="image/png,image/jpeg">
+      </label>
+    </div>
+  </div>
+  
+  
+  
+  <div class="main" *ngIf="dailogue.type ==='dotsmenu'">
+    <div class="upload">
+      <p class="uploadimage">More Actions</p>
+      <mat-icon class="wrong1" (click)="closeSheet()">close</mat-icon>
+    </div>
+    <div class="takephoto">
+      <p class="photo" (click)="resetpassword()" *ngIf="dailogue.customerData.setUpPassword === true">|** Forgot Password</p>
+      <p class="photo" (click)="setuppassword()" *ngIf="dailogue.customerData.setUpPassword === false">|** Setup Password</p>
+    </div>
+    <hr>
+    <div class="btmSheet" >
+      <span><img src="../../assets/ShieldWarning.svg" alt=""></span> &nbsp;<span class="closeAcc" (click)="kycdocuments('accCloser')">Request for Account Closure</span>
+    </div>
+  </div>

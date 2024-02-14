@@ -1,0 +1,145 @@
+<div class="main">
+    <div class="welcome">
+        <div class="row">
+            <div class="col-lg-6 p-0">
+                <app-side-nav-section />
+            </div>
+
+            <div class="col-lg-6 rightColoumn">
+                <div class="distrbtr-welcome">
+                    <mat-icon class="leftArrw">keyboard_backspace</mat-icon><span class="cust-dtls">Customer
+                        Details</span>
+                    <P class="new-prosl">Create New Proposal</P>
+
+
+                    <mat-tab-group [(selectedIndex)]="selectedIndex" (selectedTabChange)="tabChanged($event)">
+                        <mat-tab label="Proposal Details">
+                            <div class="Container">
+                                <form [formGroup]="details">
+                                    <div>
+                                        <p class="john">John Doe</p>
+                                        <p class="pers-dtls">Personal Details</p>
+                                    </div>
+
+                                    <div class="section">
+                                        <label class="choose">Choose product category</label>
+                                        <!-- <input type="text" class="form-control inp-product" placeholder="Select product Category"> -->
+                                        <select class="form-select inp-product" formControlName="chooseproduct">
+                                            <option [ngValue]="null" selected disabled hidden>Select product Category
+                                            </option>
+                                            <option>General Insurance</option>
+                                            <option>Life Insurance</option>
+                                            <option>Health Insurance</option>
+                                            <option>Motor Insurance</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="section">
+                                        <label class="choose">Choose your Insurer</label>
+                                        <!-- <input type="text" class="form-control inp-product" placeholder="Select product Category"> -->
+                                        <select class="form-select inp-product" formControlName="chooseinsurer">
+                                            <option [ngValue]="null" selected disabled hidden>Select Insurer</option>
+                                            <option>ACKO</option>
+                                            <option>Aditya Birla Life Insurance</option>
+                                            <option>Aegon Life Insurance</option>
+                                        </select>
+                                    </div>
+
+
+                                    <div class="section">
+                                        <label class="choose">Choose product type</label>
+                                        <!-- <input type="text" class="form-control inp-product" placeholder="Select product Category"> -->
+                                        <select class="form-select inp-product" formControlName="chooseptype">
+                                            <option [ngValue]="null" selected disabled hidden>Select Product</option>
+                                            <option>Team Insurance</option>
+                                            <option>Whole Life Insurance</option>
+                                            <option>Annuity Plans</option>
+                                        </select>
+                                    </div>
+
+
+
+                                    <div class="section">
+                                        <label class="choose">Choose product</label>
+                                        <!-- <input type="text" class="form-control inp-product" placeholder="Select product Category"> -->
+                                        <select class="form-select inp-product" formControlName="product">
+                                            <option [ngValue]="null" selected disabled hidden>Select product</option>
+                                            <option>PM Whole Life Insurance</option>
+                                            <option>Jeevan Dhan Whole Life Insurance</option>
+                                            <option>General Whole life Insurance</option>
+
+                                        </select>
+                                    </div>
+
+
+                                    <div class="section">
+                                        <input class="form-control product-name " type="text"
+                                            placeholder="Or Enter Product Name" formControlName="product">
+                                    </div>
+
+                                    <div class="section">
+                                        <label class="choose">Proposal Number</label>
+                                        <input class="form-control product-name" type="text"
+                                            placeholder="Enter proposal Number" formControlName="proposalnumber">
+
+                                    </div>
+
+
+                                    <div class="section">
+                                        <label class="choose">Premium Paying Term</label>
+                                        <input class="form-control product-name" type="text"
+                                            placeholder="Enter proposal Number" formControlName="premium">
+                                        <p class="years">Please ensure the terms is between 5-25 years</p>
+
+                                    </div>
+
+
+                                    <div class="mt-5 mb-3">
+                                        <button class="btn btn-primary cont-btn" (click)="openDialog()"[disabled]="!details.valid" >Continue</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </mat-tab>
+
+
+                        <mat-tab label="Policy Information">
+                            <div>
+                                <h1 class="policy-Info">Policy Information</h1>
+                                <div class="section">
+                                    <label class="policy-tensure">Policy tensure(in years)</label>
+                                    <input type="text" class="form-control tensure" placeholder="Enter policy tensure">
+                                </div>
+                                <div class="section">
+                                    <label class="premium-amt">Premium amount</label>
+                                    <mat-slider min="0" max="1000000">
+                                        <input matSliderStartThumb value="0">
+                                        <input matSliderEndThumb value="100000">
+                                      </mat-slider>
+                                </div>
+                                <div class="section">
+                                
+                                    <!-- <i class="fa-solid fa-indian-rupee-sign ind-rupee"></i> -->
+                                    <input type="text" class="form-control rupee">
+                                </div>
+                                <div>
+                                    <button class="btn btn-primary add-propsl" routerLink="/proposal-success">Add Proposal</button>
+                                </div>
+                            </div> 
+
+                        </mat-tab>
+                    </mat-tab-group>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+

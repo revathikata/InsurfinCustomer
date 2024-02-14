@@ -1,0 +1,144 @@
+.main {
+    overflow: hidden;
+  }
+  .rightColoumn {
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 100vh;
+    background: linear-gradient(270deg, #EEF5FC 0%, #C3D9ED 100%);
+  }
+  .distrbtr-welcome {
+    margin: auto;
+    border: 1px solid grey;
+    border-radius: 12px;
+    width: 393px;
+    margin-top: 5%;
+    background: #FFFFFF;
+    padding: 10px;
+    margin-bottom: 5%;
+  }
+  .customer-authorization{
+    margin: auto;
+    border: 1px solid grey;
+    border-radius: 12px;
+    width: 393px;
+    margin-top: 5%;
+    background: linear-gradient(180deg, #EEF6FD -13.97%, #EDF4FB 113.2%);
+    padding: 10px;
+    margin-bottom: 5%;
+  }
+  .back-arrw {
+    cursor: pointer;
+    color: #041427;
+    margin-left: 18px;
+    margin-top: 5px;
+  }
+  .letterHead{
+    color: #005AAA;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.64px;
+}
+.agree{
+    color: #8B8F9C;
+font-size: 16px;
+font-weight: 700;
+}
+.acceptBtn{
+    width: 345px;
+    height: 52px;
+    margin-left: 15px;
+    background-color: #005AAA;
+    border-radius: 16px;
+    margin-bottom: 5%;
+}
+.footer{
+    border-radius: 5px 5px 0px 0px;
+}
+.image{
+    width: 105.537px;
+    height: 200.258px;
+    flex-shrink: 0;
+    margin-top: 70px;
+}
+.stepsCmpleted{
+    color: #005AAA;
+font-size: 40px;
+font-style: normal;
+font-weight: 700;
+line-height: 48px; 
+letter-spacing: -0.8px;
+}
+.description{
+    color: #7D848D;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
+.addressData{
+    border-radius: 12px;
+    background: rgba(39, 145, 224, 0.05);
+}
+.dataStyle{
+    color: #7D848D;
+font-size: 14px;
+font-weight: 500;
+}
+.buttonClass{
+    margin-top:45px;
+    margin-bottom:45px;
+}
+/* .background{
+    background: linear-gradient(180deg, #EEF6FD -13.97%, #EDF4FB 113.2%);
+} */
+.pol-dtls{
+    margin-top: 7px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #041427;
+    cursor: pointer;
+}
+.authorized-letter{
+    color: #041427;
+font-size: 16px;
+font-weight: 400;
+}
+.acceptance-authentication{
+    color: #041427;
+font-size: 16px;
+font-weight: 400;
+
+}
+.lender-img{
+    margin-left: 32%;
+}
+.acknowledge{
+    margin-top: -14px;
+}
+.geo-location p{
+    color: #7D848D;
+font-size: 14px;
+font-weight: 500;
+
+}
+.geo-location span{
+    color: #7D848D;
+font-size: 14px;
+font-weight: 400;
+}
+.insurer-payment{
+    color: #041427;
+font-size: 16px;
+font-weight: 400;
+}
+.footer-flex{
+    margin-top: 10%;
+}
+.subject{
+    color:black;
+    font-weight: 700;
+    text-align: center;
+}

@@ -1,0 +1,732 @@
+<div class="main">
+  <div class="welcome">
+    <div class="row">
+      <div class="col-lg-6 p-0">
+        <app-side-nav-section />
+      </div>
+
+
+      <div class="col-lg-6 rightColoumn">
+        <div class="distrbtr-welcome" *ngIf="sharedService.mainDashboard">
+          <div>
+            <div class="menu-home container">
+              <mat-icon class="menu" (click)="menubar()">menu</mat-icon>
+              <p class="my-home">Home</p>
+              <!-- <span class="dot"></span>
+              <mat-icon class="notifications" routerLink="/notifications">notifications_none</mat-icon>
+              <div matBadge="1" matBadgeOverlap="false" matBadgeColor="warn" class="demo-section"></div> -->
+            </div>
+            <div class="container" *ngIf="proposalcounts.length === 0 || (proposalcounts[currentProposalIndex]?.displayStatus !== 'Proposal acceptance pending' 
+            && proposalcounts[currentProposalIndex]?.displayStatus !== 'Waiting for documentation' &&
+            proposalcounts[currentProposalIndex]?.displayStatus !== 'Proposal Accepted' &&  proposalcounts[currentProposalIndex]?.displayStatus !== 'Escrow account created successfully')">
+              <div class="new-proposal">
+                <p class="proposal-moment">No new proposals at the moment.</p>
+              </div>
+            </div>            
+            <!-- card 1 -->
+            <div class="card container mt-5" *ngIf="proposalcounts.length >= 0 && proposalcounts[currentProposalIndex]?.displayStatus == 'Proposal acceptance pending'
+               || proposalcounts[currentProposalIndex]?.displayStatus === 'Waiting for documentation' || 
+               proposalcounts[currentProposalIndex]?.displayStatus === 'Proposal Accepted' || proposalcounts[currentProposalIndex]?.displayStatus === 'Escrow account created successfully'">
+              <div class="high-flex"  *ngIf="proposalcounts[currentProposalIndex]?.displayStatus == 'Proposal acceptance pending'">
+                 <mat-icon class="error">error_outline</mat-icon>
+                <p class="high-priority">High Priority | Review within 3 days</p>
+              </div>
+              <div class="section-flex">
+                <div>
+                  <mat-icon class="mat-icon-leftarrw" (click)="leftArrow()" [ngStyle]="{'display':currentProposalIndex >=1 ? 'block':'none' }">keyboard_arrow_left</mat-icon>
+                </div>
+
+                <div class="income-doc">
+                  <div class="section">
+                    <p class="silver-policy">{{proposalcounts[currentProposalIndex]?.productName}}</p>
+                    <p class="prpsl-acceptance">{{proposalcounts[currentProposalIndex]?.displayStatus}}</p>
+                  </div>
+                  <div class="policy-premium">
+                    <p class="policy-num">Policy Amount</p>
+                    <p class="ten-lacs">{{(+proposalcounts[currentProposalIndex]?.policyAmount||0).toLocaleString('en-IN')}}</p>
+                  </div>
+                  <div class="policy-premium">
+                    <p class="policy-num">Proposal Number</p>
+                    <p class="ten-lacs">{{proposalcounts[currentProposalIndex]?.proposalNumber}}</p>
+                  </div>
+
+                </div>
+                
+                <div>
+                  <mat-icon class="right-arrw" (click)="nextproposal()" [ngStyle]="{'display': currentProposalIndex < proposalcounts.length - 1 ? 'block' : 'none' }">keyboard_arrow_right</mat-icon>
+                  <!-- <img class="right-arrw" src="../../assets/CaretRight.svg" (click)="nextproposal()"> -->
+                </div>
+                
+              </div>
+
+              <!-- <div class="row">
+                <div class="col-3">
+                  <mat-icon class="mat-icon-leftarrw" (click)="leftArrow()" [ngStyle]="{'display':currentProposalIndex >=1 ? 'block':'none' }">keyboard_arrow_left</mat-icon>
+                </div>
+                <div class="col-6">
+                  <p class="silver-policy">{{proposalcounts[currentProposalIndex]?.productName}}</p>
+                  <p class="prpsl-acceptance">{{proposalcounts[currentProposalIndex]?.displayStatus}}</p>
+                </div>
+                <div class="col-3">
+                  <img class="right-arrw" src="../../assets/CaretRight.svg" (click)="nextproposal()">
+                </div>
+              </div> -->
+
+              <!-- <div class="policy-premium">
+                <p class="policy-num">Policy Amount</p>
+                <p class="ten-lacs">{{proposalcounts[currentProposalIndex]?.policyAmount}}</p>
+              </div>
+              <div class="policy-premium">
+                <p class="policy-num">Proposal Number</p>
+                <p class="ten-lacs">{{proposalcounts[currentProposalIndex]?.proposalNumber}}</p>
+              </div> -->
+              <div class="mb-5 container">
+                <button class="btn btn-primary review-btn" (click)="reviewProposal()" 
+                *ngIf="proposalcounts[currentProposalIndex]?.status == 'PROPOSAL_NOT_ACCEPTED'">Review Proposal</button>
+
+                <button class="btn btn-primary review-btn" (click)="LoanInitiantBtn()" 
+                *ngIf="proposalcounts[currentProposalIndex]?.status == 'LOAN_INITIATED'">View Proposal</button>
+
+                <button class="btn btn-primary review-btn" *ngIf="proposalcounts[currentProposalIndex]?.displayStatus === 'Proposal Accepted'" (click)="continueProcessAccepted()" >Continue the Process</button>
+              <button class="btn btn-primary review-btn" *ngIf="proposalcounts[currentProposalIndex]?.displayStatus === 'Escrow account created successfully'" (click)="continueProcessToLender()" >Continue the Process</button>
+            </div>
+            </div>
+          
+            <!-- <button (click)="selectcard()">click</button> -->
+            <!-- card 1 end -->
+          </div>
+          
+        </div>
+
+        <div class="all-policies" *ngIf="sharedService.mainDashboard">
+          <!-- <div class="container actions-flex" *ngIf="loanDisbursedList.length > 0">
+            <p class="actions">Actions pending</p>
+            <p class="pending-week">DUE THIS WEEK</p>
+          </div> -->
+
+           <!-- <div class="mb-3">
+            <mat-accordion>
+                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            <div>
+                                <div class="customer-flex">
+                                    <div>
+                                        <img src="../../assets/profile pic -img.png" class="distributor-profile">
+                                    </div>
+                                    <div class="section">
+                                        <p class="customer-name">Jane Mishra</p>
+                                        <p class="gold-policy">Golden Tier II Policy</p>
+                                        <p class="double-emi">Double EMI outstanding !</p>
+                                    </div>
+                                </div>
+                                <div class="loans-flex">
+                                    <div class="loans">
+                                        <span class="loan-span">Loan</span><span class="ten-lacs">₹ 10
+                                            Lac</span>
+                                    </div>
+                                    <div class="emi-flex">
+                                        <span class="emis-outstnd">Due on</span><span
+                                            class="five-num"> 3rd May, 2023</span>
+                                    </div>
+                                </div>
+                             
+                            </div>
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>  -->
+
+        <!-- <div class="container" *ngIf="loanDisbursedList.length > 0">
+          <p class="later-flex">DUE THIS WEEK</p>
+        </div>
+        <div class="mb-3">
+          <mat-accordion *ngFor="let acceptList of loanDisbursedList; let i=index">
+              <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                  <mat-expansion-panel-header>
+                      <mat-panel-description>
+                          <div>
+                              <div class="customer-flex">
+                                  <div style="margin-left: 20px;">
+                                      <img src="../../assets/profile pic -img.png" class="distributor-profile">
+                                  </div>
+                                  <div class="section -product">
+                                      <p class="customer-name">{{selectedCustomerData.fullName}}</p>
+                                      <p class="gold-policy">{{acceptList.productName}}</p>
+                                      <p class="loan-disbursed">{{acceptList.displayStatus}}</p>
+                                  </div>
+                              </div>
+                              <div class="loans-flex">
+                                  <div class="loans">
+                                      <span class="loan-span">Loan</span><span class="ten-lacs">₹ 10
+                                          Lac</span>
+                                  </div>
+                                 <div>
+                                  <div class="emi-flex">
+                                    <span class="emis-outstnd">Disbursed on</span><span
+                                        class="five-num"> 3rd May, 2023</span>
+                                </div>
+                                 </div>
+                              </div>
+                          </div>
+                      </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <hr>
+                  <div class="more-flex">
+                    <div class="display2">
+                        <p class="policyDetails">Policy Number <span><img class="threeDots" src="../../assets/DotsThreeOutlineVertical.svg"></span></p>
+                        <p class="policyDetails">Policy Date</p>
+                        <p class="policyDetails">Premium Amount(₹)</p>
+                        </div>
+                        </div>
+              </mat-expansion-panel>
+          </mat-accordion>
+      </div> -->
+
+        <!-- <div class="container" *ngIf="loanDisbursedList.length > 0">
+          <p class="later-flex">DUE LATER</p>
+        </div>
+      <div class="mb-3">
+        <mat-accordion *ngFor="let acceptList of loanDisbursedList; let i=index">
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                <mat-expansion-panel-header>
+                    <mat-panel-description>
+                        <div>
+                            <div class="customer-flex">
+                                <div style="margin-left: 20px;">
+                                    <img src="../../assets/profile pic -img.png" class="distributor-profile">
+                                </div>
+                                <div class="section -product">
+                                    <p class="customer-name">{{selectedCustomerData.fullName}}</p>
+                                    <p class="gold-policy">{{acceptList.productName}}</p>
+                                    <p class="loan-disbursed">{{acceptList.displayStatus}}</p>
+                                </div>
+                            </div>
+                            <div class="loans-flex">
+                                <div class="loans">
+                                    <span class="loan-span">Loan</span><span class="ten-lacs">₹ 10
+                                        Lac</span>
+                                </div>
+                                <div>
+                                  <div class="emi-flex">
+                                    <span class="emis-outstnd">Disbursed on</span><span
+                                        class="five-num"> 3rd May, 2023</span>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <br>
+                <div class="more-flex">
+                  <div class="display2">
+                      <p class="policyDetails">Policy Number <span><img class="threeDots" src="../../assets/DotsThreeOutlineVertical.svg"></span></p>
+                      <p class="policyDetails">Policy Date</p>
+                      <p class="policyDetails">Premium Amount(₹)</p>
+                  <div>
+                    <div *ngIf="customerProposalDetails?.displayStatus==='Loan disbursed successfully'" >
+                      <button class="btn btn-primary view-Details">View Details</button>
+                    </div>
+                    <div>
+                  </div>
+                      </div>
+                      </div>
+                      </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div> -->
+
+
+          <div class="container sort-flex">
+            <div>
+              <p class="all-policy">All Policies</p>
+            </div>
+              <div class="sort" (click)="openBottomSheet('sort')">
+                <img src="../../assets/arrow-down.svg">
+                <span class="sorting" >Sort</span>
+              </div>
+          </div>
+
+           <div class="policy-cards">
+            <mat-card class="container card silver-policy-card" *ngFor="let policy of Allpolicies">
+              <div class="container silver-arrw">
+                <p class="policy-flex">{{policy?.productName}}</p>
+                <img class="review-proposal-arrow" src="../../assets/arrow side.svg" (click)="navigateToReviewProposal()">
+              </div>
+              <div class="container">
+                <p class="insurer">Insurer</p>
+                <p class="ins-company">{{policy?.insurerName}}</p>
+              </div>  
+              <div class="container">
+                <p class="insurer">Premium Amount (₹)</p>
+                <p class="ins-company">{{policy?.premiumAmount}}</p>
+              </div>
+              <div class="container">
+                <p class="insurer">Policy Tenure</p>
+                <p class="ins-company">{{policy?.policyTenure}}</p>
+              </div>
+            </mat-card>
+          </div> 
+         
+          <div class="no-policy" *ngIf="customerProposalDetails?.customerPolicy > 0">
+          <div class="policy-box">
+          </div>
+          <div>
+            <p class="policy-yet">You don’t have any policies yet</p>
+          </div>
+        </div>
+       
+
+        </div>
+
+
+        <div class="customer-proposal" *ngIf="sharedService.pendingDocuments">
+
+          <div class="morevert-flex">
+            <mat-icon class="back-arrw" (click)="navigateToHome()">keyboard_backspace</mat-icon>
+            <p class="pol-dtls">Home</p>
+            <mat-icon class="vert" mat-raised-button (click)="openBottomSheet('MoreActions')">more_vert</mat-icon>
+            <!-- <input type="file" #fileInput style="display: none;" (change)="onFileSelected($event)"> -->
+          </div>
+
+          <div class="container">
+            <div class="edit-customer-flex">
+              <div>
+                <img class="edit-customer " src="../../assets/profile pic -img.png" class="distributor-profile">
+              </div>
+              <div class="anitha-flex">
+                <!-- <p class="jane-name">{{allDetails?.proposalDetailsDto.customerName}}</p> -->
+                <p class="silver-policy">Silver Policy</p>
+                <p class="wait-docs">Proposal acceptance pending</p>
+              </div>
+              <!-- <div>
+                                <img class="phone-img" src="../../assets/CaretRight.svg">
+                            </div> -->
+            </div>
+            <div class="edit-proposal container">
+              <div>
+                <p class="prpsl-dtls">PROPOSAL DETAILS</p>
+              </div>
+              <div class="proposal-name">
+                <p class="Proposer-name">Proposer Name</p>
+                <p class="ani-name">{{allDetails?.proposalDetailsDto.customerName}}</p>
+              </div>
+              <div class="proposal-name">
+                <p class="Proposer-name">Proposal Number</p>
+                <p class="ani-name">{{allDetails?.proposalDetailsDto.proposalNumber}}</p>
+              </div>
+              <div class="proposal-name">
+                <p class="Proposer-name">Date of Proposal</p>
+                <p class="ani-name">{{allDetails?.proposalDetailsDto.dateOfProposal[2]}}
+                  {{allDetails?.proposalDetailsDto.dateOfProposal[1]}}
+                  {{allDetails?.proposalDetailsDto.dateOfProposal[0]}}</p>
+              </div>
+              <div class="proposal-name">
+                <p class="Proposer-name">Policy Tenure</p>
+                <p class="ani-name">{{allDetails?.proposalDetailsDto.policyTenure}}</p>
+              </div>
+              <!-- <div class="proposal-name">
+                                <p class="Proposer-name">Product Category</p>
+                                <p class="ani-name">5</p>
+                            </div> -->
+              <div class="proposal-name">
+                <p class="Proposer-name">Product Category</p>
+                <p class="ani-name">{{allDetails?.proposalDetailsDto.productCategory}}</p>
+              </div>
+              <div class="proposal-name">
+                <p class="Proposer-name">Product Type</p>
+                <p class="ani-name">{{allDetails?.proposalDetailsDto.productTypeName}}</p>
+              </div>
+              <!-- <div class="proposal-name">
+                                <p class="Proposer-name">Policy Amount  (₹)</p>
+                                <p class="ani-name">{{allDetails?.proposalDetailsDto.policyAmount}}</p>
+                            </div> -->
+              <div class="proposal-name">
+                <p class="Proposer-name">Premium Amount (₹)</p>
+                <p class="ani-name">{{allDetails?.proposalDetailsDto.premiumAmount}}</p>
+              </div>
+              <div>
+                <hr>
+              </div>
+              <div>
+                <p class="prpsl-dtls">INSURER DETAILS</p>
+              </div>
+              <div class="proposal-name">
+                <p class="Proposer-name">Insurer</p>
+                <p class="ani-name">{{allDetails?.insurerDetailsDto.insurerName}}</p>
+              </div>
+              <div class="proposal-name">
+                <p class="Proposer-name">Phone Number</p>
+                <p class="ani-name"><span class="nine-one">+91</span>
+                  {{allDetails?.insurerDetailsDto.phoneNumber}}</p>
+              </div>
+              <div class="proposal-name">
+                <p class="Proposer-name">Email</p>
+                <!-- <p class="ani-name">{{allDetails?.insurerDetailsDto.email}}</p> -->
+                <p class="ani-name">dinesh.tavivalife.com</p>
+              </div>
+              <div class="proposal-name">
+                <p class="Proposer-name">Address</p>
+                <p class="address-name">{{allDetails?.insurerDetailsDto.address}}</p>
+              </div>
+              <!-- <div class="proposal-name">
+                                <p class="Proposer-name">Date</p>
+                                <p class="ani-name">02.04.2023</p>
+                            </div> -->
+              <div>
+                <hr>
+              </div>
+              <div>
+                <p class="prpsl-dtls">INSURER BANK ACCOUNT DETAILS</p>
+                <P class="permanent-acc">Virtual Account</P>
+              </div>
+              <div class="proposal-name">
+                <p class="Proposer-name">Account Name</p>
+                <p class="ani-name">Dinesh</p>
+              </div>
+              <div class="proposal-name">
+                <p class="Proposer-name">Bank Name</p>
+                <p class="ani-name">YES Bank</p>
+              </div>
+              <!-- <div class="proposal-name">
+                                <p class="Proposer-name">Policy Tenure</p>
+                                <p class="ani-name">YES Bank</p>
+                            </div> -->
+              <div class="proposal-name">
+                <p class="Proposer-name">Account Number</p>
+                <p class="ani-name">{{allDetails?.proposalDetailsDto.accountName}}</p>
+              </div>
+              <div class="proposal-name">
+                <p class="Proposer-name">IFSC</p>
+                <p class="ani-name">YESB0000419</p>
+              </div>
+              <div>
+                <hr class="line-hr">
+              </div>
+              <div class="upload-doc">
+                <p class="prpsl-dtls-doc">DOCUMENTATION</p>
+                <p class="now-upload-doc" (click)="uploadNow()" *ngIf="allDetails.isdocumentspending == true">Upload Now</p>
+              </div>
+              <div class="proposal-name">
+                <p class="Proposer-name">Aadhaar Front</p>
+                <p class="pending" *ngIf="allDetails.isdocumentspending == true">Pending</p>
+                <p class="documentcomplete" *ngIf="allDetails.isdocumentspending == false">completed</p>
+              </div>
+              <div class="proposal-name">
+                <p class="Proposer-name">Aadhaar Back</p>
+                <p class="pending" *ngIf="allDetails.isdocumentspending == true">Pending</p>
+                <p class="documentcomplete" *ngIf="allDetails.isdocumentspending == false">completed</p>
+              </div>
+              <div class="proposal-name">
+                <p class="Proposer-name">PAN Front</p>
+                <p class="pending" *ngIf="allDetails.isdocumentspending == true">Pending</p>
+                <p class="documentcomplete" *ngIf="allDetails.isdocumentspending == false">completed</p>
+              </div>
+              <div class="proposal-name">
+                <p class="Proposer-name">Cancelled Cheque</p>
+                <p class="pending" *ngIf="allDetails.isdocumentspending == true">Pending</p>
+                <p class="documentcomplete" *ngIf="allDetails.isdocumentspending == false">completed</p>
+              </div>
+              <div class="proposal-name">
+                <p class="Proposer-name">Bank Statement</p>
+                <p class="pending" *ngIf="allDetails.isdocumentspending == true">Pending</p>
+                <p class="documentcomplete" *ngIf="allDetails.isdocumentspending == false">completed</p>
+              </div>
+              <div class="mt-5 mb-3">
+                <button class="btn btn-primary acceptProposal-btn" (click)="acceptProposal()"
+                  [disabled]="allDetails.isdocumentspending == true">Accept
+                  Proposal</button>
+              </div>
+              <div class="mt-3 container get-in-touch">
+                <span>Got a doubt about this?</span>
+                <span class="get-touch">Get in touch</span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
+        <div class="customer-proposal" *ngIf="uploadDocuments">
+
+          <div class="morevert-flex">
+            <div> <mat-icon class="backspace">keyboard_backspace</mat-icon></div>
+            <div>
+              <p class="personal-details">Proposal Details</p>
+            </div>
+
+
+            <div class="profile">
+              <div class="anitha-profile">
+                <img src="../../assets/profile pic -img.png" class="distributor-profile" >
+              </div>
+              <div class="profile-details">
+
+                <p class="mishra">
+                  {{selectedCustomerData.fullName}}
+                </p>
+                <p class="Number" appPanMask [panMask]="selectedCustomerData.panNumber">
+                  {{selectedCustomerData.panNumber}}</p>
+
+              </div>
+            </div>
+
+            <mat-icon class="vert" mat-raised-button (click)="openBottomSheet('MoreActions')">more_vert</mat-icon>
+            <!-- <input type="file" #fileInput style="display: none;" (change)="onFileSelected($event)"> -->
+          </div>
+
+          <div class="uploadFiles container">
+            <div class="document-flex">
+              <p class="document">DOCUMENTATION</p>
+              <p class="pdf">Only pdf, jpg and png allowed [Max: 25mb]</p>
+            </div>
+            <hr>
+
+            <form [formGroup]="salaryForm" *ngIf="salary">
+              <div class="adharinfo">
+                <label class="kyc-label">Aadhaar info</label>
+              </div>
+              <div class="container fileupload"
+                [ngClass]="imgname ? 'uploaded' : !aadharFront ? 'fileupload' : 'notupload'" (click)="onAadhaarFront()">
+                <label class="uploadlabel-Added">
+                  <input type="file" class="form-control uploadimg" #input id="uploadInp"
+                    placeholder="Upload Aadhaar front" (change)="AdharFrontFile($event)" formControlName="adharfrontimg"
+                    accept="application/pdf,image/png,image/jpeg">
+                  <div class="inputimgName d-flex">
+                    <p for="uploadInp" class="imguploadText" *ngIf="!imgname">Upload Aadhaar front</p>
+                    <p #input id="uploadInp" class="afteruploaded" *ngIf="imgname">{{imgname}}</p>
+                    <img class="checkcircle" *ngIf="imgname" src="../../assets/CheckCircle.svg">
+                    <img class="imgcls" *ngIf="!imgname" src="../../assets/UploadImg.svg" alt="">
+                    <img class="trash" (click)="removeAadharFront($event)" src="../../assets/Trash.svg" *ngIf="imgname"
+                      alt="">
+                  </div>
+
+                </label>
+              </div>
+              <div class="container fileupload"
+                [ngClass]="imgback ? 'uploaded' : !aadharBack ? 'fileupload' : 'notupload'" (click)="onAadhaarBack()">
+                <label class="uploadlabel-Added">
+                  <input type="file" class="form-control uploadimg" #input id="uploadback"
+                    placeholder="Upload Aadhaar back" (change)="AdharBackFile($event)" formControlName="adharbackimg"
+                    accept="application/pdf,image/png,image/jpeg">
+                  <div class="inputimgName d-flex">
+                    <p for="uploadback" class="imguploadText" *ngIf="!imgback">Upload Aadhaar back</p>
+                    <p #input id="uploadback" class="afteruploaded" *ngIf="imgback">{{imgback}}</p>
+                    <img class="checkcircle" *ngIf="imgback" src="../../assets/CheckCircle.svg">
+                    <img class="imgcls" *ngIf="!imgback" src="../../assets/UploadImg.svg" alt="">
+                    <img class="trash" (click)="removeAadharBack($event)" src="../../assets/Trash.svg" *ngIf="imgback"
+                      alt="">
+                  </div>
+
+                </label>
+              </div>
+              <div class="hrr">
+                <hr />
+              </div>
+              <div class="adharinfo">
+                <label class="kyc-label">PAN info</label>
+              </div>
+              <div class="container fileupload" [ngClass]="imgbpan ? 'uploaded' : !panCard ? 'fileupload' : 'notupload'"
+                (click)="onPanCard()">
+                <label class="uploadlabel-Added">
+                  <input type="file" class="form-control uploadimg" #input id="uploadpan" placeholder="Upload PAN Front"
+                    (change)="PanFrontFile($event)" formControlName="pancardimg"
+                    accept="application/pdf,image/png,image/jpeg">
+                  <div class="inputimgName d-flex">
+                    <p for="uploadpan" class="imguploadText" *ngIf="!imgbpan">Upload Pan front</p>
+                    <p #input id="uploadpan" class="afteruploaded" *ngIf="imgbpan">{{imgbpan}}</p>
+                    <img class="checkcircle" *ngIf="imgbpan" src="../../assets/CheckCircle.svg">
+                    <img class="imgcls" *ngIf="!imgbpan" src="../../assets/UploadImg.svg" alt="">
+                    <img class="trash" (click)="removePan($event)" src="../../assets/Trash.svg" *ngIf="imgbpan" alt="">
+                  </div>
+
+                </label>
+              </div>
+              <div class="hrr">
+                <hr />
+              </div>
+
+              <div class="adharinfo">
+                <label class="kyc-label">Bank details</label>
+              </div>
+              <div class="container fileupload"
+                [ngClass]="imgbank1 ? 'uploaded' : !cancelCheque ? 'fileupload' : 'notupload'"
+                (click)="onCancelCheque()">
+                <label class="uploadlabel-Added">
+                  <input type="file" class="form-control uploadimg" #input id="uploadbank1"
+                    placeholder="Upload bank Details" (change)="BankdetailsCheque($event)"
+                    formControlName="cancelchequeimg" accept="application/pdf,image/png,image/jpeg">
+                  <div class="inputimgName d-flex">
+                    <p for="uploadbank1" class="imguploadText" *ngIf="!imgbank1">Upload cancelled cheque</p>
+                    <p #input id="uploadbank1" class="afteruploaded" *ngIf="imgbank1">{{imgbank1}}</p>
+                    <img class="checkcircle" *ngIf="imgbank1" src="../../assets/CheckCircle.svg">
+                    <img class="imgcls" *ngIf="!imgbank1" src="../../assets/UploadImg.svg" alt="">
+                    <img class="trash" (click)="removeCancelCheque($event)" src="../../assets/Trash.svg"
+                      *ngIf="imgbank1" alt="">
+                  </div>
+
+                </label>
+              </div>
+              <div class="container fileupload"
+                [ngClass]="imgbank2 ? 'uploaded' : !bankStatement ? 'fileupload' : 'notupload'"
+                (click)="onBankStatement()">
+                <label class="uploadlabel-Added">
+                  <input type="file" class="form-control uploadimg" #input id="uploadbank2"
+                    placeholder="Upload PAN Front" (change)="BankdetailStatement($event)"
+                    formControlName="bankstatementimg" accept="application/pdf,image/png,image/jpeg">
+                  <div class="inputimgName d-flex">
+                    <p for="uploadbank2" class="imguploadText" *ngIf="!imgbank2">Upload bank statement </p>
+                    <p #input id="uploadbank2" class="afteruploaded" *ngIf="imgbank2">{{imgbank2}}</p>
+                    <img class="checkcircle" *ngIf="imgbank2" src="../../assets/CheckCircle.svg">
+                    <img class="imgcls" *ngIf="!imgbank2" src="../../assets/UploadImg.svg" alt="">
+                    <img class="trash" (click)="removeBankStatement($event)" src="../../assets/Trash.svg"
+                      *ngIf="imgbank2" alt="">
+                  </div>
+
+                </label>
+              </div>
+
+              <!-- <p *ngIf="(uploadfileMessage && aadharbackUploaded && pancardUploaded)">internal server problem try again</p> -->
+              <div class="mb-3 mt-5">
+                <button class="btn btn-primary kyc-Btn" (click)="salaryContinue()"
+                  [disabled]="!salaryForm.valid">Done</button>
+              </div>
+            </form>
+
+
+            <form [formGroup]="selfForm" *ngIf="!salary">
+              <div class="adharinfo">
+                <label class="kyc-label">Aadhaar info</label>
+              </div>
+              <div class="container fileupload"
+                [ngClass]="imgname ? 'uploaded' : !aadharFront ? 'fileupload' : 'notupload'" (click)="onAadhaarFront()">
+                <label class="uploadlabel-Added">
+                  <input type="file" class="form-control uploadimg" #input id="uploadInp"
+                    placeholder="Upload Aadhaar front" (change)="AdharFrontFile($event)" formControlName="adharfrontimg"
+                    accept="application/pdf,image/png,image/jpeg">
+                  <div class="inputimgName d-flex">
+                    <p for="uploadInp" class="imguploadText" *ngIf="!imgname">Upload Aadhaar front</p>
+                    <p #input id="uploadInp" class="afteruploaded" *ngIf="imgname">{{imgname}}</p>
+                    <img class="checkcircle" *ngIf="imgname" src="../../assets/CheckCircle.svg">
+                    <img class="imgcls" *ngIf="!imgname" src="../../assets/UploadImg.svg" alt="">
+                    <img class="trash" (click)="removeAadharFront($event)" src="../../assets/Trash.svg" *ngIf="imgname"
+                      alt="">
+                  </div>
+
+                </label>
+              </div>
+              <div class="container fileupload"
+                [ngClass]="imgback ? 'uploaded' : !aadharBack ? 'fileupload' : 'notupload'" (click)="onAadhaarBack()">
+                <label class="uploadlabel-Added">
+                  <input type="file" class="form-control uploadimg" #input id="uploadback"
+                    placeholder="Upload Aadhaar back" (change)="AdharBackFile($event)" formControlName="adharbackimg"
+                    accept="application/pdf,image/png,image/jpeg">
+                  <div class="inputimgName d-flex">
+                    <p for="uploadback" class="imguploadText" *ngIf="!imgback">Upload Aadhaar Back</p>
+                    <p #input id="uploadback" class="afteruploaded" *ngIf="imgback">{{imgback}}</p>
+                    <img class="checkcircle" *ngIf="imgback" src="../../assets/CheckCircle.svg">
+                    <img class="imgcls" *ngIf="!imgback" src="../../assets/UploadImg.svg" alt="">
+                    <img class="trash" (click)="removeAadharBack($event)" src="../../assets/Trash.svg" *ngIf="imgback"
+                      alt="">
+                  </div>
+
+                </label>
+              </div>
+              <div class="hrr">
+                <hr />
+              </div>
+              <div class="adharinfo">
+                <label class="kyc-label">PAN info</label>
+              </div>
+              <div class="container fileupload" [ngClass]="imgbpan ? 'uploaded' : !panCard ? 'fileupload' : 'notupload'"
+                (click)="onPanCard()">
+                <label class="uploadlabel-Added">
+                  <input type="file" class="form-control uploadimg" #input id="uploadpan" placeholder="Upload PAN Front"
+                    (change)="PanFrontFile($event)" formControlName="pancardimg"
+                    accept="application/pdf,image/png,image/jpeg">
+                  <div class="inputimgName d-flex">
+                    <p for="uploadpan" class="imguploadText" *ngIf="!imgbpan">Upload PAN Front</p>
+                    <p #input id="uploadpan" class="afteruploaded" *ngIf="imgbpan">{{imgbpan}}</p>
+                    <img class="checkcircle" *ngIf="imgbpan" src="../../assets/CheckCircle.svg">
+                    <img class="imgcls" *ngIf="!imgbpan" src="../../assets/UploadImg.svg" alt="">
+                    <img class="trash" (click)="removePan($event)" src="../../assets/Trash.svg" *ngIf="imgbpan" alt="">
+                  </div>
+
+                </label>
+              </div>
+              <div class="hrr">
+                <hr />
+              </div>
+              <div class="adharinfo">
+                <label class="kyc-label">Company documents</label>
+              </div>
+              <div class="container fileupload"
+                [ngClass]="imgdocument1 ? 'uploaded' : !gstCertificate ? 'fileupload' : 'notupload'" (click)="onGst()">
+                <label class="uploadlabel-Added">
+                  <input type="file" class="form-control uploadimg" #input id="uploadocument1"
+                    placeholder="Upload bank Details" (change)="uploadGstCertificate($event)"
+                    formControlName="gstcertificateimg" accept="application/pdf,image/png,image/jpeg">
+                  <div class="inputimgName d-flex">
+                    <p for="uploadocument1" class="imguploadText" *ngIf="!imgdocument1">Upload GST certificate</p>
+                    <p #input id="uploadocument1" class="afteruploaded" *ngIf="imgdocument1">{{imgdocument1}}</p>
+                    <img class="checkcircle" *ngIf="imgdocument1" src="../../assets/CheckCircle.svg">
+                    <img class="imgcls" *ngIf="!imgdocument1" src="../../assets/UploadImg.svg" alt="">
+                    <img class="trash" (click)="removeGst($event)" src="../../assets/Trash.svg" *ngIf="imgdocument1"
+                      alt="">
+                  </div>
+
+                </label>
+              </div>
+              <div class="container fileupload"
+                [ngClass]="imgdocument2 ? 'uploaded' : !incomeTax ? 'fileupload' : 'notupload'" (click)="onIncome()">
+                <label class="uploadlabel-Added">
+                  <input type="file" class="form-control uploadimg" #input id="uploadocuments2"
+                    placeholder="Upload PAN Front" (change)="uploadIncomeTax($event)" formControlName="incometaximg"
+                    accept="application/pdf,image/png,image/jpeg">
+                  <div class="inputimgName d-flex">
+                    <p for="uploadocuments2" class="imguploadText" *ngIf="!imgdocument2">Upload income tax return
+                    </p>
+                    <p #input id="uploadocuments2" class="afteruploaded" *ngIf="imgdocument2">{{imgdocument2}}</p>
+                    <img class="checkcircle" *ngIf="imgdocument2" src="../../assets/CheckCircle.svg">
+                    <img class="imgcls" *ngIf="!imgdocument2" src="../../assets/UploadImg.svg" alt="">
+                    <img class="trash" (click)="removeIncome($event)" src="../../assets/Trash.svg" *ngIf="imgdocument2"
+                      alt="">
+                  </div>
+
+                </label>
+              </div>
+              <div class="container fileupload"
+                [ngClass]="imgdocument3 ? 'uploaded' : !incorporation ? 'fileupload' : 'notupload'"
+                (click)="onIncorporation()">
+                <label class="uploadlabel-Added">
+                  <input type="file" class="form-control uploadimg" #input id="uploadocuments2"
+                    placeholder="Upload PAN Front" (change)="uploadIncorporate($event)"
+                    formControlName="incorporationimg" accept="application/pdf,image/png,image/jpeg">
+                  <div class="inputimgName d-flex">
+                    <p for="uploadocuments3" class="imguploadText" *ngIf="!imgdocument3">Upload certificate of
+                      incorporation </p>
+                    <p #input id="uploadocuments3" class="afteruploaded" *ngIf="imgdocument3">{{imgdocument3}}</p>
+                    <img class="checkcircle" *ngIf="imgdocument3" src="../../assets/CheckCircle.svg">
+                    <img class="imgcls" *ngIf="!imgdocument3" src="../../assets/UploadImg.svg" alt="">
+                    <img class="trash" (click)="removeIncorporation($event)" src="../../assets/Trash.svg"
+                      *ngIf="imgdocument3" alt="">
+                  </div>
+
+                </label>
+              </div>
+              <!-- <p *ngIf="(uploadfileMessage && aadharbackUploaded && pancardUploaded)">internal server problem try again</p> -->
+              <div class="mb-3 mt-5">
+                <button class="btn btn-primary kyc-Btn" (click)="selfContinue()"
+                  [disabled]="!selfForm.valid" (click)="documentUpload()">Done</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>

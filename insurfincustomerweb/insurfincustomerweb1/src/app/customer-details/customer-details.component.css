@@ -1,0 +1,285 @@
+.main {
+  overflow: hidden;
+}
+
+.rightColoumn {
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 100vh;
+  background: linear-gradient(270deg, #EEF5FC 0%, #C3D9ED 100%);
+}
+
+.distrbtr-welcome {
+  margin: auto;
+  border: 1px solid grey;
+  border-radius: 10px;
+  width: 393px;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  background-color: #ffffff;
+}
+
+.edit-customer-flex {
+  display: flex;
+}
+
+.morevert-flex {
+  display: flex;
+}
+
+.back-arrw {
+  cursor: pointer;
+  color: #041427;
+  margin-left: 25px;
+  /* margin-top: 12px; */
+}
+
+.login {
+  /* margin-top: 14px; */
+  font-size: 16px;
+  font-weight: 700;
+  color: #041427;
+  cursor: pointer;
+}
+
+.vert {
+  margin-left: 93px;
+  color: #0358A8;
+  cursor: pointer;
+}
+
+.edit-customer-flex {
+  display: flex;
+}
+
+.edit-customer {
+  margin-left: 18px;
+  margin-top: 18px;
+}
+
+.anitha-flex {
+  margin-left: 10px;
+  margin-top: 22px;
+}
+
+.jane-name {
+  color: #041427;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.jane-pan-num {
+  color: #041427;
+  font-size: 12px;
+  font-weight: 400;
+  margin-top: -10px;
+  /* margin-left: 2px; */
+}
+.cust-name-pan{
+  margin-top: 18px;
+}
+
+.edit-details {
+  font-weight: 700;
+  font-size: 14px;
+  color: #2791E0;
+  margin-left: -20px;
+  margin-top: 23px;
+  cursor: pointer;
+}
+
+.phone-img {
+  margin-left: 88px;
+  margin-top: 19px;
+}
+
+.edit-proposal {
+  border: 1px solid #FFFFFF;
+  width: 391px;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 10px rgba(77, 127, 174, 0.2);
+  border-radius: 24px 24px 12px 12px;
+  margin-top: 15px;
+}
+
+.cust-dtls {
+  margin-top: 29px;
+  margin-left: 32px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #7D848D;
+}
+
+.proposal-name {
+  margin-top: 15px;
+  margin-left: 32px;
+}
+
+.props-name {
+  margin-top: 15px;
+  margin-left: 32px;
+  width: 130px;
+}
+.props {
+  margin-top: 15px;
+  margin-left: 32px;
+}
+
+.aadhar {
+  display: flex;
+}
+
+.eye-img {
+  /* margin-left: 154px; */
+  /* margin-top: 20px; */
+  cursor: pointer;
+}
+.document{
+  margin-left: 7px;
+}
+.eye {
+  margin-left: 108px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.checkbox {
+  display: flex;
+  margin-top: 23px;
+}
+
+.checkbox-proceed {
+  color: #C52727;
+  font-size: 12px;
+  font-weight: 500;
+  margin-top: -10px;
+
+}
+
+.dtls-correct {
+  font-size: 16px;
+  font-weight: 700;
+  color: #8B8F9C;
+  margin-top: 8px;
+}
+
+.cont-btn {
+  color: #FFFFFF;
+  font-size: 16px;
+  font-weight: 700;
+  background: #005AAA;
+  box-shadow: inset 0px 0px 10px 6px rgba(0, 90, 170, 0.02);
+  border-radius: 12px;
+  width: 345px;
+  height: 48px;
+  margin-bottom: 5%;
+}
+
+button.btn[disabled] {
+  background: #C8DCEE;
+  border: 1px solid #C8DCEE;
+}
+
+.full-name {
+  font-size: 14px;
+  font-weight: 400;
+  color: #7D848D;
+}
+
+.name {
+  margin-top: -13px;
+  color: #041427;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.employee {
+  margin-top: -13px;
+  color: #041427;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.jpg {
+  margin-top: -13px;
+  color: #041427;
+  font-size: 14px;
+  font-weight: 700;
+  content-visibility: auto;
+}
+
+.address {
+  color: #041427;
+  font-size: 14px;
+  font-weight: 700;
+  margin-top: -10px;
+  width: 200px;
+
+}
+
+hr {
+  width: 347px;
+  margin-left: 11px;
+}
+
+.loan-successfully {
+  color: #48B16E;
+}
+
+.pdf-error {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.error-outline {
+  color: #C52727;
+  margin-top: -13px;
+  margin-left: -3px;
+}
+
+.pdf {
+  margin-left: 5px;
+}
+
+.upload-now {
+  color: #2791E0;
+  margin-top: -13px;
+  margin-left: 15%;
+  font-size: 14px;
+  font-weight: 700;
+}
+.distributor-profile{
+  width: 52px;
+  height: 51px;
+  border-radius: 50%;
+  margin-left: 13px;
+  margin-top: 12px;
+
+}
+.communication-address{
+  color: #7D848D;
+font-size: 14px;
+font-weight: 400;
+}
+.pending{
+  color: #E59510;
+font-size: 14px;
+font-weight: 700;
+}
+.section-address{
+  margin-top: 15px;
+  margin-left: 19px;
+}
+.add-details {
+  font-size: 14px;
+    font-weight: 700;
+    color: #041427;
+    margin-bottom: -2px;
+    margin-top: -10px;
+}
+.address-details {
+  font-size: 14px;
+  font-weight: 700;
+  color: #041427;
+  width: 245px;
+}

@@ -1,0 +1,112 @@
+ <!-- <div *ngIf="documentType==='aadhaarFront'">
+    <div class="container aadhar-flex">
+        <p class="aadhar">Aadhar Front</p>
+        <mat-icon class="close" (click)="closeDialog()">close</mat-icon>
+    </div>
+    <div class="img-bg">
+        <img [src]="data.imageUrl" class="uploaded-img">
+    </div>
+</div> -->
+
+
+<!-- <div *ngIf="documentType==='aadhaarBack'">
+    <div class="container aadhar-flex">
+        <p class="aadhar">Aadhaar Back</p>
+        <mat-icon class="close" (click)="closeDialog()">close</mat-icon>
+    </div>
+    <div class="img-bg">
+        <img [src]="data.imageUrl" class="uploaded-img">
+    </div>
+</div> -->
+
+
+<!-- <div *ngIf="documentType==='panFront'">
+    <div class="container aadhar-flex">
+        <p class="aadhar">PAN Front</p>
+        <mat-icon class="close" (click)="closeDialog()">close</mat-icon>
+    </div>
+    <div class="img-bg">
+        <img [src]="data.imageUrl" class="uploaded-img">
+    </div>
+</div>  -->
+
+
+<div *ngIf="documentType==='cancelledCheque'">
+    <div class="container aadhar-flex">
+        <p class="aadhar">Cancelled Cheque</p>
+        <mat-icon class="close" (click)="closeDialog()">close</mat-icon>
+    </div>
+    <div class="img-bg">
+        <img [src]="data.imageUrl" class="uploaded-img">
+    </div>
+</div>
+
+
+ <div *ngIf="documentType==='bankStatement'">
+    <div class="container aadhar-flex">
+        <p class="aadhar">Bank Statement</p>
+        <mat-icon class="close" (click)="closeDialog()">close</mat-icon>
+    </div>
+    <div class="img-bg">
+        <img [src]="data.imageUrl" class="uploaded-img">
+    </div>
+</div>
+
+
+<div *ngIf="documentType==='gst'">
+    <div class="container aadhar-flex">
+        <p class="aadhar">GST Certificate</p>
+        <mat-icon class="close" (click)="closeDialog()">close</mat-icon>
+    </div>
+    <div class="img-bg">
+        <img [src]="data.imageUrl" class="uploaded-img">
+    </div>
+</div>
+
+<div *ngIf="documentType==='incomeTax'">
+    <div class="container aadhar-flex">
+        <p class="aadhar">Income Tax Return</p>
+        <mat-icon class="close" (click)="closeDialog()">close</mat-icon>
+    </div>
+    <div class="img-bg">
+        <img [src]="data.imageUrl" class="uploaded-img">
+    </div>
+</div>
+
+<div *ngIf="documentType==='certificateOfIncorporation'">
+    <div class="container aadhar-flex">
+        <p class="incorporation">Certificate of Incorporation</p>
+        <mat-icon class="cross" (click)="closeDialog()">close</mat-icon>
+    </div>
+    <div class="img-bg">
+        <img [src]="data.imageUrl" class="uploaded-img">
+    </div>
+</div>
+
+<div *ngIf="documentType==='accCloser'">
+    <div class="moreActions">
+        <span class="wrngImg"><img src="../../assets/WarningCircle (3).svg"></span>&nbsp;
+        <span class="msgg">Account Closure</span> 
+        <mat-icon class="crosss" (click)="closeDialog()">close</mat-icon>
+    </div>
+    <div>
+        <p class="textt">You have requested for account closure. Your data will be deleted within 15 days.</p>
+    </div>
+    <div class="row mt-5  buttonRow">
+        <div class="col-6"><button class="confirmButton" (click)="onConfirm('confirmAccCloser')">Confirm</button></div>
+        <div class="col-6"><button class="cancelButton" (click)="onCancel()">Cancel</button></div>
+    </div>
+</div>
+
+<div *ngIf="documentType==='confirmAccCloser'">
+    <div class="moreActions">
+        <span class="wrngImg"><img src="../../assets/WarningCircle.svg"></span>&nbsp;
+        <span class="msgg">Account Closure</span> 
+        <mat-icon class="crosss" (click)="closeDialog()">close</mat-icon>
+    </div>
+    <div>
+        <p class="textt"> You have requested for account closure.
+            An associate will get in touch with you
+             shortly.</p>
+    </div>
+</div>

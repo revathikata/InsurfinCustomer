@@ -1,0 +1,29 @@
+<div class="menubar" *ngIf="menubar">
+    <div class="closeicon">
+        <mat-icon class="close" (click)="menuBarClose()">close</mat-icon>
+    </div>
+    <div class="menu-tag">
+        <h1>Menu</h1>
+    </div>
+    <div class="top">
+        <div class="menubar-icons" (click)="homePage()">
+            <img src="../../../assets/House.svg">
+            <p class="home-tag">Home</p>
+        </div>
+        <div class="menubar-icons" (click)="profilePage()">
+            <img src="../../../assets/User (1).svg" (click)="profile()">
+            <p class="home-tag">profile</p>
+        </div>
+        <!-- <div class="menubar-icons" (click)="myDistributor()">
+            <img src="../../../assets/AddressBook.svg" routerLink="my-distributor" class="distributor" mat-dialog-close>
+            <p class="home-tag">My distributors</p>
+        </div> -->
+        <div class="menubar-icons" (click)="openDialog()">
+            <img src="../../../assets/SignOut.svg">
+            <p class="home-tag">Sign out</p>
+        </div>
+    </div>
+    <div class="insurfin">
+        <img src="../../../assets/insurfin img (2).svg">
+    </div>
+</div>

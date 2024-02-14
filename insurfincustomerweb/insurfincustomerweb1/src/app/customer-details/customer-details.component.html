@@ -1,0 +1,321 @@
+<div class="main">
+    <div class="welcome">
+        <div class="row">
+            <div class="col-lg-6 p-0">
+                <app-side-nav-section />
+            </div>
+            <div class="col-lg-6 rightColoumn">
+                <div class="distrbtr-welcome">
+                    <div class="row mt-3">
+                        <div class="col-2">
+                            <mat-icon class="back-arrw" (click)="backArrowNavigation()">keyboard_backspace</mat-icon>
+                        </div>
+                        <div class="col-10">
+                            <p class="login" (click)="navigateBackArrow()">Login</p>
+                        </div>
+                    </div>
+
+                    <!-- <div class="edit-customer-flex">
+                        <div>
+                            <img src="../../assets/profile pic -img.png" class="distributor-profile">
+                        </div>
+                        <div class="anitha-flex">
+                            <p class="jane-name">{{selectedCustomerData.fullName}}</p>
+                            <p class="jane-pan-num" appPanMask [panMask]="{ type: 'pan', number: selectedCustomerData.panNumber }">
+                                {{ selectedCustomerData.panNumber }}
+                              </p>
+                             
+                        </div>
+                        <div>
+                            <p class="edit-details" (click)="navigateEditDetails()">Edit Details</p>
+                        </div>
+                    </div> -->
+                    <div class="row">
+                        <div class="col-2">
+                            <img class="edit-customer " src="../../assets/profile pic -img.png"
+                                class="distributor-profile">
+                        </div>
+                        <div class="col-7 cust-name-pan">
+                            <p class="jane-name">{{selectedCustomerInfo.fullName | titlecase}}</p>
+                            <p class="jane-pan-num" appPanMask [panMask]="selectedCustomerInfo.panNumber">
+                                {{selectedCustomerInfo.panNumber}}</p>
+                        </div>
+                        <div class="col-3">
+                            <p class="edit-details" (click)="navigateEditDetails()"
+                                *ngIf="!selectedCustomerData.registrationCompleted === true">Edit Details</p>
+                        </div>
+                    </div>
+                    <div class="edit-proposal container">
+                        <div>
+                            <p class="cust-dtls">CUSTOMER INFORMATION</p>
+                        </div>
+                        <div class="proposal-name">
+                            <p class="full-name">Full Name</p>
+                            <p class="name">{{selectedCustomerInfo.fullName | titlecase}}</p>
+                        </div>
+                        <div class="proposal-name">
+                            <p class="full-name">Date of Birth</p>
+                            <p class="name">{{selectedCustomerInfo.dateOfBirth}}</p>
+                        </div>
+                        <div class="proposal-name">
+                            <p class="full-name">Gender</p>
+                            <p class="name">{{selectedCustomerInfo.gender}}</p>
+                        </div>
+                        <div class="proposal-name">
+                            <p class="full-name">Phone Number</p>
+                            <p class="name">+91 {{selectedCustomerInfo.phoneNumber}}</p>
+                        </div>
+                        <div class="proposal-name">
+                            <p class="full-name">Aadhaar Number</p>
+                            <p class="name" appPanMask [panMask]="selectedCustomerInfo.aadhaarNumber">
+                                {{selectedCustomerInfo.aadhaarNumber}}</p>
+                        </div>
+                        <div class="proposal-name">
+                            <p class="full-name">PAN</p>
+                            <p class="name" appPanMask [panMask]="selectedCustomerInfo.panNumber">
+                                {{selectedCustomerInfo.panNumber}}</p>
+                        </div>
+
+                        <div>
+                            <hr>
+                        </div>
+                        <div>
+                            <p class="cust-dtls">ADDRESS</p>
+                        </div>
+                        <div class="section-address">
+                            <div class="row container">
+                                <div class="col-10">
+                                    <p class="communication-address">Communication Address</p>
+                                </div>
+                                <div class="col-2">
+                                    <p class="pending" *ngIf="selectedCustomerInfo.customerAddressDetails == null">
+                                        Pending</p>
+                                </div>
+                                <p class="add-details"
+                                    *ngIf="selectedCustomerInfo.customerAddressDetails && selectedCustomerInfo.customerAddressDetails[1]">
+                                    {{selectedCustomerInfo.customerAddressDetails ?
+                                    selectedCustomerInfo.customerAddressDetails[1].addressLine1
+                                    :''}},{{selectedCustomerInfo.customerAddressDetails[1].addressLine2}},{{selectedCustomerInfo.customerAddressDetails[1].city}},
+                                </p>
+                                <p class="address-details"
+                                    *ngIf="selectedCustomerInfo.customerAddressDetails && selectedCustomerInfo.customerAddressDetails[1]">
+                                    {{selectedCustomerInfo.customerAddressDetails[1].state}} -
+                                    {{selectedCustomerInfo.customerAddressDetails[1].pinCode}}</p>
+                            </div>
+                            <div class="row container">
+                                <div class="col-10">
+                                    <p class="communication-address">Permanent Address</p>
+                                </div>
+                                <div class="col-2">
+                                    <p class="pending" *ngIf="selectedCustomerInfo.customerAddressDetails == null">
+                                        Pending</p>
+                                </div>
+                                <p class="add-details"
+                                    *ngIf="selectedCustomerInfo.customerAddressDetails && selectedCustomerInfo.customerAddressDetails[2]">
+                                    {{selectedCustomerInfo.customerAddressDetails[2].addressLine1}},{{selectedCustomerInfo.customerAddressDetails[2].addressLine2}},{{selectedCustomerInfo.customerAddressDetails[2].city}},
+                                </p>
+                                <p class="address-details"
+                                    *ngIf="selectedCustomerInfo.customerAddressDetails && selectedCustomerInfo.customerAddressDetails[2]">
+                                    {{selectedCustomerInfo.customerAddressDetails[2].state}} -
+                                    {{selectedCustomerInfo.customerAddressDetails[2].pinCode}}</p>
+                            </div>
+                        </div>
+
+                        <!-- <div class="proposal-name"
+                            *ngIf="selectedCustomerData.customerAddressDetails && selectedCustomerData.customerAddressDetails[0]">
+                            <p class="full-name">Communication Address</p>
+                            <p class="address">{{selectedCustomerData.customerAddressDetails ?
+                                selectedCustomerData.customerAddressDetails[0].addressLine1
+                                :''}},{{selectedCustomerData.customerAddressDetails[0].addressLine2}},{{selectedCustomerData.customerAddressDetails[0].city}},
+                                {{selectedCustomerData.customerAddressDetails[0].state}} -
+                                {{selectedCustomerData.customerAddressDetails[0].pinCode}}</p>
+                        </div> -->
+                        <!-- <div class="proposal-name" *ngIf="selectedCustomerData.customerAddressDetails && selectedCustomerData.customerAddressDetails[1]">
+                            <p class="full-name">Permanent Address</p>
+                            <p class="address">
+                                {{selectedCustomerData.customerAddressDetails[1].addressLine1}},{{selectedCustomerData.customerAddressDetails[1].addressLine2}},{{selectedCustomerData.customerAddressDetails[1].city}},
+                                {{selectedCustomerData.customerAddressDetails[1].state}} -
+                                {{selectedCustomerData.customerAddressDetails[1].pinCode}}
+                            </p>
+                        </div> -->
+
+                        <div>
+                            <hr>
+                        </div>
+                        <div>
+                            <div>
+                                <p class="cust-dtls">EMPLOYMENT</p>
+                            </div>
+                            <div class="proposal-name">
+                                <p class="full-name">Employment Type</p>
+                                <p class="employee"
+                                    *ngIf=" selectedCustomerInfo.employmentDetails?.employmentType === 'SALARIEDEMPLOYEE'">
+                                    Salaried Employee</p>
+                                <p class="employee"
+                                    *ngIf="selectedCustomerInfo.employmentDetails?.employmentType === 'SELFEMPLOYEE'">
+                                    Self Employee</p>
+                            </div>
+                            <div class="proposal-name"
+                                *ngIf="selectedCustomerInfo.employmentDetails?.employmentType === 'SALARIEDEMPLOYEE'">
+                                <!-- <p class="full-name">{{ selectedCustomerInfo.employmentDetails?.employmentType === 'SALARIEDEMPLOYEE' ? 'companyName' : 'Type of employment' }}</p>
+                                <p class="employee">
+                                    {{ selectedCustomerInfo.employmentDetails?.employmentType === 'SALARIEDEMPLOYEE' ?
+                                    selectedCustomerInfo.employmentDetails?.salariedEmployeeDetails?.companyName :
+                                    selectedCustomerInfo.employmentDetails?.selfEmployeeDetails?.typeOfEmployement }}
+                                </p> -->
+                                <p class="full-name">Company Name</p>
+                                <p class="employee">
+                                    {{selectedCustomerInfo.employmentDetails?.salariedEmployeeDetails?.companyName |
+                                    titlecase}}</p>
+                            </div>
+                            <div class="proposal-name" *ngIf="selectedCustomerInfo.employmentDetails?.employmentType === 'SELFEMPLOYEE'">
+                                <p class="full-name">Type of Employment</p>
+                                <p class="employee">
+                                    {{selectedCustomerInfo.employmentDetails?.selfEmployeeDetails?.typeOfEmployement |
+                                    titlecase}}</p>
+                            </div>
+                            <div class="proposal-name">
+                                <p class="full-name">Primary Email</p>
+                                <p class="employee">
+                                    {{ selectedCustomerInfo.employmentDetails?.employmentType === 'SALARIEDEMPLOYEE' ?
+                                    selectedCustomerInfo.employmentDetails?.salariedEmployeeDetails?.primaryEmail :
+                                    selectedCustomerInfo.employmentDetails?.selfEmployeeDetails?.primaryEmail }}
+                                </p>
+                            </div>
+                            <div class="proposal-name">
+                                <p class="full-name">Secondary Email</p>
+                                <p class="employee">
+                                    {{ selectedCustomerInfo.employmentDetails?.employmentType === 'SALARIEDEMPLOYEE' ?
+                                    selectedCustomerInfo.employmentDetails?.salariedEmployeeDetails?.secondaryEmail :
+                                    selectedCustomerInfo.employmentDetails?.selfEmployeeDetails?.secondaryEmail }}
+                                </p>
+                            </div>
+                            <div class="proposal-name">
+                                <p class="full-name">{{ selectedCustomerInfo.employmentDetails?.employmentType ===
+                                    'SALARIEDEMPLOYEE' ? 'Monthly Income' : 'Annual Income' }}</p>
+                                <p class="employee">
+                                    {{ selectedCustomerInfo.employmentDetails?.employmentType === 'SALARIEDEMPLOYEE' ?
+                                    '₹' +
+                                    (selectedCustomerInfo.employmentDetails?.salariedEmployeeDetails?.monthlyIncome |
+                                    number) :
+                                    '₹' + (selectedCustomerInfo.employmentDetails?.selfEmployeeDetails?.annualIncome )}}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <hr>
+                        </div>
+                        <div>
+                            <p class="cust-dtls">KYC DOCUMENTS</p>
+                        </div>
+                        <!-- <div class="row container document">
+                            <div class="col-10">
+                                <p class="full-name">Aadhaar Front</p>
+                                <p class="jpg">{{aadharFrontImg}}</p>
+                            </div>
+                            <div class="col-2">
+                                <img class="eye-img" src="../../assets/Eye.svg" (click)="kycdocuments('aadhaarFront',aadharFronturl )">
+                            </div>
+                        </div> -->
+                        <!-- <div class="row container document">
+                            <div class="col-10">
+                                <p class="full-name">Aadhaar Back</p>
+                                <p class="jpg">{{aadharBackImg}}</p>
+                            </div>
+                            <div class="col-2">
+                                <img class="eye-img" src="../../assets/Eye.svg" (click)="kycdocuments('aadhaarBack',aadharBackurl)">
+                            </div>
+                        </div> -->
+                        <!-- <div class="row container document">
+                            <div class="col-10">
+                                <p class="full-name">PAN Front</p>
+                                <p class="jpg">{{pancardImg}}</p>
+                            </div>
+                            <div class="col-2">
+                                <img class="eye-img" src="../../assets/Eye.svg" (click)="kycdocuments('panFront' , pancardurl)">
+                            </div>
+                        </div> -->
+                        <div *ngIf="selectedCustomerInfo.employmentDetails?.employmentType === 'SALARIEDEMPLOYEE'">
+                            <!-- <div class="row container document">
+                                <div class="col-10">
+                                    <p class="full-name">Cancelled Cheque</p>
+                                    <p class="jpg"></p>
+                                </div>
+                                <div class="col-2">
+                                    <img class="eye-img" src="../../assets/Eye.svg" (click)="kycdocuments('cancelledCheque' , bankcheckurl)">
+                                    <p class="pending">Pending</p>
+                                </div>
+                            </div> -->
+                            <div class="row container document">
+                                <div class="col-10">
+                                    <p class="full-name">Bank Statement</p>
+                                    <p class="jpg" *ngIf="selectedCustomerInfo.userDocuments !== null">{{imgbank1}}</p>
+                                </div>
+                                <div class="col-2">
+                                    <!-- <img class="eye-img" src="../../assets/Eye.svg" (click)="kycdocuments('bankStatement' , bankdocurl)"> -->
+                                    <img src="../../assets/Eye.svg" class="eye-show"
+                                        *ngIf="selectedCustomerInfo.userDocuments !== null"
+                                        (click)="kycdocuments('cancelledCheque', imgdocurl)">
+                                    <p class="pending" *ngIf = "selectedCustomerInfo.userDocuments == null">Pending</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="selectedCustomerInfo.employmentDetails?.employmentType === 'SELFEMPLOYEE'">
+                            <div class="row container document">
+                                <div class="col-10">
+                                    <p class="full-name">Bank Statement</p>
+                                    <p class="jpg" *ngIf="selectedCustomerInfo.userDocuments !== null">{{imgdocument1}}</p>
+                                </div>
+                                <div class="col-2">
+                                    <!-- <img class="eye-img" src="../../assets/Eye.svg" (click)="kycdocuments('gst' , gsturl)"> -->
+                                    <img src="../../assets/Eye.svg" class="eye-show"  *ngIf="selectedCustomerInfo.userDocuments !== null"
+                       (click)="kycdocuments('gst', gstdocurl)">
+                                    <p class="pending" *ngIf = "selectedCustomerInfo.userDocuments == null">Pending</p>
+                                </div>
+                            </div>
+                            <div class="row container document">
+                                <div class="col-10">
+                                    <p class="full-name">Income Tax Return</p>
+                                    <p class="jpg" *ngIf="selectedCustomerInfo.userDocuments !== null"> {{ imgdocument2}}</p>
+                                </div>
+                                <div class="col-2">
+                                    <!-- <img class="eye-img" src="../../assets/Eye.svg" (click)="kycdocuments('incometax' , Itrurl)"> -->
+                                    <img src="../../assets/Eye.svg" class="eye-show"  *ngIf="selectedCustomerInfo.userDocuments !== null"
+                                    (click)="kycdocuments('incomeTax', certUrl)">
+                                    <p class="pending"  *ngIf = "selectedCustomerInfo.userDocuments == null">Pending</p>
+                                </div>
+                            </div>
+                            <div class="row container document">
+                                <div class="col-10">
+                                    <p class="full-name">Certificate of Incorporation</p>
+                                    <p class="jpg" *ngIf="selectedCustomerInfo.userDocuments !== null"> {{ imgdocument3 }}</p>
+                                </div>
+                                <div class="col-2">
+                                    <!-- <img class="eye-img" src="../../assets/Eye.svg" (click)="kycdocuments('certificateincorporation' , certurl)"> -->
+                                    <img src="../../assets/Eye.svg" class="eye-show"  *ngIf="selectedCustomerInfo.userDocuments !== null"
+                        (click)="kycdocuments('certificateOfIncorporation', Itrdocurl)">
+                                    <p class="pending" *ngIf = "selectedCustomerInfo.userDocuments == null">Pending</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="checkbox container">
+                            <div class="mat-box">
+                                <mat-checkbox class="checkInp" [(ngModel)]="box" color="primary"></mat-checkbox>
+                            </div>
+                            <div class="confirm -dtls">
+                                <p class="dtls-correct">I confirm that all my details are correct</p>
+                                <p class="checkbox-proceed" *ngIf="!box">Please mark the checkbox to proceed</p>
+                            </div>
+                        </div>
+                        <div class="container mt-3">
+                            <button class="btn btn-primary cont-btn" [disabled]="!box"
+                                (click)="validateCustomerLocation()">Continue</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

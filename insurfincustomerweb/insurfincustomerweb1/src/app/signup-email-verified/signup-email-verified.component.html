@@ -1,0 +1,59 @@
+<div class="main">
+    <div class="welcome">
+        <div class="row">
+            <div class="col-lg-6 p-0">
+                <app-side-nav-section />
+            </div>
+
+            <div class="col-lg-6 rightcoloumn">
+                <div class="email-id-verified" *ngIf="emailVerify">
+                    <div class="emailVerified" >
+                        <div class="container mt-5">
+                            <img src="../../assets/email-verified-img.svg" class="email-verified">
+                        </div>
+                        <div class="container mt-5">
+                            <p class="reset-password">Email verified!</p>
+                            <p class="verify-mobile-num">Please enter and verify your mobile number <br>
+                                to proceed ahead</p>
+
+                        </div>
+                        <!-- <div class="btn"> -->
+                        <button class="btn btn-primary verification-btn" (click)="continue()">Continue</button>
+                        <!-- </div> -->
+                    </div>
+                </div>
+
+                <div class="phoneVerify" >
+                        <div class="distrbtr-welcome" *ngIf="!emailVerify">
+                            <div class="section">
+                                <div>
+                                    <mat-icon class="leftArrw">keyboard_backspace</mat-icon>
+                                    <p class="verify">Verify phone number</p>
+                                </div>
+                                <div class="edit">
+                                    <p class="otp-mb">We sent the OTP to <b class="number">+91 9898787898</b></p>
+                                    <img class="pencil" src="../../assets/PencilSimple.svg" (click)="initialSection()">
+                                </div>
+                                <div>
+                                    <p class="the-code">The code will be valid for 15 minutes</p>
+                                    <p class="code">Didn't get the code? <span (click)="sendAgain()"
+                                            [ngClass]="{'disabled': isDisabled, 'sendColor': !isDisabled}">Send again</span></p>
+                                </div>
+                                <div class="otp-input mt-5">
+                                    <ngx-otp-input [config]="otpInputConfig" (otpChange)="handleOtp($event)"
+                                        (fill)="handleFill($event)">
+                                    </ngx-otp-input>
+                                </div>
+                                <div class="mt-2">
+                                    <!-- <small class="errorMessage" *ngIf="errormsg"> {{errormsg}}</small> -->
+                                    <button class="btn btn-primary otp-btn" [disabled]="!otpfill"
+                                        (click)="phoneVerified()">Continue</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>

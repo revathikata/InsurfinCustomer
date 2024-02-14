@@ -1,0 +1,626 @@
+<div class="main">
+  <div class="row">
+    <div class="col-lg-6 p-0">
+      <app-side-nav-section />
+    </div>
+
+    <div class="col-lg-6 rightColoumn">
+      <div class="distrbtr-welcome">
+        <div class="review-details" *ngIf="reviewPropsalDetails">
+          <div class="row">
+            <div class="col-2">
+              <mat-icon class="back-arrw" (click)="navigateToHome()">keyboard_backspace</mat-icon>
+            </div>
+            <div class="col-8">
+              <p class="pol-dtls" (click)="navigateToLogin()">Home</p>
+            </div>
+            <div class="col-2 bottomsheet-icon">
+              <!-- <mat-icon class="vert" mat-raised-button (click)="openBottomSheet()">more_vert</mat-icon> -->
+              <img src="../../../assets/DotsThreeOutlineVertical.svg" alt="" (click)="openBottomSheet()">
+            </div>
+          </div>
+
+          <div class="container">
+            <div class="row">
+              <div class="col-2">
+                <img class="edit-customer " src="../../assets/profile pic -img.png" class="distributor-profile">
+              </div>
+              <div class="col-9 policy-silver">
+                <p class="customer-name">{{proposalDetails?.proposalDetailsDto.customerName|titlecase}}</p>
+                <p class="policy">{{proposalDetails?.proposalDetailsDto.productName}}</p>
+                <p class="wait-docs">{{proposalDetails?.proposalDetailsDto.displayStatus}}</p>
+              </div>
+            </div>
+            <div class="edit-proposal container">
+              <div>
+                <p class="prpsl-dtls">PROPOSAL DETAILS</p>
+              </div>
+              <div class="proposal-name">
+                <p class="Proposer-name">Insurer</p>
+                <p class="ani-name">{{proposalDetails?.insurerDetailsDto.insurerName}}</p>
+              </div>
+              <div class="proposal-name">
+                <p class="Proposer-name">Proposer Name</p>
+                <p class="ani-name">{{proposalDetails?.proposalDetailsDto.customerName|titlecase}}</p>
+              </div>
+              <div class="proposal-name">
+                <p class="Proposer-name">Product Category</p>
+                <p class="ani-name">{{proposalDetails?.proposalDetailsDto.productCategory}}</p>
+              </div>
+              <div class="proposal-name">
+                <p class="Proposer-name">Product Type</p>
+                <p class="ani-name">{{proposalDetails?.proposalDetailsDto.productTypeName}}</p>
+              </div>
+              <div class="proposal-name">
+                <p class="Proposer-name">Proposal Number</p>
+                <p class="ani-name">{{proposalDetails?.proposalDetailsDto.proposalNumber}}</p>
+              </div>
+              <div class="proposal-name">
+                <p class="Proposer-name">Date of Proposal</p>
+                <p class="ani-name">{{ proposalDetails?.proposalDetailsDto.dateOfProposal }}</p>
+              </div>
+              <div class="proposal-name">
+                <p class="Proposer-name">Policy Tenure</p>
+                <p class="ani-name">{{proposalDetails?.proposalDetailsDto.policyTenure}}</p>
+              </div>
+              <!-- <div class="proposal-name">
+                                    <p class="Proposer-name">Product Category</p>
+                                    <p class="ani-name">5</p>
+                                </div> -->
+              <div class="proposal-name">
+                <p class="Proposer-name">Policy Premium Amount (₹)</p>
+                <p class="ani-name">{{proposalDetails?.proposalDetailsDto.premiumAmount | number}}</p>
+              </div>
+              <div class="proposal-name">
+                <p class="Proposer-name">Loan Amount (₹)</p>
+                <p class="ani-name">{{proposalDetails?.proposalDetailsDto.policyAmount | number}}</p>
+              </div>
+
+              <!-- <div>
+                <hr>
+              </div> -->
+
+              <!-- <mat-accordion>
+                <mat-expansion-panel class="insurer-details" [expanded]="true">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      <div>
+                        <div class="adress-flex">
+                          <div class="section">
+                            <p class="insurer-dtls">INSURER DETAILS</p>
+ 
+                          </div>
+                        </div>
+ 
+                      </div>
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+ 
+                  <div class="more-flex">
+                    <div class="proposal-name">
+                      <p class="Prop-name">Insurer</p>
+                      <p class="proposal-dtls">{{proposalDetails?.insurerDetailsDto.insurerName}}</p>
+                    </div>
+                    <div class="proposal-name">
+                      <p class="Prop-name">Phone Number</p>
+                      <p class="proposal-dtls"><span class="nine-one">+91</span>
+                        {{proposalDetails?.insurerDetailsDto.phoneNumber}}</p>
+                    </div>
+                    <div class="proposal-name">
+                      <p class="Prop-name">Email</p>
+                      <p class="proposal-dtls">{{proposalDetails?.insurerDetailsDto.email}}</p>
+                    </div>
+                    <div class="proposal-name">
+                      <p class="Prop-name">Address</p>
+                      <p class="proposal-dtls">{{proposalDetails?.insurerDetailsDto.address}}</p>
+                    </div>
+                  </div>
+                </mat-expansion-panel>
+              </mat-accordion> -->
+              <!-- <div class="proposal-name">
+                                    <p class="Proposer-name">Date</p>
+                                    <p class="ani-name">02.04.2023</p>
+                                </div> -->
+              <div>
+                <hr>
+              </div>
+
+              <mat-accordion>
+                <mat-expansion-panel class="insurer-details" [expanded]="">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      <div>
+                        <div class="adress-flex">
+                          <div class="section">
+                            <p class="insurer-dtls">INSURER BANK ACCOUNT DETAILS</p>
+                            <!-- <p class="prop-name">Virtual Account</p> -->
+
+                          </div>
+                        </div>
+
+                      </div>
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+
+                  <div class="more-flex">
+                    <div class="proposal-name">
+
+                      <!-- <p class="Prop-name">Virtual Account</p> -->
+                      <p class="Prop-name">Account Name</p>
+                      <p class="proposal-dtls">{{proposalDetails?.insurerDetailsDto?.insurerName}}
+                      </p>
+                    </div>
+                    <div class="proposal-name">
+                      <p class="Prop-name">Bank Name</p>
+                      <p class="proposal-dtls">{{proposalDetails?.proposalDetailsDto?.bankAccountDetails?.bankName}}</p>
+                    </div>
+                    <div class="proposal-name">
+                      <p class="Prop-name">Account Number</p>
+                      <p class="proposal-dtls">
+                        {{proposalDetails?.proposalDetailsDto?.bankAccountDetails?.accountNumber}}</p>
+                    </div>
+                    <div class="proposal-name">
+                      <p class="Prop-name">IFSC</p>
+                      <p class="proposal-dtls">{{proposalDetails?.proposalDetailsDto?.bankAccountDetails?.ifscCode}}</p>
+                    </div>
+                  </div>
+                </mat-expansion-panel>
+              </mat-accordion>
+              <div>
+                <hr class="line-hr">
+              </div>
+              <div class="row">
+                <div class="col-7">
+                  <p class="prpsl-dtls-doc">DOCUMENTATION</p>
+                </div>
+                <div class="col-5" *ngIf="proposalDetails?.isdocumentspending === true">
+                  <p class="now-upload-doc" (click)="uploadNow()">Upload Now</p>
+                </div>
+              </div>
+              <!-- <div class="proposal-name">
+                <p class="Proposer-name">Aadhaar Front</p>
+                <p class="pending" *ngIf="proposalDetails?.isdocumentspending === true">Pending</p>
+                <p class="documentcomplete" *ngIf="proposalDetails?.isdocumentspending === false">Completed</p>
+              </div>
+              <div class="proposal-name">
+                <p class="Proposer-name">Aadhaar Back</p>
+                <p class="pending" *ngIf="proposalDetails?.isdocumentspending === true">Pending</p>
+                <p class="documentcomplete" *ngIf="proposalDetails?.isdocumentspending === false">Completed</p>
+              </div>
+              <div class="proposal-name">
+                <p class="Proposer-name">PAN Front</p>
+                <p class="pending" *ngIf="proposalDetails?.isdocumentspending === true">Pending</p>
+                <p class="documentcomplete" *ngIf="proposalDetails?.isdocumentspending === false">Completed</p>
+              </div>
+              <div *ngIf="proposalDetails?.proposalDetailsDto.employmentType === 'SALARIEDEMPLOYEE'">
+              <div class="proposal-name">
+                <p class="Proposer-name">Cancelled Cheque</p>
+                <p class="pending" *ngIf="proposalDetails?.isdocumentspending === true">Pending</p>
+                <p class="documentcomplete" *ngIf="proposalDetails?.isdocumentspending === false">Completed</p>
+              </div>
+              <div class="proposal-name">
+                <p class="Proposer-name">Bank Statement</p>
+                <p class="pending" *ngIf="proposalDetails?.isdocumentspending === true">Pending</p>
+                <p class="documentcomplete" *ngIf="proposalDetails?.isdocumentspending === false">Completed</p>
+              </div>
+            </div>
+              <div class="selfEmployee" *ngIf="proposalDetails?.proposalDetailsDto.employmentType === 'SELFEMPLOYEE'">
+              <div class="proposal-name">
+                <p class="Proposer-name">GST Certificate</p>
+                <p class="pending" *ngIf="proposalDetails?.isdocumentspending === true">Pending</p>
+                <p class="documentcomplete" *ngIf="proposalDetails?.isdocumentspending === false">Completed</p>
+              </div>
+              <div class="proposal-name">
+                <p class="Proposer-name">Income Tax</p>
+                <p class="pending" *ngIf="proposalDetails?.isdocumentspending === true">Pending</p>
+                <p class="documentcomplete" *ngIf="proposalDetails?.isdocumentspending === false">Completed</p>
+              </div>
+              <div class="proposal-name">
+                <p class="Proposer-name">Incorporate Certificate</p>
+                <p class="pending" *ngIf="proposalDetails?.isdocumentspending === true">Pending</p>
+                <p class="documentcomplete" *ngIf="proposalDetails?.isdocumentspending === false">Completed</p>
+              </div>
+            </div>
+              <div class="row">
+                <div class="col-2">
+                  <mat-checkbox class="example-margin checkInp" color="primary" [(ngModel)]="checkBox"></mat-checkbox>
+                </div>
+                <div class="col-10">
+                  <p class="agree">By tapping Accept Proposal, I’ve read and agreed to the <b class="terms">Terms of
+                      Service, Privacy
+                      Policy, Insurer Payment Authorisation Letter, Insurer Policy Action Initiation Letter</b> & <b
+                      class="terms">Lender
+                      Authorisation Letter</b></p>
+                </div>
+              </div> -->
+
+              <div>
+                <div class="section container">
+                  <p class="documentHeaders">Pan Number*</p>
+                  <div class="aadhaarDoccument">{{proposalDetails?.proposalDetailsDto.panNumber}}</div>
+                  <small class="verifiedText">PAN number verified <img
+                      src="../../../assets/CheckCircle (1).png"></small>
+                </div>
+                <div class="section container">
+                  <p class="documentHeaders">Aadhaar Number*</p>
+                  <div class="aadhaarDoccument">{{proposalDetails?.proposalDetailsDto.aadhaarNumber}}</div>
+                  <small class="verifiedText">Aadhaar number verified <img
+                      src="../../../assets/CheckCircle (1).png"></small>
+                </div>
+                  <div class="bankDoccument mt-2" *ngIf="proposalDetails?.proposalDetailsDto.employmentType === 'SALARIEDEMPLOYEE'">
+                    <small >{{bankImgName}}</small> 
+                    <img src="../../../assets/CheckCircle (1).png">
+                  </div>
+                <div class="document container"
+                  *ngIf="proposalDetails?.proposalDetailsDto.employmentType === 'SELFEMPLOYEE'">
+                  <div class="bankDoccumentt mt-2">
+                    <small>{{gstImgName}}<img
+                        src="../../../assets/CheckCircle (1).png"></small>
+                  </div>
+                  <div class="bankDoccumentt mt-2">
+                    <small>{{ItrNameImg}}<img
+                        src="../../../assets/CheckCircle (1).png"></small>
+                  </div>
+                  <div class="bankDoccumentt mt-2">
+                    <small>{{IncorporateImg}}<img
+                        src="../../../assets/CheckCircle (1).png"></small>
+
+                  </div>
+                </div>
+                <div class="row LetterAlignments" *ngIf="viewProposal">
+                  <div class="col-2">
+                    <mat-checkbox class="example-margin checkInp" color="primary" [(ngModel)]="checkBox1"
+                      [disabled]="!checkBox1"></mat-checkbox>
+                  </div>
+                  <div class="col-10">
+                    <p class="agree">By tapping Accept Proposal, I’ve read <br> and agreed to the<b class="terms"
+                        (click)="authenticationLetter('div1')"> Insurer Payment <br>Authorisation Letter</b>
+                    </p>
+                  </div>
+                </div>
+
+                <div class="row" *ngIf="viewProposal">
+                  <div class="col-2">
+                    <mat-checkbox class="example-margin checkInp" color="primary" [(ngModel)]="checkBox2" [disabled]="!checkBox2"></mat-checkbox>
+                  </div>
+                  <div class="col-10">
+                    <p class="agree">By tapping Accept Proposal, I’ve read <br> and agreed to the <b class="terms"(click)="authenticationLetter('div2')">Insurer Policy Action <br> Initiation Letter</b></p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row"  *ngIf="viewProposal">
+                <div class="col-2">
+                  <mat-checkbox class="example-margin checkInp" color="primary" [(ngModel)]="checkBox3"
+                    [disabled]="!checkBox3"></mat-checkbox>
+                </div>
+                <div class="col-10">
+                  <p class="agree">By tapping Accept Proposal, I’ve read <br>and agreed to the <b class="terms"
+                    (click)="authenticationLetter('div3')">Lender Authorisation<br> Letter</b></p>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="mt-5 mb-3"  *ngIf="viewProposal">
+              <button class="btn btn-primary acceptProposal-btn" (click)="acceptProposal()"
+                [disabled]="(!checkBox1 || !checkBox2 || !checkBox3)">Accept Proposal</button>
+            </div>
+            <div class="mt-3 container get-in-touch"  *ngIf="viewProposal">
+              <span>Got a doubt about this?</span>
+              <span class="get-touch" (click)="getIntouch(proposalDetails)">Get in touch</span>
+            </div>
+            <div>
+              <span *ngIf="tooltip" id="tooltip">{{tooltip}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- document pending section -->
+      <div class="customer-proposal" *ngIf="pendingDocments">
+        <!-- <div class="morevert-flex">
+            <div>
+              <mat-icon class="backspace" (click)="proposalBack()">keyboard_backspace</mat-icon></div>
+            <div>
+              <p class="personal-details">Proposal Details</p>
+            </div>
+          </div> -->
+        <div class="row mt-3">
+          <div class="col-2">
+            <mat-icon class="backspace" (click)="proposalBack()">keyboard_backspace</mat-icon>
+          </div>
+          <div class="col-7">
+            <p class="personal-details">Proposal Details</p>
+          </div>
+          <div class="col-3">
+            <mat-icon class="vert" mat-raised-button (click)="openBottomSheet()">more_vert</mat-icon>
+          </div>
+        </div>
+        <!-- <div class="profile">
+              <div class="anitha-profile">
+                <img src="../../assets/profile pic -img.png" class="distributors-profile">
+              </div>
+              <div class="profile-details">
+ 
+                <p class="mishra">
+                  {{proposalDetails?.proposalDetailsDto.customerName}}
+                </p>
+                <p class="Number" [panMask]="proposalDetails?.proposalDetailsDto.panNumber" appPanMask>
+                  {{proposalDetails?.proposalDetailsDto.panNumber}}
+                </p>
+ 
+              </div>
+            </div> -->
+        <div class="review-proposal-dtls">
+          <div class="row mt-3">
+            <div class="col-3">
+              <img src="../../assets/profile pic -img.png" class="distributors-profile">
+            </div>
+            <div class="col-9 custname-pan">
+              <p class="cust-name">{{proposalDetails?.proposalDetailsDto.customerName}}</p>
+              <p class="Pan-Number" [panMask]="proposalDetails?.proposalDetailsDto.panNumber" appPanMask>
+                {{proposalDetails?.proposalDetailsDto.panNumber}}</p>
+            </div>
+            <!-- <div class="col-2">
+                  <mat-icon class="vert" mat-raised-button (click)="openBottomSheet()">more_vert</mat-icon>
+                </div> -->
+          </div>
+        </div>
+
+        <!-- <mat-icon class="vert" mat-raised-button (click)="openBottomSheet()">more_vert</mat-icon> -->
+        <!-- <input type="file" #fileInput style="display: none;" (change)="onFileSelected($event)"> -->
+
+        <div class="uploadFiles container">
+          <div class="document-flex">
+            <p class="document">DOCUMENTATION</p>
+            <p class="pdf">Only pdf, jpg and png allowed [Max: 25mb]</p>
+          </div>
+          <hr>
+          <div class="salarydocuments"
+            *ngIf="proposalDetails?.proposalDetailsDto.employmentType === 'SALARIEDEMPLOYEE'">
+            <form [formGroup]="salaryForm">
+              <div class="adharinfo">
+                <label class="kyc-label">Aadhaar info</label>
+              </div>
+              <div class="container fileupload"
+                [ngClass]="imgname ? 'uploaded' : !aadharFront ? 'fileupload' : 'notupload'" (click)="onAadhaarFront()">
+                <label class="uploadlabel-Added">
+                  <input type="file" class="form-control uploadimg" #input id="uploadInp"
+                    placeholder="Upload Aadhaar front" (change)="AdharFrontFile($event)" formControlName="adharfrontimg"
+                    accept="application/pdf,image/png,image/jpeg">
+                  <div class="inputimgName d-flex">
+                    <p for="uploadInp" class="imguploadText" *ngIf="!imgname">Upload Aadhaar front</p>
+                    <p #input id="uploadInp" class="afteruploaded" *ngIf="imgname">{{imgname}}</p>
+                    <img class="checkcircle" *ngIf="imgname" src="../../assets/CheckCircle.svg">
+                    <img class="imgcls" *ngIf="!imgname" src="../../assets/UploadImg.svg" alt="">
+                    <img class="trash" (click)="removeAadharFront($event)" src="../../assets/Trash.svg" *ngIf="imgname"
+                      alt="">
+                  </div>
+
+                </label>
+              </div>
+              <div class="container fileupload"
+                [ngClass]="imgback ? 'uploaded' : !aadharBack ? 'fileupload' : 'notupload'" (click)="onAadhaarBack()">
+                <label class="uploadlabel-Added">
+                  <input type="file" class="form-control uploadimg" #input id="uploadback"
+                    placeholder="Upload Aadhaar back" (change)="AdharBackFile($event)" formControlName="adharbackimg"
+                    accept="application/pdf,image/png,image/jpeg">
+                  <div class="inputimgName d-flex">
+                    <p for="uploadback" class="imguploadText" *ngIf="!imgback">Upload Aadhaar back</p>
+                    <p #input id="uploadback" class="afteruploaded" *ngIf="imgback">{{imgback}}</p>
+                    <img class="checkcircle" *ngIf="imgback" src="../../assets/CheckCircle.svg">
+                    <img class="imgcls" *ngIf="!imgback" src="../../assets/UploadImg.svg" alt="">
+                    <img class="trash" (click)="removeAadharBack($event)" src="../../assets/Trash.svg" *ngIf="imgback"
+                      alt="">
+                  </div>
+
+                </label>
+              </div>
+              <div class="hrr">
+                <hr />
+              </div>
+              <div class="adharinfo">
+                <label class="kyc-label">PAN info</label>
+              </div>
+              <div class="container fileupload" [ngClass]="imgbpan ? 'uploaded' : !panCard ? 'fileupload' : 'notupload'"
+                (click)="onPanCard()">
+                <label class="uploadlabel-Added">
+                  <input type="file" class="form-control uploadimg" #input id="uploadpan" placeholder="Upload PAN Front"
+                    (change)="PanFrontFile($event)" formControlName="pancardimg"
+                    accept="application/pdf,image/png,image/jpeg">
+                  <div class="inputimgName d-flex">
+                    <p for="uploadpan" class="imguploadText" *ngIf="!imgbpan">Upload Pan front</p>
+                    <p #input id="uploadpan" class="afteruploaded" *ngIf="imgbpan">{{imgbpan}}</p>
+                    <img class="checkcircle" *ngIf="imgbpan" src="../../assets/CheckCircle.svg">
+                    <img class="imgcls" *ngIf="!imgbpan" src="../../assets/UploadImg.svg" alt="">
+                    <img class="trash" (click)="removePan($event)" src="../../assets/Trash.svg" *ngIf="imgbpan" alt="">
+                  </div>
+
+                </label>
+              </div>
+              <div class="hrr">
+                <hr />
+              </div>
+
+              <div class="adharinfo">
+                <label class="kyc-label">Bank details</label>
+              </div>
+              <div class="container fileupload"
+                [ngClass]="imgbank1 ? 'uploaded' : !cancelCheque ? 'fileupload' : 'notupload'"
+                (click)="onCancelCheque()">
+                <label class="uploadlabel-Added">
+                  <input type="file" class="form-control uploadimg" #input id="uploadbank1"
+                    placeholder="Upload bank Details" (change)="BankdetailsCheque($event)"
+                    formControlName="cancelchequeimg" accept="application/pdf,image/png,image/jpeg">
+                  <div class="inputimgName d-flex">
+                    <p for="uploadbank1" class="imguploadText" *ngIf="!imgbank1">Upload cancelled cheque</p>
+                    <p #input id="uploadbank1" class="afteruploaded" *ngIf="imgbank1">{{imgbank1}}</p>
+                    <img class="checkcircle" *ngIf="imgbank1" src="../../assets/CheckCircle.svg">
+                    <img class="imgcls" *ngIf="!imgbank1" src="../../assets/UploadImg.svg" alt="">
+                    <img class="trash" (click)="removeCancelCheque($event)" src="../../assets/Trash.svg"
+                      *ngIf="imgbank1" alt="">
+                  </div>
+
+                </label>
+              </div>
+              <div class="container fileupload"
+                [ngClass]="imgbank2 ? 'uploaded' : !bankStatement ? 'fileupload' : 'notupload'"
+                (click)="onBankStatement()">
+                <label class="uploadlabel-Added">
+                  <input type="file" class="form-control uploadimg" #input id="uploadbank2"
+                    placeholder="Upload PAN Front" (change)="BankdetailStatement($event)"
+                    formControlName="bankstatementimg" accept="application/pdf,image/png,image/jpeg">
+                  <div class="inputimgName d-flex">
+                    <p for="uploadbank2" class="imguploadText" *ngIf="!imgbank2">Upload bank statement </p>
+                    <p #input id="uploadbank2" class="afteruploaded" *ngIf="imgbank2">{{imgbank2}}</p>
+                    <img class="checkcircle" *ngIf="imgbank2" src="../../assets/CheckCircle.svg">
+                    <img class="imgcls" *ngIf="!imgbank2" src="../../assets/UploadImg.svg" alt="">
+                    <img class="trash" (click)="removeBankStatement($event)" src="../../assets/Trash.svg"
+                      *ngIf="imgbank2" alt="">
+                  </div>
+
+                </label>
+              </div>
+
+              <div class="mb-3 mt-5">
+                <button class="btn btn-primary kyc-Btn" (click)="salaryContinue()"
+                  [disabled]="!salaryForm.valid">Done</button>
+              </div>
+            </form>
+          </div>
+          <div class="salarydocuments" *ngIf="proposalDetails?.proposalDetailsDto.employmentType === 'SELFEMPLOYEE'">
+            <form [formGroup]="selfForm">
+              <div class="adharinfo">
+                <label class="kyc-label">Aadhaar info</label>
+              </div>
+              <div class="container fileupload"
+                [ngClass]="imgname ? 'uploaded' : !aadharFront ? 'fileupload' : 'notupload'" (click)="onAadhaarFront()">
+                <label class="uploadlabel-Added">
+                  <input type="file" class="form-control uploadimg" #input id="uploadInp"
+                    placeholder="Upload Aadhaar front" (change)="AdharFrontFile($event)" formControlName="adharfrontimg"
+                    accept="application/pdf,image/png,image/jpeg">
+                  <div class="inputimgName d-flex">
+                    <p for="uploadInp" class="imguploadText" *ngIf="!imgname">Upload Aadhaar front</p>
+                    <p #input id="uploadInp" class="afteruploaded" *ngIf="imgname">{{imgname}}</p>
+                    <img class="checkcircle" *ngIf="imgname" src="../../assets/CheckCircle.svg">
+                    <img class="imgcls" *ngIf="!imgname" src="../../assets/UploadImg.svg" alt="">
+                    <img class="trash" (click)="removeAadharFront($event)" src="../../assets/Trash.svg" *ngIf="imgname"
+                      alt="">
+                  </div>
+
+                </label>
+              </div>
+              <div class="container fileupload"
+                [ngClass]="imgback ? 'uploaded' : !aadharBack ? 'fileupload' : 'notupload'" (click)="onAadhaarBack()">
+                <label class="uploadlabel-Added">
+                  <input type="file" class="form-control uploadimg" #input id="uploadback"
+                    placeholder="Upload Aadhaar back" (change)="AdharBackFile($event)" formControlName="adharbackimg"
+                    accept="application/pdf,image/png,image/jpeg">
+                  <div class="inputimgName d-flex">
+                    <p for="uploadback" class="imguploadText" *ngIf="!imgback">Upload Aadhaar Back</p>
+                    <p #input id="uploadback" class="afteruploaded" *ngIf="imgback">{{imgback}}</p>
+                    <img class="checkcircle" *ngIf="imgback" src="../../assets/CheckCircle.svg">
+                    <img class="imgcls" *ngIf="!imgback" src="../../assets/UploadImg.svg" alt="">
+                    <img class="trash" (click)="removeAadharBack($event)" src="../../assets/Trash.svg" *ngIf="imgback"
+                      alt="">
+                  </div>
+
+                </label>
+              </div>
+              <div class="hrr">
+                <hr />
+              </div>
+              <div class="adharinfo">
+                <label class="kyc-label">PAN info</label>
+              </div>
+              <div class="container fileupload" [ngClass]="imgbpan ? 'uploaded' : !panCard ? 'fileupload' : 'notupload'"
+                (click)="onPanCard()">
+                <label class="uploadlabel-Added">
+                  <input type="file" class="form-control uploadimg" #input id="uploadpan" placeholder="Upload PAN Front"
+                    (change)="PanFrontFile($event)" formControlName="pancardimg"
+                    accept="application/pdf,image/png,image/jpeg">
+                  <div class="inputimgName d-flex">
+                    <p for="uploadpan" class="imguploadText" *ngIf="!imgbpan">Upload PAN Front</p>
+                    <p #input id="uploadpan" class="afteruploaded" *ngIf="imgbpan">{{imgbpan}}</p>
+                    <img class="checkcircle" *ngIf="imgbpan" src="../../assets/CheckCircle.svg">
+                    <img class="imgcls" *ngIf="!imgbpan" src="../../assets/UploadImg.svg" alt="">
+                    <img class="trash" (click)="removePan($event)" src="../../assets/Trash.svg" *ngIf="imgbpan" alt="">
+                  </div>
+
+                </label>
+              </div>
+              <div class="hrr">
+                <hr />
+              </div>
+              <div class="adharinfo">
+                <label class="kyc-label">Company documents</label>
+              </div>
+              <div class="container fileupload"
+                [ngClass]="imgdocument1 ? 'uploaded' : !gstCertificate ? 'fileupload' : 'notupload'" (click)="onGst()">
+                <label class="uploadlabel-Added">
+                  <input type="file" class="form-control uploadimg" #input id="uploadocument1"
+                    placeholder="Upload bank Details" (change)="uploadGstCertificate($event)"
+                    formControlName="gstcertificateimg" accept="application/pdf,image/png,image/jpeg">
+                  <div class="inputimgName d-flex">
+                    <p for="uploadocument1" class="imguploadText" *ngIf="!imgdocument1">Upload GST certificate</p>
+                    <p #input id="uploadocument1" class="afteruploaded" *ngIf="imgdocument1">{{imgdocument1}}</p>
+                    <img class="checkcircle" *ngIf="imgdocument1" src="../../assets/CheckCircle.svg">
+                    <img class="imgcls" *ngIf="!imgdocument1" src="../../assets/UploadImg.svg" alt="">
+                    <img class="trash" (click)="removeGst($event)" src="../../assets/Trash.svg" *ngIf="imgdocument1"
+                      alt="">
+                  </div>
+
+                </label>
+              </div>
+              <div class="container fileupload"
+                [ngClass]="imgdocument2 ? 'uploaded' : !incomeTax ? 'fileupload' : 'notupload'" (click)="onIncome()">
+                <label class="uploadlabel-Added">
+                  <input type="file" class="form-control uploadimg" #input id="uploadocuments2"
+                    placeholder="Upload PAN Front" (change)="uploadIncomeTax($event)" formControlName="incometaximg"
+                    accept="application/pdf,image/png,image/jpeg">
+                  <div class="inputimgName d-flex">
+                    <p for="uploadocuments2" class="imguploadText" *ngIf="!imgdocument2">Upload income tax return
+                    </p>
+                    <p #input id="uploadocuments2" class="afteruploaded" *ngIf="imgdocument2">{{imgdocument2}}</p>
+                    <img class="checkcircle" *ngIf="imgdocument2" src="../../assets/CheckCircle.svg">
+                    <img class="imgcls" *ngIf="!imgdocument2" src="../../assets/UploadImg.svg" alt="">
+                    <img class="trash" (click)="removeIncome($event)" src="../../assets/Trash.svg" *ngIf="imgdocument2"
+                      alt="">
+                  </div>
+
+                </label>
+              </div>
+              <div class="container fileupload"
+                [ngClass]="imgdocument3 ? 'uploaded' : !incorporation ? 'fileupload' : 'notupload'"
+                (click)="onIncorporation()">
+                <label class="uploadlabel-Added">
+                  <input type="file" class="form-control uploadimg" #input id="uploadocuments2"
+                    placeholder="Upload PAN Front" (change)="uploadIncorporate($event)"
+                    formControlName="incorporationimg" accept="application/pdf,image/png,image/jpeg">
+                  <div class="inputimgName d-flex">
+                    <p for="uploadocuments3" class="imguploadText" *ngIf="!imgdocument3">Upload certificate of
+                      incorporation </p>
+                    <p #input id="uploadocuments3" class="afteruploaded" *ngIf="imgdocument3">{{imgdocument3}}</p>
+                    <img class="checkcircle" *ngIf="imgdocument3" src="../../assets/CheckCircle.svg">
+                    <img class="imgcls" *ngIf="!imgdocument3" src="../../assets/UploadImg.svg" alt="">
+                    <img class="trash" (click)="removeIncorporation($event)" src="../../assets/Trash.svg"
+                      *ngIf="imgdocument3" alt="">
+                  </div>
+
+                </label>
+              </div>
+              <div class="mb-3 mt-5">
+                <button class="btn btn-primary kyc-Btn" (click)="selfContinue()"
+                  [disabled]="!selfForm.valid">Done</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
